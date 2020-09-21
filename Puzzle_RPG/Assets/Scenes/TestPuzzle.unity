@@ -429,7 +429,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d289217ecd0249438c7b8d6424a08b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resources: []
+  resources:
+  - {fileID: 21300000, guid: 5c7c8f08935fea849be0707467cae31d, type: 3}
+  - {fileID: 21300000, guid: 19a072425c5f2a642bbb3ebed620c1f8, type: 3}
+  - {fileID: 21300000, guid: 950c66cedc5b9ab41a5adb49bb47074b, type: 3}
+  - {fileID: 21300000, guid: 91cf37e0e6b57f444863db2a9587eafb, type: 3}
   cellSize: 64
 --- !u!1001 &3801995886770974666
 PrefabInstance:
