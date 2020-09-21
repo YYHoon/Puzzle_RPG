@@ -65,6 +65,9 @@
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\MapGenerator.cs" />
     <Compile Include="Assets\Scripts\MeshGenerator.cs" />
+    <Compile Include="Assets\Scripts\testPuzzle\GameBoard.cs" />
+    <Compile Include="Assets\Scripts\testPuzzle\Index.cs" />
+    <Compile Include="Assets\Scripts\testPuzzle\Piece.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/user/Desktop/Puzzle_RPG/Puzzle_RPG/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
