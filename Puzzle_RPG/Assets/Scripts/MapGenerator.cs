@@ -30,7 +30,7 @@ public class MapGenerator : MonoBehaviour
     void Generator()
     {
         map = new int[width, height];
-        RandomFillMpa();
+        RandomFillMap();
         for(int i=0;i<5;++i)
         {
             SmoothMap();
@@ -55,6 +55,8 @@ public class MapGenerator : MonoBehaviour
         }
                 MeshGenerator meshGen = GetComponent<MeshGenerator>();
         meshGen.GenerateMesh(borderedMap, 1);
+        RandomSpawn rs = GetComponent<RandomSpawn>();
+        rs.SpawnGameObject(borderedMap);
     }
 
     void ProcesMap()
@@ -180,7 +182,7 @@ public class MapGenerator : MonoBehaviour
     void CreatePassage(Room roomA, Room roomB, Coord tileA,Coord tileB)
     {
         Room.ConnectRooms(roomA, roomB);
-        Debug.DrawLine(CoordToWorldPoint(tileA), CoordToWorldPoint(tileB), Color.green, 100);
+       // Debug.DrawLine(CoordToWorldPoint(tileA), CoordToWorldPoint(tileB), Color.green, 100);
 
         List<Coord> line = GetLine(tileA, tileB);
         foreach(Coord c in line)
@@ -330,7 +332,7 @@ public class MapGenerator : MonoBehaviour
         return x >= 0 && x < width && y >= 0 && y < height;
     }
 
-    void RandomFillMpa()
+    void RandomFillMap()
     {
         if(useRnadomSeed)
         {

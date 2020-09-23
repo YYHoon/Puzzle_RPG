@@ -55,7 +55,7 @@ public class MeshGenerator : MonoBehaviour
         List<Vector3> wallVertices = new List<Vector3>();
         List<int> wallTriangles = new List<int>();
         Mesh wallMesh = new Mesh();
-        float wallHeight = 5;
+        float wallHeight = 1;
         foreach(List<int> outline in outlines)
         {
             for(int i=0;i<outline.Count -1;++i)
