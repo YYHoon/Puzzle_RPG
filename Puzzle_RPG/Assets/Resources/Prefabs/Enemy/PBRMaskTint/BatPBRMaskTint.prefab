@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4616368514159512}
   - component: {fileID: 95578907312867320}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BatPBRMaskTint
   m_TagString: Untagged
   m_Icon: {fileID: 0}

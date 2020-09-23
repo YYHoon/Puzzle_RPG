@@ -405,7 +405,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4744821207475892}
   - component: {fileID: 95892162074931524}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: EvilMagePBR
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -563,7 +563,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4071081022433290}
   - component: {fileID: 95083823706240044}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: DragonPBRMaskTint
   m_TagString: Untagged
   m_Icon: {fileID: 0}

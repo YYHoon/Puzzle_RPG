@@ -259,7 +259,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4158631881214898}
   - component: {fileID: 95937921189647870}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BatPBR
   m_TagString: Untagged
   m_Icon: {fileID: 0}

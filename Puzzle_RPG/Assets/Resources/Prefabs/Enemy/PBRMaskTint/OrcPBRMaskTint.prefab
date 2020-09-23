@@ -2094,7 +2094,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4008027257513042}
   - component: {fileID: 95965608232384994}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: OrcPBRMaskTint
   m_TagString: Untagged
   m_Icon: {fileID: 0}

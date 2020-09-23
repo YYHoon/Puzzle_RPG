@@ -62,6 +62,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Enemy\EnemyManager.cs" />
+    <Compile Include="Assets\Scripts\Enemy\EnemySpawn.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\MapGenerator.cs" />
     <Compile Include="Assets\Scripts\MeshGenerator.cs" />
@@ -69,6 +71,7 @@
     <Compile Include="Assets\Scripts\testPuzzle\Index.cs" />
     <Compile Include="Assets\Scripts\testPuzzle\Piece.cs" />
     <None Include="Assets\Models\RPG Monster Wave PBR\Shaders\PBRMaskTint.shader" />
+    <None Include="Assets\Images\CasualUI\ReadMe.txt" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/user/Desktop/Puzzle_RPG/Puzzle_RPG/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>

@@ -224,7 +224,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4594332585218144}
   - component: {fileID: 95782433703230496}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SpiderPBRMaskTint
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -13,8 +13,8 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
+  - PLAYER
+  - ENEMY
   - 
   - 
   - 
@@ -40,4 +40,13 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: PUZZLEBOARD
+    uniqueID: 2768815447
+    locked: 0
+  - name: ENEMY
+    uniqueID: 2742142699
+    locked: 0
+  - name: PLAYER
+    uniqueID: 2893492493
     locked: 0

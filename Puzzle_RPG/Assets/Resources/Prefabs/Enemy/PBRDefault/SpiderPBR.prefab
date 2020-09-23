@@ -629,7 +629,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4843028258353612}
   - component: {fileID: 95690966028241422}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SpiderPBR
   m_TagString: Untagged
   m_Icon: {fileID: 0}

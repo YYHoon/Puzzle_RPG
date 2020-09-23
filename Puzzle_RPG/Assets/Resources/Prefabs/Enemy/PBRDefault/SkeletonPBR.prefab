@@ -226,7 +226,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4333204578251230}
   - component: {fileID: 95570523499675550}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SkeletonPBR
   m_TagString: Untagged
   m_Icon: {fileID: 0}

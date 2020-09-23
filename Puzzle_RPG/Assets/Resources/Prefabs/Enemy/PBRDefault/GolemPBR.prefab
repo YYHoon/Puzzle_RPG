@@ -1322,7 +1322,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4191744185429214}
   - component: {fileID: 95246818704427922}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: GolemPBR
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -1019,7 +1019,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4787767504811496}
   - component: {fileID: 95181452434276654}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: GolemPBRMaskTint
   m_TagString: Untagged
   m_Icon: {fileID: 0}

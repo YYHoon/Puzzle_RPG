@@ -1426,7 +1426,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4336231399882526}
   - component: {fileID: 95031224806545978}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SkeletonPBRMaskTint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
