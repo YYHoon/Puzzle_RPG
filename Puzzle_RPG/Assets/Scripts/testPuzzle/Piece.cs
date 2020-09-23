@@ -19,7 +19,7 @@ public class Piece : MonoBehaviour
     Image img;
     Index idx;
 
-    public PIECETYPE piecetype { get { return pieceType; } }
+    public PIECETYPE piecetype { get { return pieceType; } set { pieceType = piecetype; } }
     public RectTransform rectTransform { get { return rtTransform; } }
     public Index index { get { return idx; } set { idx = value; } }
 

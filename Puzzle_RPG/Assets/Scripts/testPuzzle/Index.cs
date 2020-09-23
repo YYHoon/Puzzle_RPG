@@ -19,6 +19,16 @@ public class Index
         y = (int)vector.y;
     }
 
+    public static Index Add(Index a, Index b)
+    {
+        return new Index(a.x + b.x, a.y + b.y);
+    }
+
+    public static Index Mult(Index a, int i)
+    {
+        return new Index(a.x * i, a.y * i);
+    }
+
     public static Index right { get { return new Index(1, 0); } }
     public static Index left { get { return new Index(-1, 0); } }
     public static Index up { get { return new Index(0, -1); } }
