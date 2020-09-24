@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditorInternal;
 using System;
+using UnityEditor;
 
 public class MapGenerator : MonoBehaviour
 {
@@ -53,10 +55,11 @@ public class MapGenerator : MonoBehaviour
                 }
             }
         }
-                MeshGenerator meshGen = GetComponent<MeshGenerator>();
+        MeshGenerator meshGen = GetComponent<MeshGenerator>();
         meshGen.GenerateMesh(borderedMap, 1);
         RandomSpawn rs = GetComponent<RandomSpawn>();
         rs.SpawnGameObject(borderedMap);
+        rs.TreeSpawn(borderedMap);
     }
 
     void ProcesMap()
@@ -334,23 +337,25 @@ public class MapGenerator : MonoBehaviour
 
     void RandomFillMap()
     {
-        if(useRnadomSeed)
+        int pseudoRandom = 0;
+        if (useRnadomSeed)
         {
-            seed = Time.time.ToString();
+            //seed = Time.time.ToString();
+            pseudoRandom = UnityEngine.Random.Range(0, 100);
         }
-        System.Random pseudoRandom = new System.Random(seed.GetHashCode());
-        
-        for(int x = 0;x<width;++x)
+        // System.Random pseudoRandom = new System.Random(seed.GetHashCode());
+        for (int x = 0;x< width;++x)
         {
             for (int y = 0; y < height; ++y)
             {
+                pseudoRandom = UnityEngine.Random.Range(0, 100);
                 if (x == 0 || x == width - 1 || y == 0 || y == height - 1)
                 {
                     map[x, y] = 1;
                 }
                 else
                 {
-                    map[x, y] = (pseudoRandom.Next(0, 100) < randomFillPercent) ? 1 : 0;
+                    map[x, y] = (pseudoRandom < randomFillPercent) ? 1 : 0;
                 }
             }
         }
@@ -370,7 +375,6 @@ public class MapGenerator : MonoBehaviour
                 {
                     map[x, y] = 0;
                 }
-                
             }
         }
     }

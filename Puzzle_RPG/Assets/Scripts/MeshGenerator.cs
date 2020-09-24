@@ -83,6 +83,7 @@ public class MeshGenerator : MonoBehaviour
             Destroy(walls.GetComponent<MeshCollider>());
         MeshCollider wallCollider = walls.gameObject.AddComponent<MeshCollider>();
         wallCollider.sharedMesh = wallMesh;
+        wallCollider.transform.position = new Vector3(0, 1, 0);
     }
 
     void TriangulateSquare(Square square)
