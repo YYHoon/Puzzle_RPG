@@ -19,6 +19,11 @@ public class Index
         y = (int)vector.y;
     }
 
+    public bool Equal(Index idx)
+    {
+        return (x == idx.x && y == idx.y);
+    }
+
     public static Index Add(Index a, Index b)
     {
         return new Index(a.x + b.x, a.y + b.y);

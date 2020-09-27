@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class GameBoard : MonoBehaviour
 {
@@ -35,7 +36,7 @@ public class GameBoard : MonoBehaviour
     
     void Update()
     {        
-             
+        
     }
 
     //시작할 때 보드 세팅
@@ -119,6 +120,34 @@ public class GameBoard : MonoBehaviour
         piece.rectTransform.anchoredPosition = vec;
 
         return piece;
+    }
+
+    public void OnPointerDown(PointerEventData eventData, Piece target)
+    {
+
+    }
+
+    public void OnDrag(PointerEventData eventData, Piece target)
+    {
+
+    }
+
+    public void OnPointerUp(PointerEventData eventData, Piece target)
+    {
+
+    }
+
+    //피스 위치 바꾸기
+    public void SwapPiece(Index one, Index two)
+    {
+        Node nodeOne = GetNode(one);
+        Piece pieceOne = GetPiece(one);
+
+        Node nodeTwo = GetNode(two);
+        Piece pieceTwo = GetPiece(two);
+
+        nodeOne.setPiece(pieceTwo);
+        nodeTwo.setPiece(pieceOne);        
     }
 
     //매치된 상태인지 확인
@@ -245,5 +274,11 @@ public class Node
         index = new Index(indexX, indexY);
         pos = position;
         this.piece = piece;
+    }
+
+    public void setPiece(Piece p)
+    {
+        piece = p;
+        piece.SetType(p.piecetype);
     }
 }

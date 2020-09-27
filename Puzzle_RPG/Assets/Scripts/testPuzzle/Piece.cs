@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public enum PIECETYPE
 {
@@ -12,14 +13,14 @@ public enum PIECETYPE
     none = 4
 }
 
-public class Piece : MonoBehaviour
+public class Piece : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
 {
     [SerializeField] PIECETYPE pieceType;
     RectTransform rtTransform;
     Image img;
     Index idx;
 
-    public PIECETYPE piecetype { get { return pieceType; } set { pieceType = piecetype; } }
+    public PIECETYPE piecetype { get { return pieceType; } }
     public RectTransform rectTransform { get { return rtTransform; } }
     public Index index { get { return idx; } set { idx = value; } }
 
@@ -31,5 +32,31 @@ public class Piece : MonoBehaviour
         pieceType = type;
         img.sprite = sprite;
         idx = index;
+        Name();
+    }
+
+    public void SetType(PIECETYPE type)
+    {
+        this.pieceType = type;
+    }
+
+    void Name()
+    {
+        transform.name = "Index [" + idx.x + ", " + idx.y + "]";
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        
+    }
+
+    public void OnDrag(PointerEventData eventData)
+    {
+        
+    }
+
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        
     }
 }

@@ -69,6 +69,7 @@
     <Compile Include="Assets\Scripts\MeshGenerator.cs" />
     <Compile Include="Assets\Scripts\testPuzzle\GameBoard.cs" />
     <Compile Include="Assets\Scripts\testPuzzle\Index.cs" />
+    <Compile Include="Assets\Scripts\testPuzzle\MovePiece.cs" />
     <Compile Include="Assets\Scripts\testPuzzle\Piece.cs" />
     <None Include="Assets\Models\RPG Monster Wave PBR\Shaders\PBRMaskTint.shader" />
     <None Include="Assets\Images\CasualUI\ReadMe.txt" />
