@@ -23,7 +23,7 @@ public class MapGenerator : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetMouseButtonDown(0))
+        if(Input.GetMouseButtonDown(1))
         {
             Generator();
         }
@@ -58,6 +58,7 @@ public class MapGenerator : MonoBehaviour
         MeshGenerator meshGen = GetComponent<MeshGenerator>();
         meshGen.GenerateMesh(borderedMap, 1);
         RandomSpawn rs = GetComponent<RandomSpawn>();
+        rs.DeleteChilds();
         rs.SpawnGameObject(borderedMap);
         rs.TreeSpawn(borderedMap);
     }

@@ -7,6 +7,11 @@ public class RandomSpawn : MonoBehaviour
 {
     public GameObject spawnObject;
     public GameObject[] treeObject;
+    public GameObject treeParent;
+    private void Start()
+    {
+        
+    }
 
     public void SpawnGameObject(int[,] map)
     {
@@ -76,15 +81,27 @@ public class RandomSpawn : MonoBehaviour
 
     public void TreeSpawn(int[,] map)
     {
-        for(int i=0;i<map.GetLength(0);++i)
+        for (int i=0;i<map.GetLength(0);++i)
         {
             for(int j=0;j<map.GetLength(0);++j)
             {
                 if(map[i,j]==1&&Random.Range(0,100)>88)
                 {
-                    Instantiate(treeObject[Random.Range(0,treeObject.Length)], new Vector3(i - map.GetLength(0) * 0.5f, 0.8f, j - map.GetLength(1) * 0.5f),Quaternion.Euler(0,0,0));
+                    GameObject newObject = Instantiate(treeObject[Random.Range(0,treeObject.Length)], new Vector3(i - map.GetLength(0) * 0.5f, 0.8f, j - map.GetLength(1) * 0.5f),Quaternion.Euler(0,0,0), treeParent.transform);
+                    newObject.isStatic = true;
                 }
             }
+        }
+    }
+
+    public void DeleteChilds()
+    {
+        Transform[] child = treeParent.GetComponentsInChildren<Transform>();
+
+        if(child != null)
+        foreach(var iter in child)
+        {
+            if (iter != treeParent.transform) Destroy(iter.gameObject);
         }
     }
 }
