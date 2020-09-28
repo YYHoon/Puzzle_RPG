@@ -6,8 +6,8 @@ using UnityEngine.EventSystems;
 
 public class GameBoard : MonoBehaviour
 {
-    //static GameBoard sInstance;
-    //public static GameBoard Instance { get { return sInstance; } }
+    static GameBoard instance;
+    public static GameBoard Instance { get { return instance; } }
 
     //public RectTransform gameBoard;
     GameObject piecePrefab;
@@ -22,16 +22,16 @@ public class GameBoard : MonoBehaviour
     //float startX;
     //float startY;
 
-    //private void Awake()
-    //{
-    //    sInstance = this;
-    //}
+    private void Awake()
+    {
+        instance = this;
+    }
 
     void Start()
     {
         //gameBoard = GetComponent<RectTransform>();
         SetBoard();
-        //MixBoard();
+        MixBoard();
     }
     
     void Update()
@@ -79,12 +79,17 @@ public class GameBoard : MonoBehaviour
                 Index idx = new Index(x, y);
                 PIECETYPE type = GetPieceType(idx);
 
-                while (CheckMatch(idx).Count > 0)
+                List<Node> mathList = CheckMatch(idx);
+                //while (mathList.Count > 0)
                 {
-                    type = GetPieceType(idx);
-                    if (!equal.Contains(type))
-                        equal.Add(type);
+                    //mathList[mathList.Count / 2] = 
+
+                    //type = GetPieceType(idx);
+                    //if (!equal.Contains(type))
+                    //    equal.Add(type);
                     //nodeList[y, x].setPieceType(ResetPieceType(equal));
+
+                    //mathList = CheckMatch(idx);
                 }
             }
         }
@@ -116,8 +121,8 @@ public class GameBoard : MonoBehaviour
         int random = Random.Range(0, resources.Length);
         PIECETYPE type = (PIECETYPE)random;
 
+        piece.GetComponent<RectTransform>.anchoredPosition = vec;
         piece.Initialize(type, resources[random], idx);
-        piece.rectTransform.anchoredPosition = vec;
 
         return piece;
     }
@@ -147,7 +152,7 @@ public class GameBoard : MonoBehaviour
         Piece pieceTwo = GetPiece(two);
 
         nodeOne.setPiece(pieceTwo);
-        nodeTwo.setPiece(pieceOne);        
+        nodeTwo.setPiece(pieceOne);
     }
 
     //매치된 상태인지 확인
@@ -236,9 +241,8 @@ public class GameBoard : MonoBehaviour
     //인덱스의 노드값 받기
     Node GetNode(Index idx)
     {
-        if (idx.x < 0 || idx.x > widthCount || idx.y < 0 || idx.y > heightCount)
+        if (idx.x < 0 || idx.x >= widthCount || idx.y < 0 || idx.y >= heightCount)
             return null;
-
         return nodeList[idx.y, idx.x];
     }
 
@@ -280,5 +284,13 @@ public class Node
     {
         piece = p;
         piece.SetType(p.piecetype);
+        piece.SetIndex(index);
+
+        p.rectTransform.anchoredPosition = pos;
+    }
+
+    public void setPieceType(PIECETYPE type)
+    {
+        this.piece.piecetype = type;
     }
 }

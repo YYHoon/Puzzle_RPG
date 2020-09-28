@@ -19,10 +19,12 @@ public class Piece : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerU
     RectTransform rtTransform;
     Image img;
     Index idx;
+    Vector3 originPos;
 
-    public PIECETYPE piecetype { get { return pieceType; } }
+    public PIECETYPE piecetype { get { return pieceType; } set { pieceType = piecetype; } }
     public RectTransform rectTransform { get { return rtTransform; } }
     public Index index { get { return idx; } set { idx = value; } }
+    public Vector3 originPosition { get { return originPos; } set { originPos = originPosition; } }
 
     public void Initialize(PIECETYPE type, Sprite sprite, Index index)
     {
@@ -32,12 +34,18 @@ public class Piece : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerU
         pieceType = type;
         img.sprite = sprite;
         idx = index;
+        originPos = rtTransform.position;
         Name();
     }
 
     public void SetType(PIECETYPE type)
     {
         this.pieceType = type;
+    }
+
+    public void SetIndex(Index index)
+    {
+        this.idx = index;
     }
 
     void Name()
@@ -47,16 +55,17 @@ public class Piece : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerU
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        
+        MovePiece.Instance.Click(eventData, this);
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        
+        MovePiece.Instance.Drag(eventData);
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        
+        //MovePiece.Instance.SetIdx();
+        MovePiece.Instance.Drop();
     }
 }
