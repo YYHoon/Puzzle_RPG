@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class Index
 {
     public int x;
@@ -17,6 +18,27 @@ public class Index
     {
         x = (int)vector.x;
         y = (int)vector.y;
+    }
+
+    public void add(Index i)
+    {
+        x += i.x;
+        y += i.y;
+    }
+
+    public bool Equal(Index idx)
+    {
+        return (x == idx.x && y == idx.y);
+    }
+
+    public static Index Add(Index a, Index b)
+    {
+        return new Index(a.x + b.x, a.y + b.y);
+    }
+
+    public static Index Mult(Index a, int i)
+    {
+        return new Index(a.x * i, a.y * i);
     }
 
     public static Index right { get { return new Index(1, 0); } }
