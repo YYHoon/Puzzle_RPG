@@ -31,7 +31,7 @@ public class GameBoard : MonoBehaviour
     {
         //gameBoard = GetComponent<RectTransform>();
         SetBoard();
-        MixBoard();
+        //MixBoard();
     }
     
     void Update()
@@ -62,7 +62,7 @@ public class GameBoard : MonoBehaviour
                 //Vector2(startX + CellSize * x, startY - CellSize * y)
                 Vector2 position = new Vector2(32 + cellSize * x, -32 - cellSize * y);
                 Piece newPiece = RandomPiece(new Index(x, y), position);
-                nodeList[y, x] = new Node(x, y, newPiece.rectTransform.anchoredPosition, newPiece);
+                nodeList[y, x] = new Node(x, y, newPiece.rectTransform.position, newPiece);
             }
         }
     }
@@ -80,6 +80,7 @@ public class GameBoard : MonoBehaviour
                 PIECETYPE type = GetPieceType(idx);
 
                 List<Node> mathList = CheckMatch(idx);
+
                 //while (mathList.Count > 0)
                 {
                     //mathList[mathList.Count / 2] = 
@@ -125,21 +126,6 @@ public class GameBoard : MonoBehaviour
         piece.Initialize(type, resources[random], idx);
 
         return piece;
-    }
-
-    public void OnPointerDown(PointerEventData eventData, Piece target)
-    {
-
-    }
-
-    public void OnDrag(PointerEventData eventData, Piece target)
-    {
-
-    }
-
-    public void OnPointerUp(PointerEventData eventData, Piece target)
-    {
-
     }
 
     //피스 위치 바꾸기
@@ -270,10 +256,10 @@ public class GameBoard : MonoBehaviour
 public class Node
 {
     public Index index;
-    public Vector2 pos;
+    public Vector3 pos;
     public Piece piece;
 
-    public Node(int indexX, int indexY, Vector2 position, Piece piece)
+    public Node(int indexX, int indexY, Vector3 position, Piece piece)
     {
         index = new Index(indexX, indexY);
         pos = position;
@@ -283,10 +269,10 @@ public class Node
     public void setPiece(Piece p)
     {
         piece = p;
-        piece.SetType(p.piecetype);
+        //piece.SetType(p.piecetype);
         piece.SetIndex(index);
-
-        p.rectTransform.anchoredPosition = pos;
+        piece.rectTransform.position = pos;
+        piece.originPosition = pos;
     }
 
     public void setPieceType(PIECETYPE type)

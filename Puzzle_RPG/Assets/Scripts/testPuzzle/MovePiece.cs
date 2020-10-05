@@ -11,7 +11,6 @@ public class MovePiece : MonoBehaviour
 
     Index idx;
     Piece moving;
-    Vector2 startPos;
 
     float moveSpeed = 16f;
 
@@ -21,22 +20,11 @@ public class MovePiece : MonoBehaviour
     {
         instance = this;
     }
-
-    void Start()
-    {
-
-    }
-
-    void Update()
-    {
-        
-    }
     
     public void Click(PointerEventData eventData, Piece piece)
     {
         moving = piece;
         idx = new Index(moving.index.x, moving.index.y);
-        startPos = eventData.position;
     }
 
     public void Drag(PointerEventData eventData)
@@ -75,30 +63,11 @@ public class MovePiece : MonoBehaviour
                     else final = new Index(0, 1);
                 }
             }
-
             else
             {
                 moving.rectTransform.position = worldPoint;
             }
         }
-        
-        //Vector2 originDirection = eventData.position - startPos;
-        //Vector2 normalDirection = originDirection.normalized;
-        //Vector2 absolDirection = new Vector2 (Mathf.Abs(originDirection.x), Mathf.Abs(originDirection.y));
-        //  
-        ////좌우이동
-        //if (absolDirection.x > absolDirection.y)
-        //{
-        //    if (normalDirection.x < 0) final = new Index(-1, 0);
-        //    else final = new Index(1, 0);
-        //}
-        //
-        ////상하이동
-        //else
-        //{
-        //    if (normalDirection.y < 0) final = new Index(0, 1);
-        //    else final = new Index(0, -1);
-        //}
     }
 
     public void Drop()
@@ -106,6 +75,8 @@ public class MovePiece : MonoBehaviour
         idx.add(final);
         GameBoard.Instance.SwapPiece(moving.index, idx);
 
+        moving = null;
+        idx = new Index(0, 0);
         //Debug.Log("up : " + idx.x + ", " + idx.y);
     }
 }

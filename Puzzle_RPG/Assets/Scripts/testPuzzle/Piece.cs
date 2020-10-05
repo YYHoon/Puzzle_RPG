@@ -21,10 +21,10 @@ public class Piece : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerU
     Index idx;
     Vector3 originPos;
 
-    public PIECETYPE piecetype { get { return pieceType; } set { pieceType = piecetype; } }
+    public PIECETYPE piecetype { get { return pieceType; } set { pieceType = value; } }
     public RectTransform rectTransform { get { return rtTransform; } }
     public Index index { get { return idx; } set { idx = value; } }
-    public Vector3 originPosition { get { return originPos; } set { originPos = originPosition; } }
+    public Vector3 originPosition { get { return originPos; } set { originPos = value; } }
 
     public void Initialize(PIECETYPE type, Sprite sprite, Index index)
     {
