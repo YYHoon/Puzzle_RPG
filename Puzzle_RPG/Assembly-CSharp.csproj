@@ -63,12 +63,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\ModularRPGHeroesPolyArt\TPController\Scripts\AnimatorMatcher.cs" />
-    <Compile Include="Assets\ModularRPGHeroesPolyArt\TPController\Scripts\BoolOperator1.cs" />
-    <Compile Include="Assets\ModularRPGHeroesPolyArt\TPController\Scripts\BoolOperator2.cs" />
-    <Compile Include="Assets\ModularRPGHeroesPolyArt\TPController\Scripts\CameraManager.cs" />
-    <Compile Include="Assets\ModularRPGHeroesPolyArt\TPController\Scripts\ControlManager.cs" />
-    <Compile Include="Assets\ModularRPGHeroesPolyArt\TPController\Scripts\ResetTimer.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\Map\MapGenerator.cs" />
     <Compile Include="Assets\Scripts\Map\MeshGenerator.cs" />
@@ -80,13 +74,11 @@
     <Compile Include="Assets\Scripts\testPuzzle\GameBoard.cs" />
     <Compile Include="Assets\Scripts\testPuzzle\Index.cs" />
     <Compile Include="Assets\Scripts\testPuzzle\Piece.cs" />
-    <None Include="Assets\CUBE - Heroes and Dungeons\Read me.txt" />
-    <None Include="Assets\RPG Monster Wave PBR\Shaders\PBRMaskTint.shader" />
-    <None Include="Assets\ModularRPGHeroesPolyArt\ReadMe.txt" />
-    <None Include="Assets\CasualUI\ReadMe.txt" />
-    <None Include="Assets\CUBE - Heroes and Dungeons\www.meshtint.com.txt" />
-    <None Include="Assets\ModularRPGHeroesPolyArt\Shader\PolyArtMaskTint.shader" />
-    <None Include="Assets\BrokenVector\LowPolyTreePack\README.txt" />
+    <None Include="Assets\Resources\CUBE - Heroes and Dungeons\Read me.txt" />
+    <None Include="Assets\Resources\CasualUI\ReadMe.txt" />
+    <None Include="Assets\Resources\CUBE - Heroes and Dungeons\www.meshtint.com.txt" />
+    <None Include="Assets\Resources\ModularRPGHeroesPolyArt\Shader\PolyArtMaskTint.shader" />
+    <None Include="Assets\Resources\BrokenVector\LowPolyTreePack\README.txt" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>D:/PUZZLE/Puzzle_RPG/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
