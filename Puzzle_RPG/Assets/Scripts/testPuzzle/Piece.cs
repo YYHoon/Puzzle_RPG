@@ -23,6 +23,7 @@ public class Piece : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerU
 
     public PIECETYPE piecetype { get { return pieceType; } set { pieceType = value; } }
     public RectTransform rectTransform { get { return rtTransform; } }
+    public Image image { get { return img; } set { img = value; } }
     public Index index { get { return idx; } set { idx = value; } }
     public Vector3 originPosition { get { return originPos; } set { originPos = value; } }
 
@@ -36,11 +37,6 @@ public class Piece : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerU
         idx = index;
         originPos = rtTransform.position;
         Name();
-    }
-
-    public void SetType(PIECETYPE type)
-    {
-        this.pieceType = type;
     }
 
     public void SetIndex(Index index)

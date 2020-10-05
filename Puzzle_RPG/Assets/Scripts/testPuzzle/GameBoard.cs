@@ -17,6 +17,7 @@ public class GameBoard : MonoBehaviour
     [SerializeField] float cellSize = 64f;
     int widthCount = 5;
     int heightCount = 6;
+    int checkMatch = 0;
     //float blankWidth;
     //float blankHeight;
     //float startX;
@@ -31,12 +32,12 @@ public class GameBoard : MonoBehaviour
     {
         //gameBoard = GetComponent<RectTransform>();
         SetBoard();
-        //MixBoard();
+        MixBoard();       
     }
     
     void Update()
-    {        
-        
+    {
+        //UpdateGravity();
     }
 
     //시작할 때 보드 세팅
@@ -79,31 +80,36 @@ public class GameBoard : MonoBehaviour
                 Index idx = new Index(x, y);
                 PIECETYPE type = GetPieceType(idx);
 
-                List<Node> mathList = CheckMatch(idx);
+                List<Node> matchList = CheckMatch(idx);
 
-                //while (mathList.Count > 0)
+                while (matchList.Count > 0)
                 {
                     //mathList[mathList.Count / 2] = 
+                    
+                    if (!equal.Contains(type))
+                        equal.Add(type);
+                    
+                    PIECETYPE newType = ResetPieceType(equal);
+                    
+                    nodeList[y, x].setPieceType(newType);
+                    GetPiece(idx).image.sprite = resources[(int)newType];
 
-                    //type = GetPieceType(idx);
-                    //if (!equal.Contains(type))
-                    //    equal.Add(type);
-                    //nodeList[y, x].setPieceType(ResetPieceType(equal));
-
-                    //mathList = CheckMatch(idx);
+                    matchList = CheckMatch(idx);
                 }
+                equal.Clear();
             }
         }
     }
 
+    //중복 피스 중 겹치지 않는 타입 리턴
     PIECETYPE ResetPieceType(List<PIECETYPE> equal)
     {
         List<PIECETYPE> type = new List<PIECETYPE>();
 
         //리소스 타입 다 담고
         for (int i = 0; i < resources.Length; i++)
-            type.Add((PIECETYPE)i);        
-        
+            type.Add((PIECETYPE)i);
+
         //들어온 리스트에서 중복 리소스 삭제
         for (int i = 0; i < equal.Count; i++)
             type.Remove((PIECETYPE)i);
@@ -139,6 +145,16 @@ public class GameBoard : MonoBehaviour
 
         nodeOne.setPiece(pieceTwo);
         nodeTwo.setPiece(pieceOne);
+
+        List<Node> matchList = CheckMatch(two);
+            Debug.Log(matchList.Count);
+
+        foreach (Node match in matchList)
+        {
+            Debug.Log(match.index.x + ", " + match.index.y);
+            Destroy(match.piece);
+            //matchList.Remove(match);
+        }
     }
 
     //매치된 상태인지 확인
@@ -159,7 +175,7 @@ public class GameBoard : MonoBehaviour
             int idxCount = i.x != 0 ? widthCount : heightCount;
             int matchCount = 0;
 
-            for (int j = 1; j < 3; j++)
+            for (int j = 1; j < idxCount; j++)
             {
                 Index nextIndex = Index.Add(start, Index.Mult(i, j));
 
@@ -173,43 +189,48 @@ public class GameBoard : MonoBehaviour
                 else
                     break;
             }
-
             //2개 이상 매치면 매치리스트에 넣기
             if (matchCount >= 2)
+            {
                 AddMatch(matchList, line);
+                //checkMatch++;
+            }
         }
 
         //매치 상태인데 우리가 가운데 있는 상황일 때
-        //for (int i = 0; i < 4; i += 2)
-        //{
-        //    Index[] direction = { match[i], match[i + 1] };
-        //    List<Node> line = new List<Node>();
-        //    int matchCount = 0;
+        for (int i = 0; i < 4; i += 2)
+        {
+            Index[] direction = { match[i], match[i + 1] };
+            List<Node> line = new List<Node>();
+            int matchCount = 0;
 
-        //    foreach (Index j in direction)
-        //    {
-        //        Index idx = Index.Add(start, j);
-        //        Node node = GetNode(idx);
+            foreach (Index j in direction)
+            {
+                Index idx = Index.Add(start, j);
+                Node node = GetNode(idx);
 
-        //        if (node != null && node.piece != null &&
-        //            node.piece.piecetype == startType)
-        //        {
-        //            line.Add(node);
-        //            matchCount++;
-        //        }
-        //    }
+                if (node != null && node.piece != null &&
+                    node.piece.piecetype == startType)
+                {
+                    line.Add(node);
+                    matchCount++;
+                }
+            }
 
-        //    if (matchCount >= 2)
-        //        AddMatch(matchList, line);
-        //}
+            if (matchCount >= 2)
+            {
+                AddMatch(matchList, line);
+                //checkMatch++;
+            }
+        }
 
         if (matchList.Count != 0)
         {
             Node node = GetNode(start);
-            if (matchList.Contains(node) == false)
+            if (!matchList.Contains(node))
                 matchList.Add(node);
         }
-
+        //Debug.Log( "카운트 : " + matchList.Count);
         return matchList;
     }
 
@@ -221,6 +242,25 @@ public class GameBoard : MonoBehaviour
             if (matchList.Contains(line[i])) continue;
 
             matchList.Add(line[i]);
+        }
+    }
+
+    //퍼즐 진행 중 
+    void UpdateGravity()
+    {
+        for (int y = heightCount - 1; y > 0; y--)
+        {
+            for (int x = widthCount - 1; x > 0; x--)
+            {
+                Index current = new Index(x, y);
+
+                if (nodeList[y, x].piece == null)
+                {
+                    Index upper = Index.Add(new Index(x, y), Index.up);
+
+                    nodeList[y, x].piece = GetPiece(upper);
+                }
+            }
         }
     }
 
@@ -269,7 +309,6 @@ public class Node
     public void setPiece(Piece p)
     {
         piece = p;
-        //piece.SetType(p.piecetype);
         piece.SetIndex(index);
         piece.rectTransform.position = pos;
         piece.originPosition = pos;
@@ -277,6 +316,6 @@ public class Node
 
     public void setPieceType(PIECETYPE type)
     {
-        this.piece.piecetype = type;
+        piece.piecetype = type;
     }
 }

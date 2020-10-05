@@ -63,6 +63,7 @@ public class MovePiece : MonoBehaviour
                     else final = new Index(0, 1);
                 }
             }
+
             else
             {
                 moving.rectTransform.position = worldPoint;
