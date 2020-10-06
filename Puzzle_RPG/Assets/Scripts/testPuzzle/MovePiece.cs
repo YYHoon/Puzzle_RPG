@@ -7,12 +7,12 @@ public class MovePiece : MonoBehaviour
 {
     static MovePiece instance;
     public static MovePiece Instance { get { return instance; } }
-    Index final;
 
-    Index idx;
-    Piece moving;
+    Index final;  //추가할 인덱스
+    Index idx;    //최종적으로 이동할 인덱스
+    Piece moving; //내가 움직이고 있는 피스
 
-    float moveSpeed = 16f;
+    float moveSpeed;
 
     [SerializeField] float maxDragRange = 0.5f;
 
@@ -27,7 +27,7 @@ public class MovePiece : MonoBehaviour
         idx = new Index(moving.index.x, moving.index.y);
     }
 
-    public void Drag(PointerEventData eventData)
+    public void Drag(PointerEventData eventData, float moveSpeed = 16f)
     {
         if (moving == null)
             return;
@@ -78,6 +78,22 @@ public class MovePiece : MonoBehaviour
 
         moving = null;
         idx = new Index(0, 0);
-        //Debug.Log("up : " + idx.x + ", " + idx.y);
+    }
+
+    public IEnumerator Gravity(Piece piece, Node destination, float moveSpeed = 5f)
+    {
+        while (true)
+        {
+            piece.rectTransform.position = Vector3.Lerp(piece.rectTransform.position, destination.pos, moveSpeed * Time.deltaTime);
+
+            if ((piece.rectTransform.position - destination.pos).magnitude < 0.1f)
+            {
+                piece.rectTransform.position = destination.pos;
+                piece.originPosition = destination.pos;
+                break;
+            }
+
+            yield return null;
+        }
     }
 }

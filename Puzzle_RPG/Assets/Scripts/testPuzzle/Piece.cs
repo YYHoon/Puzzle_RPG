@@ -18,7 +18,7 @@ public class Piece : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerU
     [SerializeField] PIECETYPE pieceType;
     RectTransform rtTransform;
     Image img;
-    Index idx;
+    [SerializeField] Index idx;
     Vector3 originPos;
 
     public PIECETYPE piecetype { get { return pieceType; } set { pieceType = value; } }

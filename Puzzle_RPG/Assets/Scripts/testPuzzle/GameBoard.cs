@@ -17,7 +17,6 @@ public class GameBoard : MonoBehaviour
     [SerializeField] float cellSize = 64f;
     int widthCount = 5;
     int heightCount = 6;
-    int checkMatch = 0;
     //float blankWidth;
     //float blankHeight;
     //float startX;
@@ -137,6 +136,13 @@ public class GameBoard : MonoBehaviour
     //피스 위치 바꾸기
     public void SwapPiece(Index one, Index two)
     {
+        //노드 바깥이라면
+        if (GetNode(two) == null)
+        {
+            GetNode(one).setPiece(GetPiece(one));
+            return;
+        }
+
         Node nodeOne = GetNode(one);
         Piece pieceOne = GetPiece(one);
 
@@ -146,15 +152,31 @@ public class GameBoard : MonoBehaviour
         nodeOne.setPiece(pieceTwo);
         nodeTwo.setPiece(pieceOne);
 
-        List<Node> matchList = CheckMatch(two);
-            Debug.Log(matchList.Count);
+        List<Node> matchOne = CheckMatch(one);
+        List<Node> matchTwo = CheckMatch(two);
 
-        foreach (Node match in matchList)
+        List<Node> matchList = new List<Node>();
+
+        AddMatch(matchList, matchOne);
+        AddMatch(matchList, matchTwo);
+
+        //매치된 게 없다면
+        if (matchList.Count <= 0)
         {
-            Debug.Log(match.index.x + ", " + match.index.y);
-            Destroy(match.piece);
-            //matchList.Remove(match);
+            nodeOne.setPiece(pieceOne);
+            nodeTwo.setPiece(pieceTwo);
+            return;
         }
+
+        else
+        {
+            foreach (Node match in matchList)
+            {
+                RemovePiece(match);
+            }
+        }
+        
+        UpdateGravity();
     }
 
     //매치된 상태인지 확인
@@ -166,7 +188,7 @@ public class GameBoard : MonoBehaviour
 
         List<Node> matchList = new List<Node>();
 
-        Index[] match = { Index.up, Index.left, Index.down, Index.right };
+        Index[] match = {Index.right, Index.left, Index.up, Index.down };
 
         //한 방향으로의 일렬검사
         foreach (Index i in match)
@@ -193,7 +215,6 @@ public class GameBoard : MonoBehaviour
             if (matchCount >= 2)
             {
                 AddMatch(matchList, line);
-                //checkMatch++;
             }
         }
 
@@ -220,7 +241,6 @@ public class GameBoard : MonoBehaviour
             if (matchCount >= 2)
             {
                 AddMatch(matchList, line);
-                //checkMatch++;
             }
         }
 
@@ -228,9 +248,9 @@ public class GameBoard : MonoBehaviour
         {
             Node node = GetNode(start);
             if (!matchList.Contains(node))
-                matchList.Add(node);
+                matchList.Add(GetNode(start));
         }
-        //Debug.Log( "카운트 : " + matchList.Count);
+
         return matchList;
     }
 
@@ -245,25 +265,66 @@ public class GameBoard : MonoBehaviour
         }
     }
 
-    //퍼즐 진행 중 
+    //퍼즐 이동 후
     void UpdateGravity()
     {
-        for (int y = heightCount - 1; y > 0; y--)
+        for (int x = 0; x < widthCount; x++)
         {
-            for (int x = widthCount - 1; x > 0; x--)
+            for (int y = heightCount - 1; y >= 0; y--)
             {
                 Index current = new Index(x, y);
+                Index upper = Index.Add(current, Index.up);
 
                 if (nodeList[y, x].piece == null)
                 {
-                    Index upper = Index.Add(new Index(x, y), Index.up);
+                    //빈 노드 위의 인덱스를 검사
+                    while (GetPiece(upper) == null)
+                    {
+                        upper.add(Index.up);
+                        
+                        //노드 벗어나면 탐색 종료
+                        if (GetNode(upper) == null) break;
+                    }
+                    
+                    //빈 노드의 위를 탐색했을 때 피스가 있다면
+                    if (GetNode(upper) != null)
+                    {
+                        //MovePiece.Instance.Move(GetPiece(upper), GetNode(current));
+                        StartCoroutine(MovePiece.Instance.Gravity(GetPiece(upper), GetNode(current)));
 
-                    nodeList[y, x].piece = GetPiece(upper);
+                        GetNode(current).piece = GetPiece(upper);
+                        GetPiece(current).index = GetNode(current).index;
+                        GetNode(upper).piece = null;
+                    }
+
+                    //노드 바깥이면
+                    else
+                    {
+                        Vector2 position = new Vector2();
+                        position.x = 32 + (cellSize * x);
+                        position.y = -32 + (cellSize * y);
+                        
+                        Piece newPiece = RandomPiece(current, position);
+
+                        //MovePiece.Instance.Move(newPiece, GetNode(current));
+                        StartCoroutine(MovePiece.Instance.Gravity(newPiece, GetNode(current)));
+
+                        GetNode(current).piece = newPiece;
+                        GetPiece(current).index = GetNode(current).index;
+                    }
                 }
             }
-        }
+        }        
     }
 
+    //매치된 퍼즐 삭제
+    void RemovePiece(Node node)
+    {
+        Destroy(node.piece.gameObject);
+        //Destroy(node.piece);
+        node.piece = null;
+    }
+    
     //인덱스의 노드값 받기
     Node GetNode(Index idx)
     {
