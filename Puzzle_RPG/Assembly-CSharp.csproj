@@ -74,6 +74,7 @@
     <Compile Include="Assets\Scripts\UI\MiniMap\MiniMap.cs" />
     <Compile Include="Assets\Scripts\testPuzzle\GameBoard.cs" />
     <Compile Include="Assets\Scripts\testPuzzle\Index.cs" />
+    <Compile Include="Assets\Scripts\testPuzzle\MoveEvent.cs" />
     <Compile Include="Assets\Scripts\testPuzzle\MovePiece.cs" />
     <Compile Include="Assets\Scripts\testPuzzle\Piece.cs" />
     <None Include="Assets\Resources\CUBE - Heroes and Dungeons\Read me.txt" />
