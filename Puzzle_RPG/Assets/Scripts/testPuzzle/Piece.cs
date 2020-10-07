@@ -61,7 +61,6 @@ public class Piece : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerU
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        //MovePiece.Instance.SetIdx();
         MovePiece.Instance.Drop();
     }
 }

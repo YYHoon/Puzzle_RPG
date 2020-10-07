@@ -7,13 +7,11 @@ public class MovePiece : MonoBehaviour
 {
     static MovePiece instance;
     public static MovePiece Instance { get { return instance; } }
-    Index final;
 
-    Index idx;
-    Piece moving;
-
-    float moveSpeed = 16f;
-
+    Index final;  //추가할 인덱스
+    Index idx;    //최종적으로 이동할 인덱스
+    Piece movingPiece; //내가 움직이고 있는 피스
+    
     [SerializeField] float maxDragRange = 0.5f;
 
     private void Awake()
@@ -23,13 +21,13 @@ public class MovePiece : MonoBehaviour
     
     public void Click(PointerEventData eventData, Piece piece)
     {
-        moving = piece;
-        idx = new Index(moving.index.x, moving.index.y);
+        movingPiece = piece;
+        idx = new Index(movingPiece.index.x, movingPiece.index.y);
     }
 
-    public void Drag(PointerEventData eventData)
+    public void Drag(PointerEventData eventData, float moveSpeed = 16f)
     {
-        if (moving == null)
+        if (movingPiece == null)
             return;
 
         RectTransform rectTransform = GetComponent<RectTransform>();
@@ -38,7 +36,7 @@ public class MovePiece : MonoBehaviour
 
         if (RectTransformUtility.ScreenPointToWorldPointInRectangle(rectTransform, eventData.position, Camera.main, out worldPoint))
         {
-            Vector3 direction = worldPoint - moving.originPosition;
+            Vector3 direction = worldPoint - movingPiece.originPosition;
             Vector3 normalDirection = direction.normalized;
             Vector3 absolDirection = new Vector3(Mathf.Abs(direction.x), Mathf.Abs(direction.y), 0f);
 
@@ -47,7 +45,7 @@ public class MovePiece : MonoBehaviour
             //피스가 이동 제한 범위를 넘으려고 할 경우
             if (maxDragRange < range)
             {
-                moving.rectTransform.position = moving.originPosition + direction.normalized * maxDragRange;
+                movingPiece.rectTransform.position = movingPiece.originPosition + direction.normalized * maxDragRange;
 
                 //좌우
                 if (absolDirection.x > absolDirection.y)
@@ -66,7 +64,7 @@ public class MovePiece : MonoBehaviour
 
             else
             {
-                moving.rectTransform.position = worldPoint;
+                movingPiece.rectTransform.position = worldPoint;
             }
         }
     }
@@ -74,10 +72,9 @@ public class MovePiece : MonoBehaviour
     public void Drop()
     {
         idx.add(final);
-        GameBoard.Instance.SwapPiece(moving.index, idx);
+        GameBoard.Instance.SwapPiece(movingPiece.index, idx);
 
-        moving = null;
+        movingPiece = null;
         idx = new Index(0, 0);
-        //Debug.Log("up : " + idx.x + ", " + idx.y);
     }
 }
