@@ -121,6 +121,12 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &134961066 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1001329544817510, guid: c0239550469e34546954c86f48990e73,
+    type: 3}
+  m_PrefabInstance: {fileID: 2069148093}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &138366032
 GameObject:
   m_ObjectHideFlags: 0
@@ -169,7 +175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -493,6 +499,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &567936265 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1995310051065308, guid: c0239550469e34546954c86f48990e73,
+    type: 3}
+  m_PrefabInstance: {fileID: 2069148093}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &602033095
 GameObject:
   m_ObjectHideFlags: 0
@@ -597,7 +609,7 @@ GameObject:
   - component: {fileID: 992683844}
   - component: {fileID: 992683843}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Cloth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -739,7 +751,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1229211370}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1294121328}
+        m_MethodName: OnRightButton
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &1229211370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -787,6 +810,7 @@ GameObject:
   - component: {fileID: 1294121325}
   - component: {fileID: 1294121327}
   - component: {fileID: 1294121326}
+  - component: {fileID: 1294121328}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -852,6 +876,46 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1294121324}
   m_CullTransparentMesh: 0
+--- !u!114 &1294121328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1294121324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a3ae01109b82d34da73434c0570dd3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cloth:
+  - {fileID: 1771017173}
+  - {fileID: 1340866850}
+  - {fileID: 567936265}
+  - {fileID: 1447640089}
+  - {fileID: 1609580632}
+  - {fileID: 1730884594}
+  - {fileID: 134961066}
+  rightButton: {fileID: 1229211369}
+  leftButton: {fileID: 295319061}
+--- !u!1 &1340866850 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1647922246100752, guid: c0239550469e34546954c86f48990e73,
+    type: 3}
+  m_PrefabInstance: {fileID: 2069148093}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1447640089 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1443229360256450, guid: c0239550469e34546954c86f48990e73,
+    type: 3}
+  m_PrefabInstance: {fileID: 2069148093}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1609580632 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1489958436390924, guid: c0239550469e34546954c86f48990e73,
+    type: 3}
+  m_PrefabInstance: {fileID: 2069148093}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1637292510
 GameObject:
   m_ObjectHideFlags: 0
@@ -926,6 +990,18 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!1 &1730884594 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1315977221533122, guid: c0239550469e34546954c86f48990e73,
+    type: 3}
+  m_PrefabInstance: {fileID: 2069148093}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1771017173 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1505252515790994, guid: c0239550469e34546954c86f48990e73,
+    type: 3}
+  m_PrefabInstance: {fileID: 2069148093}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1994725975
 GameObject:
   m_ObjectHideFlags: 0
@@ -1006,6 +1082,10 @@ PrefabInstance:
     - target: {fileID: 1350513569089224, guid: c0239550469e34546954c86f48990e73, type: 3}
       propertyPath: m_Name
       value: SwordShield01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1505252515790994, guid: c0239550469e34546954c86f48990e73, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4513101019596146, guid: c0239550469e34546954c86f48990e73, type: 3}
       propertyPath: m_LocalPosition.x
