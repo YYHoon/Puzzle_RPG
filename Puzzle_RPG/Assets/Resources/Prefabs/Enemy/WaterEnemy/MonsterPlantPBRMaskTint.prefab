@@ -1403,9 +1403,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4441364228691298}
   - component: {fileID: 95370461447590988}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: MonsterPlantPBRMaskTint
-  m_TagString: Untagged
+  m_TagString: Water
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

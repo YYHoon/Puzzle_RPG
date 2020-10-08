@@ -45,24 +45,24 @@ public class GameBoard : MonoBehaviour
     
     void Update()
     {
-        if (movingPiece.Count != 0)
-        {
-            List<Node> matchList = new List<Node>();
+        //if (movingPiece.Count != 0)
+        //{
+        //    List<Node> matchList = new List<Node>();
 
-            for (int i = 0; i < movingPiece.Count; ++i)
-            {
-                AddMatch(matchList, CheckMatch(movingPiece[i].index));
-            }
+        //    for (int i = 0; i < movingPiece.Count; ++i)
+        //    {
+        //        AddMatch(matchList, CheckMatch(movingPiece[i].index));
+        //    }
 
-            if (matchList.Count > 0)
-            {
-                for (int i = 0; i < matchList.Count; i++)
-                    RemovePiece(matchList[i]);
-            }
+        //    if (matchList.Count > 0)
+        //    {
+        //        for (int i = 0; i < matchList.Count; i++)
+        //            RemovePiece(matchList[i]);
+        //    }
 
-            movingPiece.Clear();
-            UpdateGravity();
-        }
+        //    movingPiece.Clear();
+        //    UpdateGravity();
+        //}
 
         //if (IsMoveEventEnd())
         //{
@@ -202,31 +202,31 @@ public class GameBoard : MonoBehaviour
         movingPiece.Add(pieceTwo);
 
         //매치 됐는지 확인
-        //List<Node> matchOne = CheckMatch(one);
-        //List<Node> matchTwo = CheckMatch(two);
+        List<Node> matchOne = CheckMatch(one);
+        List<Node> matchTwo = CheckMatch(two);
 
-        //List<Node> matchList = new List<Node>();
+        List<Node> matchList = new List<Node>();
 
-        ////매치리스트에 합하기
-        //AddMatch(matchList, matchOne);
-        //AddMatch(matchList, matchTwo);
+        //매치리스트에 합하기
+        AddMatch(matchList, matchOne);
+        AddMatch(matchList, matchTwo);
 
-        ////매치된 게 없다면
-        //if (matchList.Count <= 0)
-        //{
-        //    nodeOne.setPiece(pieceOne);
-        //    nodeTwo.setPiece(pieceTwo);
-        //    return;
-        //}
+        //매치된 게 없다면
+        if (matchList.Count <= 0)
+        {
+            nodeOne.setPiece(pieceOne);
+            nodeTwo.setPiece(pieceTwo);
+            return;
+        }
 
-        ////있다면
-        //else
-        //{
-        //    for (int i = 0; i < matchList.Count; i++)
-        //        RemovePiece(matchList[i]);
-        //}
+        //있다면
+        else
+        {
+            for (int i = 0; i < matchList.Count; i++)
+                RemovePiece(matchList[i]);
+        }
 
-        //UpdateGravity();
+        UpdateGravity();
     }
 
     //매치된 상태인지 확인
@@ -315,6 +315,12 @@ public class GameBoard : MonoBehaviour
         }
     }
 
+    //매치 되었을 경우 에너미 공격
+    void EnemyAttack()
+    {
+
+    }
+
     //퍼즐 이동 후
     public void UpdateGravity()
     {
@@ -376,6 +382,7 @@ public class GameBoard : MonoBehaviour
         }
     }
 
+    //움직이는 피스가 있는지 확인하는 bool
     //bool IsMoveEventEnd()
     //{
     //    for (int i = 0; i < moveEventList.Count; ++i)
@@ -388,6 +395,7 @@ public class GameBoard : MonoBehaviour
     //    return true;
     //}
 
+    //퍼즐 아래로 떨어뜨리는 코루틴
     public IEnumerator Gravity(Piece piece, Node destination, float moveSpeed = 5.0f)
     {
         while (true)
@@ -416,7 +424,6 @@ public class GameBoard : MonoBehaviour
         //}
     }
     
-
     //매치된 퍼즐 삭제
     void RemovePiece(Node node)
     {
