@@ -5,12 +5,14 @@ using UnityEngine;
 
 public class RandomSpawn : MonoBehaviour
 {
+    //public Transform spawnObject;
     public GameObject spawnObject;
     public GameObject[] treeObject;
     public GameObject treeParent;
+
     private void Start()
     {
-        
+        //spawnObject = GetComponent<Transform>();
     }
 
     public void SpawnGameObject(int[,] map)
@@ -24,7 +26,9 @@ public class RandomSpawn : MonoBehaviour
             if (map[x, y] == 0&& checkMap(map,x,y))
             {
                 Vector3 spawnPos = new Vector3(x- map.GetLength(0)*0.5f, 0.3f, y- map.GetLength(1) * 0.5f);
+                spawnObject = EnemyManager.Instance.RandomEnemy();
                 Instantiate(spawnObject, spawnPos, Quaternion.Euler(0, 0, 0));
+                //Instantiate(spawnObject, spawnPos, Quaternion.Euler(0, 0, 0));
                 break;
             }
             test += 0.00001f;
@@ -38,7 +42,9 @@ public class RandomSpawn : MonoBehaviour
             if (map[x, y] == 0 && checkMap(map, x, y))
             {
                 Vector3 spawnPos = new Vector3(x - map.GetLength(0) * 0.5f, 0.3f, y - map.GetLength(1) * 0.5f);
+                spawnObject = EnemyManager.Instance.RandomEnemy();
                 Instantiate(spawnObject, spawnPos, Quaternion.Euler(0, 0, 0));
+                //Instantiate(spawnObject, spawnPos, Quaternion.Euler(0, 0, 0));
                 break;
             }
             test += 0.00001f;
@@ -52,7 +58,9 @@ public class RandomSpawn : MonoBehaviour
             if (map[x, y] == 0 && checkMap(map, x, y))
             {
                 Vector3 spawnPos = new Vector3(x - map.GetLength(0) * 0.5f, 0.3f, y - map.GetLength(1) * 0.5f);
+                spawnObject = EnemyManager.Instance.RandomEnemy();
                 Instantiate(spawnObject, spawnPos, Quaternion.Euler(0, 0, 0));
+                //Instantiate(spawnObject, spawnPos, Quaternion.Euler(0, 0, 0));
                 break;
             }
             test += 0.00001f;
@@ -66,7 +74,9 @@ public class RandomSpawn : MonoBehaviour
             if (map[x, y] == 0 && checkMap(map, x, y))
             {
                 Vector3 spawnPos = new Vector3(x - map.GetLength(0) * 0.5f, 0.3f, y - map.GetLength(1) * 0.5f);
+                spawnObject = EnemyManager.Instance.RandomEnemy();
                 Instantiate(spawnObject, spawnPos, Quaternion.Euler(0, 0, 0));
+                //Instantiate(spawnObject, spawnPos, Quaternion.Euler(0, 0, 0));
                 break;
             }
             test += 0.00001f;

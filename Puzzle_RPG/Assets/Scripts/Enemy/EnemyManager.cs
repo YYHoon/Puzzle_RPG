@@ -22,29 +22,18 @@ public class EnemyManager : MonoBehaviour
     void Start()
     {
         Enemies = Resources.LoadAll<GameObject>("Prefabs/Enemy/");
-        
+
         //if (GameObject.FindWithTag("Fire"))
         //    Enemies = GameObject.FindGameObjectsWithTag("Fire");
-
-        //else if (GameObject.FindWithTag("Water"))
-        //    Enemies = Resources.LoadAll<GameObject>("Prefabs/Enemy/WaterEnemy/");
-
-        //else if (GameObject.FindWithTag("Plant"))
-        //    Enemies = Resources.LoadAll<GameObject>("Prefabs/Enemy/PlantEnemy/");
-
         //FireEnemy = Resources.LoadAll<GameObject>("Prefabs/Enemy/FireEnemy/");
-        //WaterEnemy = Resources.LoadAll<GameObject>("Prefabs/Enemy/WaterEnemy/");
-        //PlantEnemy = Resources.LoadAll<GameObject>("Prefabs/Enemy/PlantEnemy/");
-
     }
 
-    public void RandomEnemy(Transform enemyPos)
+    //에너미 랜덤 생성 후 반환
+    public GameObject RandomEnemy()
     {
         random = Random.Range(0, Enemies.Length);
-        Instantiate(Enemies[random], enemyPos);
+        //Instantiate(Enemies[random], enemyPos.position, enemyPos.rotation);
 
-        //Instantiate(FireEnemy[Random.Range(0, FireEnemy.Length)], enemyPos);
-        //Instantiate(WaterEnemy[Random.Range(0, WaterEnemy.Length)], enemyPos);
-        //Instantiate(PlantEnemy[Random.Range(0, PlantEnemy.Length)], enemyPos);
+        return Enemies[random];
     }
 }
