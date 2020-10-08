@@ -15,53 +15,61 @@ public class RandomSpawn : MonoBehaviour
 
     public void SpawnGameObject(int[,] map)
     {
+        float test = 0.0f;
         //좌상
         while (true)
         {
-            int x = Random.Range(0, (int)(map.GetLength(0)*0.3f));
-            int y = Random.Range(0, (int)(map.GetLength(1) * 0.3f));
+            int x = Random.Range(0, (int)(map.GetLength(0)*(0.3f+test)));
+            int y = Random.Range(0, (int)(map.GetLength(1) * (0.3f + test)));
             if (map[x, y] == 0&& checkMap(map,x,y))
             {
                 Vector3 spawnPos = new Vector3(x- map.GetLength(0)*0.5f, 0.3f, y- map.GetLength(1) * 0.5f);
                 Instantiate(spawnObject, spawnPos, Quaternion.Euler(0, 0, 0));
                 break;
             }
+            test += 0.00001f;
         }
+        test = 0.0f;
         //우상
         while (true)
         {
-            int x = Random.Range((int)(map.GetLength(0) * 0.7f), map.GetLength(0) - 1);
-            int y = Random.Range(0, (int)(map.GetLength(1) * 0.3f));
+            int x = Random.Range((int)(map.GetLength(0) * (0.7f + test)), map.GetLength(0) - 1);
+            int y = Random.Range(0, (int)(map.GetLength(1) * (0.3f + test)));
             if (map[x, y] == 0 && checkMap(map, x, y))
             {
                 Vector3 spawnPos = new Vector3(x - map.GetLength(0) * 0.5f, 0.3f, y - map.GetLength(1) * 0.5f);
                 Instantiate(spawnObject, spawnPos, Quaternion.Euler(0, 0, 0));
                 break;
             }
+            test += 0.00001f;
         }
+        test = 0.0f;
         //좌하
         while (true)
         {
-            int x = Random.Range(0, (int)(map.GetLength(0) * 0.3f));
-            int y = Random.Range((int)(map.GetLength(1) * 0.7f), map.GetLength(1));
+            int x = Random.Range(0, (int)(map.GetLength(0) * (0.3f + test)));
+            int y = Random.Range((int)(map.GetLength(1) * (0.7f + test)), map.GetLength(1));
             if (map[x, y] == 0 && checkMap(map, x, y))
             {
                 Vector3 spawnPos = new Vector3(x - map.GetLength(0) * 0.5f, 0.3f, y - map.GetLength(1) * 0.5f);
                 Instantiate(spawnObject, spawnPos, Quaternion.Euler(0, 0, 0));
                 break;
             }
+            test += 0.00001f;
         }
+        test = 0.0f;
         //우하
         while (true)
         {
-            int x = Random.Range((int)(map.GetLength(0) * 0.7f), map.GetLength(0) - 1);
-            int y = Random.Range((int)(map.GetLength(1) * 0.7f), map.GetLength(1));
+            int x = Random.Range((int)(map.GetLength(0) * (0.7f + test)), map.GetLength(0) - 1);
+            int y = Random.Range((int)(map.GetLength(1) * (0.7f + test)), map.GetLength(1));
             if (map[x, y] == 0 && checkMap(map, x, y))
             {
                 Vector3 spawnPos = new Vector3(x - map.GetLength(0) * 0.5f, 0.3f, y - map.GetLength(1) * 0.5f);
                 Instantiate(spawnObject, spawnPos, Quaternion.Euler(0, 0, 0));
                 break;
             }
+            test += 0.00001f;
         }
     }
 

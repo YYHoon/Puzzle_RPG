@@ -17,7 +17,11 @@ TagManager:
   - UI
   - 
   - 
+<<<<<<< HEAD
   - ENEMY
+=======
+  - Player
+>>>>>>> origin/master
   - 
   - 
   - 
