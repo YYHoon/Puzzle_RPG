@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class EnemySpawn : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    GameObject Enemy;
+    Transform EnemyPos;
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        EnemyPos = GameObject.Find("EnemyPos").GetComponent<Transform>();
+        Enemy = EnemyManager.Instance.RandomEnemy();
+
+        Instantiate(Enemy, EnemyPos.position, EnemyPos.rotation, EnemyPos);
+        EnemyPos.localScale = new Vector3(2.0f, 2.0f, 1.0f);
     }
 }

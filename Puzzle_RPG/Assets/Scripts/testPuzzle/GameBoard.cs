@@ -4,20 +4,26 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+public class MoveEvent
+{
+    public Coroutine coroutine;
+    public Piece targetPiece;
+}
+
 public class GameBoard : MonoBehaviour
 {
     static GameBoard instance;
     public static GameBoard Instance { get { return instance; } }
-
-    //public RectTransform gameBoard;
+    
+    [Header("피스에 필요한 것들")]
     GameObject piecePrefab;
     [SerializeField] Sprite[] resources;
     Node[,] nodeList;
 
-    //List<Piece> movingPiece = new List<Piece>();//움직이는 피스들 담을 리스트
+    [Header("다 움직인 피스들")]
     List<MoveEvent> moveEventList = new List<MoveEvent>();
 
-    [Header("GameBoardSetting")]
+    [Header("게임보드 칸")]
     [SerializeField] float cellSize = 64f;
     int widthCount = 7;
     int heightCount = 8;
@@ -39,18 +45,15 @@ public class GameBoard : MonoBehaviour
     
     void Update()
     {
-        //if (moveEventList.Count != 0)
-        {
-            //UpdateGravity();
-        }
-
         if (IsMoveEventEnd())
         {
             List<Node> matchList = new List<Node>();
 
             for (int i = 0; i < moveEventList.Count; ++i)
             {
-                AddMatch(matchList, CheckMatch(moveEventList[i].targetPiece.index));
+                List<Node> tempList = CheckMatch(moveEventList[i].targetPiece.index);
+
+                AddMatch(matchList, tempList);
             }
 
             if (matchList.Count > 0)
@@ -60,8 +63,10 @@ public class GameBoard : MonoBehaviour
             }
 
             moveEventList.Clear();
+            UpdateGravity();
         }
     }
+ 
 
     //시작할 때 보드 세팅
     void SetBoard()
@@ -163,7 +168,11 @@ public class GameBoard : MonoBehaviour
         //노드 바깥이라면
         if (GetNode(two) == null)
         {
-            GetNode(one).setPiece(GetPiece(one));
+            //GetNode(one).setPiece(GetPiece(one));
+            MoveEvent Return = new MoveEvent();
+            Return.targetPiece = GetPiece(one);
+            Return.coroutine = StartCoroutine(Move(GetPiece(one), GetNode(one)));
+            moveEventList.Add(Return);
             return;
         }
 
@@ -173,39 +182,52 @@ public class GameBoard : MonoBehaviour
         Node nodeTwo = GetNode(two);
         Piece pieceTwo = GetPiece(two);
 
-        //피스 자리 바꾸기
-        nodeOne.setPiece(pieceTwo);
-        nodeTwo.setPiece(pieceOne);
+        MoveEvent pieceOneMoveEvent = new MoveEvent();
+        pieceOneMoveEvent.targetPiece = pieceOne;
+        pieceOneMoveEvent.coroutine = StartCoroutine(Move(pieceOne, nodeTwo));
+        moveEventList.Add(pieceOneMoveEvent);
 
-        
+        nodeTwo.setIndex(pieceOne);
 
+        MoveEvent pieceTwoMoveEvent = new MoveEvent();
+        pieceTwoMoveEvent.targetPiece = pieceTwo;
+        pieceTwoMoveEvent.coroutine = StartCoroutine(Move(pieceTwo, nodeOne));
+        moveEventList.Add(pieceTwoMoveEvent);
 
-            //매치 됐는지 확인
-        List<Node> matchOne = CheckMatch(one);
-        List<Node> matchTwo = CheckMatch(two);
+        nodeOne.setIndex(pieceTwo);
 
-        List<Node> matchList = new List<Node>();
+        //nodeOne.setPiece(pieceTwo);
+        //nodeTwo.setPiece(pieceOne);
 
-        //매치리스트에 합하기
-        AddMatch(matchList, matchOne);
-        AddMatch(matchList, matchTwo);
+        //movingPiece.Add(pieceOne);
+        //movingPiece.Add(pieceTwo);
 
-        //매치된 게 없다면
-        if (matchList.Count <= 0)
-        {
-            nodeOne.setPiece(pieceOne);
-            nodeTwo.setPiece(pieceTwo);
-            return;
-        }
+        //매치 됐는지 확인
+        //List<Node> matchOne = CheckMatch(one);
+        //List<Node> matchTwo = CheckMatch(two);
 
-        //있다면
-        else
-        {
-            for (int i = 0; i < matchList.Count; i++)
-                RemovePiece(matchList[i]);
-        }
+        //List<Node> matchList = new List<Node>();
 
-        UpdateGravity();
+        ////매치리스트에 합하기
+        //AddMatch(matchList, matchOne);
+        //AddMatch(matchList, matchTwo);
+
+        ////매치된 게 없다면
+        //if (matchList.Count <= 0)
+        //{
+        //    nodeOne.setPiece(pieceOne);
+        //    nodeTwo.setPiece(pieceTwo);
+        //    return;
+        //}
+
+        ////있다면
+        //else
+        //{
+        //    for (int i = 0; i < matchList.Count; i++)
+        //        RemovePiece(matchList[i]);
+        //}
+
+        //UpdateGravity();
     }
 
     //매치된 상태인지 확인
@@ -279,7 +301,6 @@ public class GameBoard : MonoBehaviour
             if (!matchList.Contains(node))
                 matchList.Add(GetNode(start));
         }
-
         return matchList;
     }
 
@@ -292,6 +313,12 @@ public class GameBoard : MonoBehaviour
 
             matchList.Add(line[i]);
         }
+    }
+
+    //매치 되었을 경우 에너미 공격
+    void EnemyAttack()
+    {
+
     }
 
     //퍼즐 이동 후
@@ -320,12 +347,13 @@ public class GameBoard : MonoBehaviour
                     {
                         MoveEvent newEvent = new MoveEvent();
                         newEvent.targetPiece = GetPiece(upper);
-                        newEvent.coroutine = StartCoroutine(Gravity(GetPiece(upper), GetNode(current)));
+                        newEvent.coroutine = StartCoroutine(Move(GetPiece(upper), GetNode(current)));
                         moveEventList.Add(newEvent);
+                        //StartCoroutine(Move(GetPiece(upper), GetNode(current)));
 
-                        //movingPiece.Add(GetPiece(upper));
                         GetNode(current).piece = GetPiece(upper);
                         GetPiece(current).index = GetNode(current).index;
+                        //movingPiece.Add(GetPiece(current));
                         GetNode(upper).piece = null;
                     }
 
@@ -337,14 +365,15 @@ public class GameBoard : MonoBehaviour
                         position.y = -32 + (cellSize * y);
 
                         Piece newPiece = RandomPiece(current, position);
-                        //movingPiece.Add(newPiece);
 
                         MoveEvent newEvent = new MoveEvent();
                         newEvent.targetPiece = newPiece;
-                        newEvent.coroutine = StartCoroutine(Gravity(newPiece, GetNode(current)));
+                        newEvent.coroutine = StartCoroutine(Move(newPiece, GetNode(current)));
                         moveEventList.Add(newEvent);
+                        //StartCoroutine(Move(newPiece, GetNode(current)));
 
                         GetNode(current).piece = newPiece;
+                        //movingPiece.Add(GetPiece(current));
                         GetPiece(current).index = GetNode(current).index;
                     }                    
                 }
@@ -352,19 +381,20 @@ public class GameBoard : MonoBehaviour
         }
     }
 
+    //움직이는 피스가 있는지 확인하는 bool
     bool IsMoveEventEnd()
     {
         for (int i = 0; i < moveEventList.Count; ++i)
         {
             if (moveEventList[i].coroutine != null)
-                Debug.Log(moveEventList.Count);
             return false;
         }
 
         return true;
     }
 
-    public IEnumerator Gravity(Piece piece, Node destination, float moveSpeed = 5.0f)
+    //퍼즐 움직이는 코루틴
+    public IEnumerator Move(Piece piece, Node destination, float moveSpeed = 7.0f)
     {
         while (true)
         {
@@ -380,24 +410,21 @@ public class GameBoard : MonoBehaviour
             yield return null;
         }
 
-        //코루틴이 끝났다는 뜻
+        //코루틴이 끝났다는 뜼
         for (int i = 0; i < moveEventList.Count; ++i)
         {
             if (moveEventList[i].targetPiece == piece)
             {
-                Debug.Log(moveEventList[i].targetPiece);
                 moveEventList[i].coroutine = null;
                 break;
             }
         }
     }
     
-
     //매치된 퍼즐 삭제
     void RemovePiece(Node node)
-    {
+    {       
         Destroy(node.piece.gameObject);
-        //Destroy(node.piece);
         node.piece = null;
     }
    
@@ -443,12 +470,12 @@ public class Node
         this.piece = piece;
     }
 
-    public void setPiece(Piece p)
+    public void setIndex(Piece p)
     {
         piece = p;
         piece.SetIndex(index);
-        piece.rectTransform.position = pos;
-        piece.originPosition = pos;
+        //piece.rectTransform.position = pos;
+        //piece.originPosition = pos;
     }
 
     public void setPieceType(PIECETYPE type)

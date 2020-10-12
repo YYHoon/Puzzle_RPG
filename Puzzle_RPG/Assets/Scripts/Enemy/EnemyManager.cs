@@ -4,21 +4,36 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
-    GameObject[] Enemies;
-    Transform EnemyPos;
+    static EnemyManager instance;
+    public static EnemyManager Instance { get { return instance; } }
+
+    [SerializeField] GameObject[] Enemies;
+    //GameObject[] FireEnemy;
+    //GameObject[] WaterEnemy;
+    //GameObject[] PlantEnemy;
+
     int random;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     void Start()
     {
         Enemies = Resources.LoadAll<GameObject>("Prefabs/Enemy/");
-        EnemyPos = GameObject.Find("EnemyPos").GetComponent<Transform>();
-        RandomEnemy();
+
+        //if (GameObject.FindWithTag("Fire"))
+        //    Enemies = GameObject.FindGameObjectsWithTag("Fire");
+        //FireEnemy = Resources.LoadAll<GameObject>("Prefabs/Enemy/FireEnemy/");
     }
 
-    void RandomEnemy()
+    //에너미 랜덤 생성 후 반환
+    public GameObject RandomEnemy()
     {
         random = Random.Range(0, Enemies.Length);
+        //Instantiate(Enemies[random], enemyPos.position, enemyPos.rotation);
 
-        Instantiate(Enemies[random], EnemyPos);
+        return Enemies[random];
     }
 }

@@ -1324,9 +1324,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4700302584741114}
   - component: {fileID: 95661104805808786}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: MonsterPlantPBR
-  m_TagString: Untagged
+  m_TagString: Plant
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

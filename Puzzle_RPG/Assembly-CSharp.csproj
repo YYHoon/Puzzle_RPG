@@ -70,15 +70,14 @@
     <Compile Include="Assets\Scripts\Map\MapGenerator.cs" />
     <Compile Include="Assets\Scripts\Map\MeshGenerator.cs" />
     <Compile Include="Assets\Scripts\Map\RandomSpawn.cs" />
-    <Compile Include="Assets\Scripts\SceneManager.cs" />
     <Compile Include="Assets\Scripts\TimeManager.cs" />
     <Compile Include="Assets\Scripts\UI\Camera\IsometricCamera.cs" />
     <Compile Include="Assets\Scripts\UI\Joystick\JoyStick.cs" />
     <Compile Include="Assets\Scripts\UI\MiniMap\MiniMap.cs" />
     <Compile Include="Assets\Scripts\UI\UI_Inven.cs" />
+    <Compile Include="Assets\Scripts\testPuzzle\EnemyHit.cs" />
     <Compile Include="Assets\Scripts\testPuzzle\GameBoard.cs" />
     <Compile Include="Assets\Scripts\testPuzzle\Index.cs" />
-    <Compile Include="Assets\Scripts\testPuzzle\MoveEvent.cs" />
     <Compile Include="Assets\Scripts\testPuzzle\MovePiece.cs" />
     <Compile Include="Assets\Scripts\testPuzzle\Piece.cs" />
     <None Include="Assets\Resources\CUBE - Heroes and Dungeons\Read me.txt" />
