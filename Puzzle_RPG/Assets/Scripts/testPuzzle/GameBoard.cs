@@ -51,9 +51,8 @@ public class GameBoard : MonoBehaviour
 
             for (int i = 0; i < moveEventList.Count; ++i)
             {
-                List<Node> tempList = CheckMatch(moveEventList[i].targetPiece.index);
-
-                AddMatch(matchList, tempList);
+                //List<Node> tempList = CheckMatch(moveEventList[i].targetPiece.index);
+                AddMatch(matchList, CheckMatch(moveEventList[i].targetPiece.index));
             }
 
             if (matchList.Count > 0)
@@ -65,8 +64,7 @@ public class GameBoard : MonoBehaviour
             moveEventList.Clear();
             UpdateGravity();
         }
-    }
- 
+    } 
 
     //시작할 때 보드 세팅
     void SetBoard()
@@ -168,7 +166,6 @@ public class GameBoard : MonoBehaviour
         //노드 바깥이라면
         if (GetNode(two) == null)
         {
-            //GetNode(one).setPiece(GetPiece(one));
             MoveEvent Return = new MoveEvent();
             Return.targetPiece = GetPiece(one);
             Return.coroutine = StartCoroutine(Move(GetPiece(one), GetNode(one)));
@@ -182,52 +179,23 @@ public class GameBoard : MonoBehaviour
         Node nodeTwo = GetNode(two);
         Piece pieceTwo = GetPiece(two);
 
+        //피스원부터 코루틴
         MoveEvent pieceOneMoveEvent = new MoveEvent();
         pieceOneMoveEvent.targetPiece = pieceOne;
         pieceOneMoveEvent.coroutine = StartCoroutine(Move(pieceOne, nodeTwo));
         moveEventList.Add(pieceOneMoveEvent);
 
+        //피스원 인덱스 설정
         nodeTwo.setIndex(pieceOne);
 
+        //피스투 코루틴
         MoveEvent pieceTwoMoveEvent = new MoveEvent();
         pieceTwoMoveEvent.targetPiece = pieceTwo;
         pieceTwoMoveEvent.coroutine = StartCoroutine(Move(pieceTwo, nodeOne));
         moveEventList.Add(pieceTwoMoveEvent);
 
+        //피스투 인덱스 설정
         nodeOne.setIndex(pieceTwo);
-
-        //nodeOne.setPiece(pieceTwo);
-        //nodeTwo.setPiece(pieceOne);
-
-        //movingPiece.Add(pieceOne);
-        //movingPiece.Add(pieceTwo);
-
-        //매치 됐는지 확인
-        //List<Node> matchOne = CheckMatch(one);
-        //List<Node> matchTwo = CheckMatch(two);
-
-        //List<Node> matchList = new List<Node>();
-
-        ////매치리스트에 합하기
-        //AddMatch(matchList, matchOne);
-        //AddMatch(matchList, matchTwo);
-
-        ////매치된 게 없다면
-        //if (matchList.Count <= 0)
-        //{
-        //    nodeOne.setPiece(pieceOne);
-        //    nodeTwo.setPiece(pieceTwo);
-        //    return;
-        //}
-
-        ////있다면
-        //else
-        //{
-        //    for (int i = 0; i < matchList.Count; i++)
-        //        RemovePiece(matchList[i]);
-        //}
-
-        //UpdateGravity();
     }
 
     //매치된 상태인지 확인
@@ -315,7 +283,7 @@ public class GameBoard : MonoBehaviour
         }
     }
 
-    //매치 되었을 경우 에너미 공격
+    //매치 되었을 경우 에너미를 공격
     void EnemyAttack()
     {
 
@@ -349,7 +317,6 @@ public class GameBoard : MonoBehaviour
                         newEvent.targetPiece = GetPiece(upper);
                         newEvent.coroutine = StartCoroutine(Move(GetPiece(upper), GetNode(current)));
                         moveEventList.Add(newEvent);
-                        //StartCoroutine(Move(GetPiece(upper), GetNode(current)));
 
                         GetNode(current).piece = GetPiece(upper);
                         GetPiece(current).index = GetNode(current).index;
@@ -370,7 +337,6 @@ public class GameBoard : MonoBehaviour
                         newEvent.targetPiece = newPiece;
                         newEvent.coroutine = StartCoroutine(Move(newPiece, GetNode(current)));
                         moveEventList.Add(newEvent);
-                        //StartCoroutine(Move(newPiece, GetNode(current)));
 
                         GetNode(current).piece = newPiece;
                         //movingPiece.Add(GetPiece(current));

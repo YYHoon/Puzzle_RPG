@@ -11,9 +11,7 @@ public class EnemyManager : MonoBehaviour
     //GameObject[] FireEnemy;
     //GameObject[] WaterEnemy;
     //GameObject[] PlantEnemy;
-
-    int random;
-
+    
     private void Awake()
     {
         instance = this;
@@ -31,7 +29,7 @@ public class EnemyManager : MonoBehaviour
     //에너미 랜덤 생성 후 반환
     public GameObject RandomEnemy()
     {
-        random = Random.Range(0, Enemies.Length);
+        int random = Random.Range(0, Enemies.Length);
         //Instantiate(Enemies[random], enemyPos.position, enemyPos.rotation);
 
         return Enemies[random];

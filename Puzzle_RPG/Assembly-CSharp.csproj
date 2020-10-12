@@ -88,34 +88,34 @@
     <None Include="Assets\Resources\BrokenVector\LowPolyTreePack\README.txt" />
     <None Include="Assets\Resources\Customizable Skybox\Stylized Sky\Shaders\Stylized Sky.shader" />
     <Reference Include="Unity.Timeline.Editor">
-      <HintPath>C:/Users/KGA_9/Desktop/Puzzle/Puzzle_RPG/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+      <HintPath>C:/Users/KGA_9/Desktop/Puzzle_RPG/Puzzle_RPG/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VSCode.Editor">
-      <HintPath>C:/Users/KGA_9/Desktop/Puzzle/Puzzle_RPG/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+      <HintPath>C:/Users/KGA_9/Desktop/Puzzle_RPG/Puzzle_RPG/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>C:/Users/KGA_9/Desktop/Puzzle/Puzzle_RPG/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>C:/Users/KGA_9/Desktop/Puzzle_RPG/Puzzle_RPG/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>C:/Users/KGA_9/Desktop/Puzzle/Puzzle_RPG/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+      <HintPath>C:/Users/KGA_9/Desktop/Puzzle_RPG/Puzzle_RPG/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline">
-      <HintPath>C:/Users/KGA_9/Desktop/Puzzle/Puzzle_RPG/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+      <HintPath>C:/Users/KGA_9/Desktop/Puzzle_RPG/Puzzle_RPG/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
     </Reference>
     <Reference Include="Unity.CollabProxy.Editor">
-      <HintPath>C:/Users/KGA_9/Desktop/Puzzle/Puzzle_RPG/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+      <HintPath>C:/Users/KGA_9/Desktop/Puzzle_RPG/Puzzle_RPG/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Rider.Editor">
-      <HintPath>C:/Users/KGA_9/Desktop/Puzzle/Puzzle_RPG/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+      <HintPath>C:/Users/KGA_9/Desktop/Puzzle_RPG/Puzzle_RPG/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Sprite.Editor">
-      <HintPath>C:/Users/KGA_9/Desktop/Puzzle/Puzzle_RPG/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
+      <HintPath>C:/Users/KGA_9/Desktop/Puzzle_RPG/Puzzle_RPG/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>C:/Users/KGA_9/Desktop/Puzzle/Puzzle_RPG/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>C:/Users/KGA_9/Desktop/Puzzle_RPG/Puzzle_RPG/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
-      <HintPath>C:/Users/KGA_9/Desktop/Puzzle/Puzzle_RPG/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+      <HintPath>C:/Users/KGA_9/Desktop/Puzzle_RPG/Puzzle_RPG/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.0f6/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>

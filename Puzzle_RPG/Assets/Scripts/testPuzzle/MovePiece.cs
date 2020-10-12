@@ -8,10 +8,11 @@ public class MovePiece : MonoBehaviour
     static MovePiece instance;
     public static MovePiece Instance { get { return instance; } }
 
-    Index final;  //추가할 인덱스
-    Index idx;    //최종적으로 이동할 인덱스
+    Index final;       //추가할 인덱스
+    Index idx;         //최종적으로 이동할 인덱스
     Piece movingPiece; //내가 움직이고 있는 피스
-    
+    float distance;
+
     [SerializeField] float maxDragRange = 0.5f;
 
     private void Awake()
@@ -41,6 +42,7 @@ public class MovePiece : MonoBehaviour
             Vector3 absolDirection = new Vector3(Mathf.Abs(direction.x), Mathf.Abs(direction.y), 0f);
 
             float range = direction.magnitude;
+            distance = Vector3.Distance(worldPoint, movingPiece.originPosition);
 
             //피스가 이동 제한 범위를 넘으려고 할 경우
             if (maxDragRange < range)
@@ -69,11 +71,26 @@ public class MovePiece : MonoBehaviour
         }
     }
 
-    public void Drop()
+    public void Drop(PointerEventData eventData)
     {
-        idx.add(final);
-        GameBoard.Instance.SwapPiece(movingPiece.index, idx);
+        //Debug.Log(distance);
 
+        //피스의 본래 포지션과 마우스 좌표의 차이가 0.15f 미만이면
+        //본래 포지션으로 돌려놓기
+        if (distance < 0.15f)
+        {
+            movingPiece.rectTransform.position = movingPiece.originPosition;
+            return; 
+        }
+
+        //아니면 스왑하기
+        else
+        {
+            idx.add(final);
+            GameBoard.Instance.SwapPiece(movingPiece.index, idx);
+        }
+
+        distance = 0f;
         movingPiece = null;
         idx = new Index(0, 0);
     }
