@@ -28,7 +28,7 @@ public class MovePiece : MonoBehaviour
 
     public void Drag(PointerEventData eventData, float moveSpeed = 16f)
     {
-        if (movingPiece == null)
+        if (movingPiece == null || !GameBoard.Instance.IsMoveEventEnd())
             return;
 
         RectTransform rectTransform = GetComponent<RectTransform>();

@@ -55,7 +55,7 @@ public class GameBoard : MonoBehaviour
                 AddMatch(matchList, CheckMatch(moveEventList[i].targetPiece.index));
             }
 
-            if (matchList.Count > 0)
+            if (matchList.Count != 0)
             {
                 for (int i = 0; i < matchList.Count; i++)
                     RemovePiece(matchList[i]);
@@ -179,23 +179,57 @@ public class GameBoard : MonoBehaviour
         Node nodeTwo = GetNode(two);
         Piece pieceTwo = GetPiece(two);
 
-        //피스원부터 코루틴
-        MoveEvent pieceOneMoveEvent = new MoveEvent();
-        pieceOneMoveEvent.targetPiece = pieceOne;
-        pieceOneMoveEvent.coroutine = StartCoroutine(Move(pieceOne, nodeTwo));
-        moveEventList.Add(pieceOneMoveEvent);
-
+        //==========================인덱스 값만 먼저 바꿔보기==========================//
         //피스원 인덱스 설정
         nodeTwo.setIndex(pieceOne);
 
-        //피스투 코루틴
-        MoveEvent pieceTwoMoveEvent = new MoveEvent();
-        pieceTwoMoveEvent.targetPiece = pieceTwo;
-        pieceTwoMoveEvent.coroutine = StartCoroutine(Move(pieceTwo, nodeOne));
-        moveEventList.Add(pieceTwoMoveEvent);
-
         //피스투 인덱스 설정
         nodeOne.setIndex(pieceTwo);
+
+        //======================자리 교체 전 매치 확인======================//
+        List<Node> matchList = new List<Node>();
+        List<Node> matchOne = CheckMatch(one);
+        List<Node> matchTwo = CheckMatch(two);
+
+        AddMatch(matchList, matchOne);
+        AddMatch(matchList, matchTwo);
+        
+        //매치된 퍼즐이 없으면 제자리로 돌려놓기
+        if (matchList.Count == 0)
+        {
+            //MoveEvent pieceOneBackEvent = new MoveEvent();
+            //pieceOneBackEvent.targetPiece = pieceOne;
+            //pieceOneBackEvent.coroutine = StartCoroutine(Move(pieceOne, nodeOne));
+            //moveEventList.Add(pieceOneBackEvent);
+
+            StartCoroutine(Move(pieceOne, nodeOne));
+            nodeOne.setIndex(pieceOne);
+
+            //MoveEvent pieceTwoBackEvent = new MoveEvent();
+            //pieceTwoBackEvent.targetPiece = pieceTwo;
+            //pieceTwoBackEvent.coroutine = StartCoroutine(Move(pieceTwo, nodeTwo));
+            //moveEventList.Add(pieceTwoBackEvent);
+
+            StartCoroutine(Move(pieceTwo, nodeTwo));
+            nodeTwo.setIndex(pieceTwo);
+        }
+
+        //매치된 퍼즐이 있으면
+        else
+        {
+            //피스원부터 코루틴
+            MoveEvent pieceOneMoveEvent = new MoveEvent();
+            pieceOneMoveEvent.targetPiece = pieceOne;
+            pieceOneMoveEvent.coroutine = StartCoroutine(Move(pieceOne, nodeTwo));
+
+            //피스투 코루틴
+            MoveEvent pieceTwoMoveEvent = new MoveEvent();
+            pieceTwoMoveEvent.targetPiece = pieceTwo;
+            pieceTwoMoveEvent.coroutine = StartCoroutine(Move(pieceTwo, nodeOne));
+
+            moveEventList.Add(pieceOneMoveEvent);
+            moveEventList.Add(pieceTwoMoveEvent);
+        }
     }
 
     //매치된 상태인지 확인
@@ -348,7 +382,7 @@ public class GameBoard : MonoBehaviour
     }
 
     //움직이는 피스가 있는지 확인하는 bool
-    bool IsMoveEventEnd()
+    public bool IsMoveEventEnd()
     {
         for (int i = 0; i < moveEventList.Count; ++i)
         {
