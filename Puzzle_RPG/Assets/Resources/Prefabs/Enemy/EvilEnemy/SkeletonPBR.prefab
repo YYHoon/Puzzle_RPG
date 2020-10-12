@@ -228,7 +228,7 @@ GameObject:
   - component: {fileID: 95570523499675550}
   m_Layer: 8
   m_Name: SkeletonPBR
-  m_TagString: Untagged
+  m_TagString: Evil
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

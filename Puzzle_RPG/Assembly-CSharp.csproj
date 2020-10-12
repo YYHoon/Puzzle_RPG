@@ -64,7 +64,6 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\ChangeCloth.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyManager.cs" />
-    <Compile Include="Assets\Scripts\Enemy\EnemySpawn.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\Map\MapGenerator.cs" />
     <Compile Include="Assets\Scripts\Map\MeshGenerator.cs" />
@@ -83,7 +82,6 @@
     <None Include="Assets\Resources\Epic Toon FX\Prefabs\Combat\Combat FX.txt" />
     <None Include="Assets\Resources\CUBE - Heroes and Dungeons\Read me.txt" />
     <None Include="Assets\Models\RPG Monster Wave PBR\Shaders\PBRMaskTint.shader" />
-    <None Include="Assets\Resources\CasualUI\ReadMe.txt" />
     <None Include="Assets\Resources\CUBE - Heroes and Dungeons\www.meshtint.com.txt" />
     <None Include="Assets\Images\CasualUI\ReadMe.txt" />
     <None Include="Assets\Resources\ModularRPGHeroesPolyArt\Shader\PolyArtMaskTint.shader" />

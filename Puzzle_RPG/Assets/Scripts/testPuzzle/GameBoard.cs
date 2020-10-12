@@ -22,6 +22,7 @@ public class GameBoard : MonoBehaviour
 
     [Header("다 움직인 피스들")]
     List<MoveEvent> moveEventList = new List<MoveEvent>();
+    int damage;
 
     [Header("게임보드 칸")]
     [SerializeField] float cellSize = 64f;
@@ -201,14 +202,16 @@ public class GameBoard : MonoBehaviour
             //pieceOneBackEvent.targetPiece = pieceOne;
             //pieceOneBackEvent.coroutine = StartCoroutine(Move(pieceOne, nodeOne));
             //moveEventList.Add(pieceOneBackEvent);
-
-            StartCoroutine(Move(pieceOne, nodeOne));
-            nodeOne.setIndex(pieceOne);
+            //nodeOne.setIndex(pieceOne);
 
             //MoveEvent pieceTwoBackEvent = new MoveEvent();
             //pieceTwoBackEvent.targetPiece = pieceTwo;
             //pieceTwoBackEvent.coroutine = StartCoroutine(Move(pieceTwo, nodeTwo));
             //moveEventList.Add(pieceTwoBackEvent);
+            //nodeTwo.setIndex(pieceTwo);
+
+            StartCoroutine(Move(pieceOne, nodeOne));
+            nodeOne.setIndex(pieceOne);
 
             StartCoroutine(Move(pieceTwo, nodeTwo));
             nodeTwo.setIndex(pieceTwo);
@@ -318,9 +321,12 @@ public class GameBoard : MonoBehaviour
     }
 
     //매치 되었을 경우 에너미를 공격
-    void EnemyAttack()
+    void EnemyAttack(Piece piece)
     {
+        if (IsMoveEventEnd())
+        {
 
+        }
     }
 
     //퍼즐 이동 후
@@ -387,7 +393,7 @@ public class GameBoard : MonoBehaviour
         for (int i = 0; i < moveEventList.Count; ++i)
         {
             if (moveEventList[i].coroutine != null)
-            return false;
+                return false;
         }
 
         return true;

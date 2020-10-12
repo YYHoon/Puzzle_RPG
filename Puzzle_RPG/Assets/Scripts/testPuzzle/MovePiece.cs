@@ -22,6 +22,9 @@ public class MovePiece : MonoBehaviour
     
     public void Click(PointerEventData eventData, Piece piece)
     {
+        if (!GameBoard.Instance.IsMoveEventEnd())
+            return;
+
         movingPiece = piece;
         idx = new Index(movingPiece.index.x, movingPiece.index.y);
     }
