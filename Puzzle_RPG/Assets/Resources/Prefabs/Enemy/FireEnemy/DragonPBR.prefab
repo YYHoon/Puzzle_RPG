@@ -814,7 +814,7 @@ GameObject:
   - component: {fileID: 95336232578254584}
   m_Layer: 8
   m_Name: DragonPBR
-  m_TagString: Fire
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -5,9 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class DataManager : MonoBehaviour
 {
+    static DataManager instance;
+    public static DataManager Instance { get { return instance; } }
+
     [SerializeField]
     ChangeCloth.PlayerIdx saveIdx;
     public GameObject ClothIdx;
+    List<Enemy> enemyList = new List<Enemy>();
     public ChangeCloth.PlayerIdx SaveIdx
     {
         get
@@ -19,10 +23,14 @@ public class DataManager : MonoBehaviour
             saveIdx = value;
         }
     }
+
+    [Header("Enemy")]
+    Enemy enemy;
+
     private void Awake()
     {
-        DontDestroyOnLoad(gameObject);
-        
+        instance = this;
+        DontDestroyOnLoad(gameObject);        
     }
     
     public void SaveCloth()
@@ -34,5 +42,17 @@ public class DataManager : MonoBehaviour
     {
         ClothIdx = GameObject.Find("Player_H1");
         Debug.Log(ClothIdx);
+    }
+
+    public void SaveEnemy()
+    {
+        enemyList = EnemyManager.Instance.EnemyList;        
+    }
+
+    public Enemy LoadEnemy(Enemy battleEnemy)
+    {
+        Enemy enemy = new Enemy();
+        enemy = battleEnemy;
+        return enemy;
     }
 }

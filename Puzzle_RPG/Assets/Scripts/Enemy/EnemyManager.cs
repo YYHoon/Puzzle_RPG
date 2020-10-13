@@ -18,17 +18,14 @@ public class EnemyManager : MonoBehaviour
 
     [Header("Enemy")]
     List<Enemy> enemyList = new List<Enemy>();
-
     GameObject[] Enemies;
-    Transform EnemyPos;
-    //ENEMYTYPE enemyType;
 
     [Header("HpBar")]
     [SerializeField] Slider HpBar;
     float currentHp = 100f;
     float maxHp = 100f;
 
-    //public ENEMYTYPE enemytype { get { return enemyType; } }
+    public List<Enemy> EnemyList { get { return enemyList; } }
 
     private void Awake()
     {
@@ -45,30 +42,9 @@ public class EnemyManager : MonoBehaviour
        // HpBar.value = currentHp / maxHp;
     }
 
-    //에너미 랜덤 반환
+    //에너미 4종류 리스트에 담기
     public void SetEnemy()
     {
-        //int random = Random.Range(0, 4);
-        //Enemy enemy = new Enemy();
-        //enemy.Type = (ENEMYTYPE)random;
-        //
-        //if (enemyList.Count != 0)
-        //{
-        //    for (int i = 0; i < enemyList.Count; i++)
-        //    {
-        //        //if (enemy.Type != enemyList[i].Type) continue;
-        //
-        //        while (enemy.Type == enemyList[i].Type)
-        //        {
-        //            random = Random.Range(0, 4);
-        //            enemy.Type = (ENEMYTYPE)random;
-        //        }
-        //    }
-        //}        
-        //
-        //enemy.Object = selectType(random);
-        //enemyList.Add(enemy);
-
         for (int i = 0; i < 4; i++)
         {
             Enemy enemy = new Enemy();
@@ -79,7 +55,7 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
-    //에너미 타입 지정
+    //에너미 프리팹 지정
     GameObject selectType(int type)
     {
         if (type == 0)

@@ -1324,7 +1324,7 @@ GameObject:
   - component: {fileID: 95246818704427922}
   m_Layer: 8
   m_Name: GolemPBR
-  m_TagString: Water
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

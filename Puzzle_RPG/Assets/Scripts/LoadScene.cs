@@ -4,14 +4,17 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class LoadScene : MonoBehaviour
 {
-    public DataManager dataManager;
-
-
     public void OnBattleScene()
     {
-        dataManager.SaveCloth();
-        SceneManager.LoadScene("TestHoon");
+        DataManager.Instance.SaveCloth();
+        SceneManager.LoadScene("Battle");
     }
 
+    public void OnPuzzleScene()
+    {
+        DataManager.Instance.SaveEnemy();
+        SceneManager.LoadScene("TestPuzzle");
+    }
 
+    
 }

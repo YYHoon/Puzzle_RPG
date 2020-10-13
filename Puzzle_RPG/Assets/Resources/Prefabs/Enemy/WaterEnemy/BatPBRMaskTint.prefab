@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 95578907312867320}
   m_Layer: 8
   m_Name: BatPBRMaskTint
-  m_TagString: Water
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

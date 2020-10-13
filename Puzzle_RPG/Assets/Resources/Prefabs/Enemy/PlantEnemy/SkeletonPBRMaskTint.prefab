@@ -1428,7 +1428,7 @@ GameObject:
   - component: {fileID: 95031224806545978}
   m_Layer: 8
   m_Name: SkeletonPBRMaskTint
-  m_TagString: Plant
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

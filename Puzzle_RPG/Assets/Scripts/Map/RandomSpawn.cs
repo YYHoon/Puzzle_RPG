@@ -6,7 +6,7 @@ using UnityEngine;
 public class RandomSpawn : MonoBehaviour
 {
     //public Transform spawnObject;
-    public GameObject spawnObject;
+    public GameObject[] spawnObject;
     public GameObject[] treeObject;
     public GameObject treeParent;
     public GameObject player;
@@ -22,7 +22,7 @@ public class RandomSpawn : MonoBehaviour
             if (map[x, y] == 0&& checkMap(map,x,y))
             {
                 Vector3 spawnPos = new Vector3(x- map.GetLength(0)*0.5f, 0.3f, y- map.GetLength(1) * 0.5f);
-                spawnObject = EnemyManager.Instance.spawn(spawnPos);
+                spawnObject[0] = EnemyManager.Instance.spawn(spawnPos);
                 break;
             }
             test += 0.00001f;
@@ -36,7 +36,7 @@ public class RandomSpawn : MonoBehaviour
             if (map[x, y] == 0 && checkMap(map, x, y))
             {
                 Vector3 spawnPos = new Vector3(x - map.GetLength(0) * 0.5f, 0.3f, y - map.GetLength(1) * 0.5f);
-                spawnObject = EnemyManager.Instance.spawn(spawnPos);
+                spawnObject[1] = EnemyManager.Instance.spawn(spawnPos);
                 break;
             }
             test += 0.00001f;
@@ -50,7 +50,7 @@ public class RandomSpawn : MonoBehaviour
             if (map[x, y] == 0 && checkMap(map, x, y))
             {
                 Vector3 spawnPos = new Vector3(x - map.GetLength(0) * 0.5f, 0.3f, y - map.GetLength(1) * 0.5f);
-                spawnObject = EnemyManager.Instance.spawn(spawnPos);
+                spawnObject[2] = EnemyManager.Instance.spawn(spawnPos);
                 break;
             }
             test += 0.00001f;
@@ -64,7 +64,7 @@ public class RandomSpawn : MonoBehaviour
             if (map[x, y] == 0 && checkMap(map, x, y))
             {
                 Vector3 spawnPos = new Vector3(x - map.GetLength(0) * 0.5f, 0.3f, y - map.GetLength(1) * 0.5f);
-                spawnObject = EnemyManager.Instance.spawn(spawnPos);
+                spawnObject[3] = EnemyManager.Instance.spawn(spawnPos);
                 //spawnObject = EnemyManager.Instance.RandomEnemy();
                 //Instantiate(spawnObject, spawnPos, Quaternion.Euler(0, 0, 0));
                 break;
