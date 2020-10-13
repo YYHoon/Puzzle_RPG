@@ -3251,7 +3251,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b271cccebd3438e4b92909cdf4b84904, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Enemies: []
+  enemyType: 0
+  HpBar: {fileID: 0}
 --- !u!4 &877340879
 Transform:
   m_ObjectHideFlags: 0
@@ -3423,6 +3424,7 @@ MonoBehaviour:
   - {fileID: 184622, guid: c7bcf19bbfa57ed4ea9147dff66d5542, type: 3}
   - {fileID: 195476, guid: ec7286e0017272441a3dec9205cb8daf, type: 3}
   treeParent: {fileID: 769159307}
+  player: {fileID: 1221114690}
 --- !u!1 &952202863
 GameObject:
   m_ObjectHideFlags: 0

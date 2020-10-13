@@ -23,6 +23,7 @@ public class PlayerCloth : MonoBehaviour
     {
         dataManager = GameObject.Find("DataManager");
         dm = dataManager.GetComponent<DataManager>();
+        
         clothChild.AddRange(cloth.GetComponentsInChildren<Transform>(true));
         clothChild.RemoveAt(0);
         clothChild[dm.SaveIdx.clothIndex].gameObject.SetActive(true);
