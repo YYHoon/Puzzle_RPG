@@ -16,5 +16,8 @@ public class LoadScene : MonoBehaviour
         SceneManager.LoadScene("TestPuzzle");
     }
 
-    
+    public void FromPuzzleToBattle()
+    {
+        SceneManager.LoadScene("Battle");
+    }
 }

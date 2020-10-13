@@ -12,6 +12,7 @@ public class DataManager : MonoBehaviour
     ChangeCloth.PlayerIdx saveIdx;
     public GameObject ClothIdx;
     List<Enemy> enemyList = new List<Enemy>();
+    public int[,] mapSave;
     public ChangeCloth.PlayerIdx SaveIdx
     {
         get
@@ -54,5 +55,10 @@ public class DataManager : MonoBehaviour
         Enemy enemy = new Enemy();
         enemy = battleEnemy;
         return enemy;
+    }
+
+    public void SaveMap(int [,]map)
+    {
+        mapSave = map;
     }
 }

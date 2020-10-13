@@ -16,7 +16,7 @@ public class MapGenerator : MonoBehaviour
     [Range(0, 100)]
     public int randomFillPercent;
     int[,] map;
-    private void Start()
+    private void Awake()
     {
         Generator();
     }
@@ -31,29 +31,37 @@ public class MapGenerator : MonoBehaviour
 
     void Generator()
     {
-        map = new int[width, height];
-        RandomFillMap();
-        for(int i=0;i<5;++i)
+        int[,] borderedMap;
+        if (DataManager.Instance.mapSave == null)
         {
-            SmoothMap();
-        }
-
-        ProcesMap();
-        int borderSize = 1;
-        int[,] borderedMap = new int[width + borderSize * 2, height + borderSize * 2];
-        for (int x = 0; x < borderedMap.GetLength(0); ++x)
-        {
-            for (int y = 0; y < borderedMap.GetLength(1); ++y)
+            map = new int[width, height];
+            RandomFillMap();
+            for (int i = 0; i < 5; ++i)
             {
-                if(x>=borderSize && x<width+borderSize&&y>=borderSize && y <height +borderSize)
+                SmoothMap();
+            }
+
+            ProcesMap();
+            int borderSize = 1;
+            borderedMap = new int[width + borderSize * 2, height + borderSize * 2];
+            for (int x = 0; x < borderedMap.GetLength(0); ++x)
+            {
+                for (int y = 0; y < borderedMap.GetLength(1); ++y)
                 {
-                    borderedMap[x, y] = map[x - borderSize, y - borderSize];
-                }
-                else
-                {
-                    borderedMap[x, y] = 1;
+                    if (x >= borderSize && x < width + borderSize && y >= borderSize && y < height + borderSize)
+                    {
+                        borderedMap[x, y] = map[x - borderSize, y - borderSize];
+                    }
+                    else
+                    {
+                        borderedMap[x, y] = 1;
+                    }
                 }
             }
+        }
+        else
+        {
+            borderedMap = DataManager.Instance.mapSave;
         }
         MeshGenerator meshGen = GetComponent<MeshGenerator>();
         meshGen.GenerateMesh(borderedMap, 1);
@@ -62,6 +70,8 @@ public class MapGenerator : MonoBehaviour
         rs.SpawnGameObject(borderedMap);
         rs.TreeSpawn(borderedMap);
         rs.PlayerSpawn(borderedMap);
+
+        DataManager.Instance.SaveMap(borderedMap);
     }
 
     void ProcesMap()
