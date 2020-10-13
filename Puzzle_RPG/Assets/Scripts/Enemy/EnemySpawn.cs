@@ -103,6 +103,6 @@ public class EnemySpawn : MonoBehaviour
 
         //에너미 체력바 갱신
         enemy.Damage(damage);
-        HpBar.value = enemy.Hp;        
+        HpBar.value = enemy.Hp;
     }
 }
