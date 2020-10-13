@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
 public class LoadScene : MonoBehaviour
 {
+    public Transform EnemyPosition;
+
     public void OnBattleScene()
     {
         DataManager.Instance.SaveCloth();
@@ -12,9 +15,6 @@ public class LoadScene : MonoBehaviour
 
     public void OnPuzzleScene()
     {
-        DataManager.Instance.SaveEnemy();
         SceneManager.LoadScene("TestPuzzle");
     }
-
-    
 }

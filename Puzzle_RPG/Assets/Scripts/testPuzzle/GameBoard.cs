@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System.Collections;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -10,11 +10,23 @@ public class MoveEvent
     public Piece targetPiece;
 }
 
+public struct Attack
+{
+    public float fire;
+    public float water;
+    public float plant;
+    public float heal;
+}
+
 public class GameBoard : MonoBehaviour
 {
     static GameBoard instance;
     public static GameBoard Instance { get { return instance; } }
-    
+
+    [Header("공격")]
+    Attack attack;
+    List<Piece> attackList = new List<Piece>();
+
     [Header("피스에 필요한 것들")]
     GameObject piecePrefab;
     [SerializeField] Sprite[] resources;
@@ -32,6 +44,8 @@ public class GameBoard : MonoBehaviour
     //float blankHeight;
     //float startX;
     //float startY;
+
+    int count;
 
     private void Awake()
     {
@@ -52,17 +66,20 @@ public class GameBoard : MonoBehaviour
 
             for (int i = 0; i < moveEventList.Count; ++i)
             {
-                //List<Node> tempList = CheckMatch(moveEventList[i].targetPiece.index);
                 AddMatch(matchList, CheckMatch(moveEventList[i].targetPiece.index));
             }
 
             if (matchList.Count != 0)
             {
                 for (int i = 0; i < matchList.Count; i++)
+                {
+                    attackList.Add(matchList[i].piece);
                     RemovePiece(matchList[i]);
+                }
             }
 
             moveEventList.Clear();
+            PlayerAttack();
             UpdateGravity();
         }
     } 
@@ -122,6 +139,17 @@ public class GameBoard : MonoBehaviour
                     GetPiece(idx).image.sprite = resources[(int)newType];
 
                     matchList = CheckMatch(idx);
+
+                    /*
+                    count++;
+                    Debug.Log(count);
+                    if (count >= 100)
+                    {
+                        Debug.Log("match");
+                        break;
+                    }
+                    */
+
                 }
                 equal.Clear();
             }
@@ -321,11 +349,34 @@ public class GameBoard : MonoBehaviour
     }
 
     //매치 되었을 경우 에너미를 공격
-    void EnemyAttack(Piece piece)
+    void PlayerAttack()
     {
-        if (IsMoveEventEnd())
-        {
+        if (attackList.Count == 0) return;
 
+        for (int i = 0; i < attackList.Count; i++)
+        {
+            if (attackList[i].piecetype == PIECETYPE.fire)
+                attack.fire += 1;
+
+            else if (attackList[i].piecetype == PIECETYPE.water)
+                attack.water += 1;
+
+            else if (attackList[i].piecetype == PIECETYPE.plant)
+                attack.plant += 1;
+
+            else if (attackList[i].piecetype == PIECETYPE.heal)
+                attack.heal += 1;
+        }
+
+        EnemySpawn.Instance.EnemyHit(attack);
+
+        //초기화
+        {
+            attackList.Clear();
+            attack.fire = 0;
+            attack.water = 0;
+            attack.plant = 0;
+            attack.heal = 0;
         }
     }
 

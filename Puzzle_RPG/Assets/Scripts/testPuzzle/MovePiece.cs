@@ -11,8 +11,8 @@ public class MovePiece : MonoBehaviour
     Index final;       //추가할 인덱스
     Index idx;         //최종적으로 이동할 인덱스
     Piece movingPiece; //내가 움직이고 있는 피스
-    float distance;
-
+    float distance;    //마우스와 피스 거리
+    
     [SerializeField] float maxDragRange = 0.5f;
 
     private void Awake()
@@ -24,7 +24,7 @@ public class MovePiece : MonoBehaviour
     {
         if (!GameBoard.Instance.IsMoveEventEnd())
             return;
-
+        
         movingPiece = piece;
         idx = new Index(movingPiece.index.x, movingPiece.index.y);
     }
@@ -76,7 +76,8 @@ public class MovePiece : MonoBehaviour
 
     public void Drop(PointerEventData eventData)
     {
-        //Debug.Log(distance);
+        if (!GameBoard.Instance.IsMoveEventEnd())
+            return;
 
         //피스의 본래 포지션과 마우스 좌표의 차이가 0.15f 미만이면
         //본래 포지션으로 돌려놓기

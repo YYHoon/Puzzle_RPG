@@ -8,10 +8,23 @@ public class DataManager : MonoBehaviour
     static DataManager instance;
     public static DataManager Instance { get { return instance; } }
 
-    [SerializeField]
     ChangeCloth.PlayerIdx saveIdx;
     public GameObject ClothIdx;
+
     List<Enemy> enemyList = new List<Enemy>();
+    public List<Enemy> EnemyList
+    {
+        get
+        {
+            return enemyList;
+        }
+    }
+    public int EnemyIdx
+    {
+        get;
+        set;
+    }
+
     public ChangeCloth.PlayerIdx SaveIdx
     {
         get
@@ -23,9 +36,6 @@ public class DataManager : MonoBehaviour
             saveIdx = value;
         }
     }
-
-    [Header("Enemy")]
-    Enemy enemy;
 
     private void Awake()
     {
@@ -41,18 +51,10 @@ public class DataManager : MonoBehaviour
     public void LoadCloth()
     {
         ClothIdx = GameObject.Find("Player_H1");
-        Debug.Log(ClothIdx);
     }
 
     public void SaveEnemy()
     {
-        enemyList = EnemyManager.Instance.EnemyList;        
-    }
-
-    public Enemy LoadEnemy(Enemy battleEnemy)
-    {
-        Enemy enemy = new Enemy();
-        enemy = battleEnemy;
-        return enemy;
+        enemyList = EnemyManager.Instance.EnemyList;
     }
 }

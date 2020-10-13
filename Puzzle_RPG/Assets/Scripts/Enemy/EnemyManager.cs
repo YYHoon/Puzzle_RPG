@@ -19,11 +19,10 @@ public class EnemyManager : MonoBehaviour
     [Header("Enemy")]
     List<Enemy> enemyList = new List<Enemy>();
     GameObject[] Enemies;
+    int index = 0;
 
     [Header("HpBar")]
     [SerializeField] Slider HpBar;
-    float currentHp = 100f;
-    float maxHp = 100f;
 
     public List<Enemy> EnemyList { get { return enemyList; } }
 
@@ -37,11 +36,6 @@ public class EnemyManager : MonoBehaviour
         SetEnemy();
     }
 
-    private void Update()
-    {
-       // HpBar.value = currentHp / maxHp;
-    }
-
     //에너미 4종류 리스트에 담기
     public void SetEnemy()
     {
@@ -50,9 +44,10 @@ public class EnemyManager : MonoBehaviour
             Enemy enemy = new Enemy();
             enemy.Object = selectType(i);
             enemy.Type = (ENEMYTYPE)i;
-            enemyList.Add(enemy);
             enemy.EnemyTypeToString();
+            enemyList.Add(enemy);
         }
+        DataManager.Instance.SaveEnemy();
     }
 
     //에너미 프리팹 지정
@@ -87,32 +82,37 @@ public class EnemyManager : MonoBehaviour
     {
         if (enemyList.Count <= 0) return null;
 
-        GameObject enemy = enemyList[0].Object;
-        enemyList.RemoveAt(0);
-
-        //Instantiate(enemy, EnemyPos.position, EnemyPos.rotation, EnemyPos);
-        //EnemyPos.localScale = new Vector3(2.0f, 2.0f, 1.0f);
+        GameObject enemy = enemyList[index].Object;
+        index++;
 
         return Instantiate(enemy, position, Quaternion.Euler(0, 0, 0));        
-    }
-
-    //에너미가 공격 당할 때
-    void Damage(float damage)
-    {
-        currentHp -= damage;
     }
 }
 
 public class Enemy
 {
-   public GameObject enemyObject;
-   public ENEMYTYPE enemyType;
+    public GameObject enemyObject;
+    public ENEMYTYPE enemyType;
+
+    float currentHp = 200f;
+    float maxHp = 200f;
+    public float enemyHp;
 
     public GameObject Object { get {return enemyObject;} set { enemyObject = value; } }
     public ENEMYTYPE Type { get { return enemyType; } set { enemyType = value; } }
+    public float Hp { get { return enemyHp; } }
 
+    //에너미 속성대로 이름 뜨게 하기
     public void EnemyTypeToString()
     {
         this.enemyObject.transform.name = enemyType.ToString();
+    }
+
+    //에너미가 공격 당할 때
+    public void Damage(float damage)
+    {
+        if (currentHp <= 0) return;
+        currentHp -= damage;
+        enemyHp = currentHp / maxHp;
     }
 }

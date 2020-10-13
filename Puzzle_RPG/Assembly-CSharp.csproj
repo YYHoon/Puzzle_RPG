@@ -64,13 +64,16 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\ChangeCloth.cs" />
     <Compile Include="Assets\Scripts\DataManager.cs" />
+    <Compile Include="Assets\Scripts\Enemy\EnemyAnimation.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyManager.cs" />
+    <Compile Include="Assets\Scripts\Enemy\EnemySpawn.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\LoadScene.cs" />
     <Compile Include="Assets\Scripts\Map\MapGenerator.cs" />
     <Compile Include="Assets\Scripts\Map\MeshGenerator.cs" />
     <Compile Include="Assets\Scripts\Map\RandomSpawn.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerCloth.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerColl.cs" />
     <Compile Include="Assets\Scripts\TimeManager.cs" />
     <Compile Include="Assets\Scripts\UI\Camera\IsometricCamera.cs" />
     <Compile Include="Assets\Scripts\UI\Joystick\JoyStick.cs" />
