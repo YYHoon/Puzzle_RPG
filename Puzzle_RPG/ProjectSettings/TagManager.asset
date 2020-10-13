@@ -45,3 +45,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: GameBoard
+    uniqueID: 411474073
+    locked: 0
+  - name: PuzzleUI
+    uniqueID: 2866115883
+    locked: 0

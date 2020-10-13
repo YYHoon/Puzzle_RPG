@@ -261,7 +261,7 @@ GameObject:
   - component: {fileID: 95937921189647870}
   m_Layer: 8
   m_Name: BatPBR
-  m_TagString: Untagged
+  m_TagString: Evil
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
