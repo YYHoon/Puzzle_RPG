@@ -10,10 +10,10 @@ public class IsometricCamera : MonoBehaviour
     float offSetY = 4;
     [SerializeField]
     float offSetZ = -1;
-    public GameObject player;
+    GameObject player;
     void Start()
     {
-        
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame

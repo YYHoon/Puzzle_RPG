@@ -7,6 +7,14 @@ using UnityEngine.UI;
 
 public class ChangeCloth : MonoBehaviour
 {
+    public struct PlayerIdx
+    {
+      public int clothIndex;
+      public int hairIndex;
+      public int helmIndex;
+      public int gloveIndex;
+      public int shoesIndex;
+    }
     public Transform cloth;
     List<Transform> clothChild = new List<Transform>();
     public Transform hair;
@@ -17,123 +25,131 @@ public class ChangeCloth : MonoBehaviour
     List<Transform> gloveChild = new List<Transform>();
     public Transform shoes;
     List<Transform> shoesChild = new List<Transform>();
-    int clothIndex;
-    int hairIndex;
-    int helmIndex;
-    int gloveIndex;
-    int shoesIndex;
+    PlayerIdx playerIdx;
+
+    public PlayerIdx ClothIdx
+    { get
+        {
+            return playerIdx;
+        }
+        set
+        {
+            playerIdx = value;
+        }
+    }
+   
     // Start is called before the first frame update
 
     private void Start()
     {
         clothChild.AddRange(cloth.GetComponentsInChildren<Transform>(true));
         clothChild.RemoveAt(0);
-        clothIndex = Random.Range(0, clothChild.Count);
-        clothChild[clothIndex].gameObject.SetActive(true);
+        playerIdx.clothIndex = Random.Range(0, clothChild.Count);
+        clothChild[playerIdx.clothIndex].gameObject.SetActive(true);
 
         hairChild.AddRange(hair.GetComponentsInChildren<Transform>(true));
         hairChild.RemoveAt(0);
-        hairIndex = Random.Range(0, hairChild.Count);
-        hairChild[hairIndex].gameObject.SetActive(true);
+        playerIdx.hairIndex = Random.Range(0, hairChild.Count);
+        hairChild[playerIdx.hairIndex].gameObject.SetActive(true);
 
         helmChild.AddRange(helm.GetComponentsInChildren<Transform>(true));
         helmChild.RemoveAt(0);
-        helmIndex = Random.Range(0, helmChild.Count);
-        helmChild[helmIndex].gameObject.SetActive(true);
+        playerIdx.helmIndex = Random.Range(0, helmChild.Count);
+        helmChild[playerIdx.helmIndex].gameObject.SetActive(true);
 
         gloveChild.AddRange(glove.GetComponentsInChildren<Transform>(true));
         gloveChild.RemoveAt(0);
-        gloveIndex = Random.Range(0, gloveChild.Count);
-        gloveChild[gloveIndex].gameObject.SetActive(true);
+        playerIdx.gloveIndex = Random.Range(0, gloveChild.Count);
+        gloveChild[playerIdx.gloveIndex].gameObject.SetActive(true);
 
         shoesChild.AddRange(shoes.GetComponentsInChildren<Transform>(true));
         shoesChild.RemoveAt(0);
-        shoesIndex = Random.Range(0, shoesChild.Count);
-        shoesChild[shoesIndex].gameObject.SetActive(true);
+        playerIdx.shoesIndex = Random.Range(0, shoesChild.Count);
+        shoesChild[playerIdx.shoesIndex].gameObject.SetActive(true);
     }
-
+   
     public void OnClothButton(bool isRight)
     {
-        clothChild[clothIndex].gameObject.SetActive(false);
+        clothChild[playerIdx.clothIndex].gameObject.SetActive(false);
        if (isRight == false)
        {
-           clothIndex--;
-           if (clothIndex < 0)
-               clothIndex = clothChild.Count - 1;
+            playerIdx.clothIndex--;
+           if (playerIdx.clothIndex < 0)
+                playerIdx.clothIndex = clothChild.Count - 1;
        }
        else
        {
-           clothIndex++;
-           clothIndex %= clothChild.Count;
+            playerIdx.clothIndex++;
+            playerIdx.clothIndex %= clothChild.Count;
        }
-        clothChild[clothIndex].gameObject.SetActive(true);
+        clothChild[playerIdx.clothIndex].gameObject.SetActive(true);
     }
 
     public void OnHairButton(bool isRight)
     {
-        hairChild[hairIndex].gameObject.SetActive(false);
+        hairChild[playerIdx.hairIndex].gameObject.SetActive(false);
         if (isRight == false)
         {
-            hairIndex--;
-            if (hairIndex < 0)
-                hairIndex = hairChild.Count - 1;
+            playerIdx.hairIndex--;
+            if (playerIdx.hairIndex < 0)
+                playerIdx.hairIndex = hairChild.Count - 1;
         }
         else
         {
-            hairIndex++;
-            hairIndex %= hairChild.Count;
+            playerIdx.hairIndex++;
+            playerIdx.hairIndex %= hairChild.Count;
         }
-        hairChild[hairIndex].gameObject.SetActive(true);
+        hairChild[playerIdx.hairIndex].gameObject.SetActive(true);
     }
 
     public void OnHelmButton(bool isRight)
     {
-        helmChild[helmIndex].gameObject.SetActive(false);
+        helmChild[playerIdx.helmIndex].gameObject.SetActive(false);
         if (isRight == false)
         {
-            helmIndex--;
-            if (helmIndex < 0)
-                helmIndex = helmChild.Count - 1;
+            playerIdx.helmIndex--;
+            if (playerIdx.helmIndex < 0)
+                playerIdx.helmIndex = helmChild.Count - 1;
         }
         else
         {
-            helmIndex++;
-            helmIndex %= helmChild.Count;
+            playerIdx.helmIndex++;
+            playerIdx.helmIndex %= helmChild.Count;
         }
-        helmChild[helmIndex].gameObject.SetActive(true);
+        helmChild[playerIdx.helmIndex].gameObject.SetActive(true);
     }
 
     public void OnGloveButton(bool isRight)
     {
-        gloveChild[gloveIndex].gameObject.SetActive(false);
+        gloveChild[playerIdx.gloveIndex].gameObject.SetActive(false);
         if (isRight == false)
         {
-            gloveIndex--;
-            if (gloveIndex < 0)
-                gloveIndex = gloveChild.Count - 1;
+            playerIdx.gloveIndex--;
+            if (playerIdx.gloveIndex < 0)
+                playerIdx.gloveIndex = gloveChild.Count - 1;
         }
         else
         {
-            gloveIndex++;
-            gloveIndex %= gloveChild.Count;
+            playerIdx.gloveIndex++;
+            playerIdx.gloveIndex %= gloveChild.Count;
         }
-        gloveChild[gloveIndex].gameObject.SetActive(true);
+        gloveChild[playerIdx.gloveIndex].gameObject.SetActive(true);
     }
 
     public void OnShoesButton(bool isRight)
     {
-        shoesChild[shoesIndex].gameObject.SetActive(false);
+        shoesChild[playerIdx.shoesIndex].gameObject.SetActive(false);
         if (isRight == false)
         {
-            shoesIndex--;
-            if (shoesIndex < 0)
-                shoesIndex = shoesChild.Count - 1;
+            playerIdx.shoesIndex--;
+            if (playerIdx.shoesIndex < 0)
+                playerIdx.shoesIndex = shoesChild.Count - 1;
         }
         else
         {
-            shoesIndex++;
-            shoesIndex %= shoesChild.Count;
+            playerIdx.shoesIndex++;
+            playerIdx.shoesIndex %= shoesChild.Count;
         }
-        shoesChild[shoesIndex].gameObject.SetActive(true);
+        shoesChild[playerIdx.shoesIndex].gameObject.SetActive(true);
     }
 }

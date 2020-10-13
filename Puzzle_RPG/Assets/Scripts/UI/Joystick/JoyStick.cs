@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class JoyStick : MonoBehaviour,IPointerDownHandler,IPointerUpHandler,IDragHandler
 {
-    public GameObject player;
+    GameObject player;
     public float moveSpeed = 5.0f;
     RectTransform rect;
     Vector2 touch = Vector2.zero;
@@ -16,6 +16,7 @@ public class JoyStick : MonoBehaviour,IPointerDownHandler,IPointerUpHandler,IDra
 
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
         rect = GetComponent<RectTransform>();
         widthHalf = rect.sizeDelta.x * 0.5f;
         moveFlag = false;
