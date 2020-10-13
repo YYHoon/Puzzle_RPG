@@ -17,12 +17,9 @@ public class LoadScene : MonoBehaviour
     {
         SceneManager.LoadScene("TestPuzzle");
     }
-<<<<<<< HEAD
-=======
 
     public void FromPuzzleToBattle()
     {
         SceneManager.LoadScene("Battle");
     }
->>>>>>> origin/master
 }

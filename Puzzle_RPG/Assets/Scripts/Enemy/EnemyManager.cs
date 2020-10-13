@@ -21,9 +21,6 @@ public class EnemyManager : MonoBehaviour
     GameObject[] Enemies;
     int index = 0;
 
-    [Header("HpBar")]
-    [SerializeField] Slider HpBar;
-
     public List<Enemy> EnemyList { get { return enemyList; } }
 
     private void Awake()

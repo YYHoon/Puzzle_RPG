@@ -16,7 +16,7 @@ public class MapGenerator : MonoBehaviour
     [Range(0, 100)]
     public int randomFillPercent;
     int[,] map;
-    private void Awake()
+    private void Start()
     {
         Generator();
     }
