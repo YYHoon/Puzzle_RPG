@@ -61,6 +61,7 @@ public class MapGenerator : MonoBehaviour
         rs.DeleteChilds();
         rs.SpawnGameObject(borderedMap);
         rs.TreeSpawn(borderedMap);
+        rs.PlayerSpawn(borderedMap);
     }
 
     void ProcesMap()
