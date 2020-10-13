@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-enum ENEMYTYPE
+public enum ENEMYTYPE
 {
     fire = 0,
     water = 1,
@@ -17,10 +17,11 @@ public class EnemyManager : MonoBehaviour
     public static EnemyManager Instance { get { return instance; } }
 
     [Header("Enemy")]
-    List<GameObject> enemyList = new List<GameObject>();
+    List<Enemy> enemyList = new List<Enemy>();
+
     GameObject[] Enemies;
     Transform EnemyPos;
-    [SerializeField] ENEMYTYPE enemyType;
+    //ENEMYTYPE enemyType;
 
     [Header("HpBar")]
     [SerializeField] Slider HpBar;
@@ -36,10 +37,7 @@ public class EnemyManager : MonoBehaviour
 
     private void Start()
     {
-        //EnemyPos = GameObject.Find("EnemyPos").GetComponent<Transform>();
-
-        RandomEnemy();
-        //spawn();
+        SetEnemy();
     }
 
     private void Update()
@@ -48,27 +46,37 @@ public class EnemyManager : MonoBehaviour
     }
 
     //에너미 랜덤 반환
-    public GameObject RandomEnemy()
+    public void SetEnemy()
     {
-        int random = Random.Range(0, 4);
-        GameObject enemy = selectType(random);
-        enemyType = (ENEMYTYPE)random;
-        //Instantiate(Enemies[random], enemyPos.position, enemyPos.rotation);
-        
-        for (int i = 0; i < enemyList.Count; i++)
-        {
-            while (enemyList[random] == enemyList[i])
-            {
-                random = Random.Range(0, 4);
-            }            
-            
-            enemy = selectType(random);
-            enemyType = (ENEMYTYPE)random;
-            enemyList.Add(enemy);
-            break;            
-        }        
+        //int random = Random.Range(0, 4);
+        //Enemy enemy = new Enemy();
+        //enemy.Type = (ENEMYTYPE)random;
+        //
+        //if (enemyList.Count != 0)
+        //{
+        //    for (int i = 0; i < enemyList.Count; i++)
+        //    {
+        //        //if (enemy.Type != enemyList[i].Type) continue;
+        //
+        //        while (enemy.Type == enemyList[i].Type)
+        //        {
+        //            random = Random.Range(0, 4);
+        //            enemy.Type = (ENEMYTYPE)random;
+        //        }
+        //    }
+        //}        
+        //
+        //enemy.Object = selectType(random);
+        //enemyList.Add(enemy);
 
-        return enemy;
+        for (int i = 0; i < 4; i++)
+        {
+            Enemy enemy = new Enemy();
+            enemy.Object = selectType(i);
+            enemy.Type = (ENEMYTYPE)i;
+            enemyList.Add(enemy);
+            enemy.EnemyTypeToString();
+        }
     }
 
     //에너미 타입 지정
@@ -101,7 +109,10 @@ public class EnemyManager : MonoBehaviour
     //에너미 생성
     public GameObject spawn(Vector3 position)
     {
-        GameObject enemy = RandomEnemy();
+        if (enemyList.Count <= 0) return null;
+
+        GameObject enemy = enemyList[0].Object;
+        enemyList.RemoveAt(0);
 
         //Instantiate(enemy, EnemyPos.position, EnemyPos.rotation, EnemyPos);
         //EnemyPos.localScale = new Vector3(2.0f, 2.0f, 1.0f);
@@ -113,5 +124,19 @@ public class EnemyManager : MonoBehaviour
     void Damage(float damage)
     {
         currentHp -= damage;
+    }
+}
+
+public class Enemy
+{
+   public GameObject enemyObject;
+   public ENEMYTYPE enemyType;
+
+    public GameObject Object { get {return enemyObject;} set { enemyObject = value; } }
+    public ENEMYTYPE Type { get { return enemyType; } set { enemyType = value; } }
+
+    public void EnemyTypeToString()
+    {
+        this.enemyObject.transform.name = enemyType.ToString();
     }
 }
