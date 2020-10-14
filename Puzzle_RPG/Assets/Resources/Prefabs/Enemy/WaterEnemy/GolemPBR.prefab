@@ -1322,6 +1322,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4191744185429214}
   - component: {fileID: 95246818704427922}
+  - component: {fileID: 2690592388775661327}
   m_Layer: 8
   m_Name: GolemPBR
   m_TagString: Enemy
@@ -1364,6 +1365,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!136 &2690592388775661327
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1706760125350986}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 2.49
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.65, z: 0}
 --- !u!1 &1713691074708414
 GameObject:
   m_ObjectHideFlags: 0

@@ -1019,6 +1019,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4787767504811496}
   - component: {fileID: 95181452434276654}
+  - component: {fileID: 5848867396007998155}
   m_Layer: 8
   m_Name: GolemPBRMaskTint
   m_TagString: Enemy
@@ -1061,6 +1062,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!136 &5848867396007998155
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1522012193435230}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 2.34
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.07, z: 0}
 --- !u!1 &1536261451581358
 GameObject:
   m_ObjectHideFlags: 0

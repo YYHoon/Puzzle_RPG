@@ -629,6 +629,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4843028258353612}
   - component: {fileID: 95690966028241422}
+  - component: {fileID: 1417107337728410718}
   m_Layer: 8
   m_Name: SpiderPBR
   m_TagString: Enemy
@@ -671,6 +672,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!136 &1417107337728410718
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1557585983417840}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 1.67
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.25, z: 0}
 --- !u!1 &1574160754023944
 GameObject:
   m_ObjectHideFlags: 0

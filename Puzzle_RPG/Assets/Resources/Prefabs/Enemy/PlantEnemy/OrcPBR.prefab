@@ -1753,6 +1753,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4240512476921092}
   - component: {fileID: 95848811368337272}
+  - component: {fileID: 6021960688547291445}
   m_Layer: 8
   m_Name: OrcPBR
   m_TagString: Enemy
@@ -1796,6 +1797,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!136 &6021960688547291445
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1765397208479606}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 1.97
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.04, z: 0}
 --- !u!1 &1802723691041012
 GameObject:
   m_ObjectHideFlags: 0

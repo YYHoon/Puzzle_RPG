@@ -11,9 +11,11 @@ public class MovePiece : MonoBehaviour
     Index final;       //추가할 인덱스
     Index idx;         //최종적으로 이동할 인덱스
     Piece movingPiece; //내가 움직이고 있는 피스
-    float distance;    //마우스와 피스 거리
-    
     [SerializeField] float maxDragRange = 0.5f;
+    float distance;    //마우스와 피스 거리
+    bool moving = false;
+    
+    public bool Moving { get { return moving; } set { moving = value; } }
 
     private void Awake()
     {
@@ -22,16 +24,16 @@ public class MovePiece : MonoBehaviour
     
     public void Click(PointerEventData eventData, Piece piece)
     {
-        if (!GameBoard.Instance.IsMoveEventEnd())
+        if (!GameBoard.Instance.IsMoveEventEnd() || moving == true)
             return;
-        
+
         movingPiece = piece;
         idx = new Index(movingPiece.index.x, movingPiece.index.y);
     }
 
     public void Drag(PointerEventData eventData, float moveSpeed = 16f)
     {
-        if (movingPiece == null || !GameBoard.Instance.IsMoveEventEnd())
+        if (movingPiece == null || !GameBoard.Instance.IsMoveEventEnd() || moving == true)
             return;
 
         RectTransform rectTransform = GetComponent<RectTransform>();
@@ -76,7 +78,7 @@ public class MovePiece : MonoBehaviour
 
     public void Drop(PointerEventData eventData)
     {
-        if (!GameBoard.Instance.IsMoveEventEnd())
+        if (!GameBoard.Instance.IsMoveEventEnd() || moving == true)
             return;
 
         //피스의 본래 포지션과 마우스 좌표의 차이가 0.15f 미만이면
@@ -94,6 +96,7 @@ public class MovePiece : MonoBehaviour
             GameBoard.Instance.SwapPiece(movingPiece.index, idx);
         }
 
+        moving = true;
         distance = 0f;
         movingPiece = null;
         idx = new Index(0, 0);

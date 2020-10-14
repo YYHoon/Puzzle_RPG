@@ -27,6 +27,11 @@ public class GameBoard : MonoBehaviour
     Attack attack;
     List<Piece> attackList = new List<Piece>();
 
+    float count = 0;
+    bool turn = false;
+    
+    public bool PlayerTurn { get { return turn; } set { turn = value; } }
+
     [Header("피스에 필요한 것들")]
     GameObject piecePrefab;
     [SerializeField] Sprite[] resources;
@@ -45,8 +50,6 @@ public class GameBoard : MonoBehaviour
     //float startX;
     //float startY;
 
-    int count;
-
     private void Awake()
     {
         instance = this;
@@ -55,7 +58,7 @@ public class GameBoard : MonoBehaviour
     void Start()
     {
         SetBoard();
-        MixBoard();       
+        MixBoard();
     }
     
     void Update()
@@ -81,6 +84,27 @@ public class GameBoard : MonoBehaviour
             moveEventList.Clear();
             PlayerAttack();
             UpdateGravity();
+        }
+
+        //마우스 드랍 상태면
+        if (MovePiece.Instance.Moving)
+        {
+            count += Time.deltaTime;
+
+            //시간 1초 지나면 턴 활성화
+            if (count >= 1)
+            {
+                count = 0;
+                turn = true;
+                MovePiece.Instance.Moving = false;
+            }
+        }
+
+        //피스가 움직이고 있는 동안에는 카운트 초기화
+        if (!IsMoveEventEnd())
+        {
+            count = 0;
+            turn = false;
         }
     } 
 
@@ -127,29 +151,20 @@ public class GameBoard : MonoBehaviour
                 List<Node> matchList = CheckMatch(idx);
 
                 while (matchList.Count > 0)
-                {
-                    //mathList[mathList.Count / 2] = 
-                    
+                {                    
                     if (!equal.Contains(type))
                         equal.Add(type);
                     
                     PIECETYPE newType = ResetPieceType(equal);
-                    
-                    nodeList[y, x].setPieceType(newType);
-                    GetPiece(idx).image.sprite = resources[(int)newType];
+
+                    Node node = GetNode(matchList[matchList.Count / 2].index);
+                    node.setPieceType(newType);
+                    GetPiece(node.index).image.sprite = resources[(int)newType];
+
+                    //nodeList[y, x].setPieceType(newType);
+                    //GetPiece(idx).image.sprite = resources[(int)newType];
 
                     matchList = CheckMatch(idx);
-
-                    /*
-                    count++;
-                    Debug.Log(count);
-                    if (count >= 100)
-                    {
-                        Debug.Log("match");
-                        break;
-                    }
-                    */
-
                 }
                 equal.Clear();
             }
@@ -353,6 +368,7 @@ public class GameBoard : MonoBehaviour
     {
         if (attackList.Count == 0) return;
 
+        //매치된 피스의 속성 값별로 구조체에 더해서
         for (int i = 0; i < attackList.Count; i++)
         {
             if (attackList[i].piecetype == PIECETYPE.fire)
@@ -367,16 +383,17 @@ public class GameBoard : MonoBehaviour
             else if (attackList[i].piecetype == PIECETYPE.heal)
                 attack.heal += 1;
         }
-
+        
+        //에너미 힛 함수로 넘기기
         EnemySpawn.Instance.EnemyHit(attack);
 
         //초기화
         {
-            attackList.Clear();
             attack.fire = 0;
             attack.water = 0;
             attack.plant = 0;
             attack.heal = 0;
+            attackList.Clear();
         }
     }
 

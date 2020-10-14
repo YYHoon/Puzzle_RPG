@@ -11,7 +11,8 @@ public class EnemySpawn : MonoBehaviour
     public Transform enemyPos;
     GameObject[] Enemies;
     Enemy enemy = new Enemy();
-    
+    float damage = 0;
+
     [SerializeField] Slider HpBar;
 
     List<Enemy> enemyList = new List<Enemy>();
@@ -29,6 +30,21 @@ public class EnemySpawn : MonoBehaviour
         SetEnemy();
     }
 
+    private void Update()
+    {
+        //턴 하나 끝나면
+        if (GameBoard.Instance.PlayerTurn == true)
+        {
+            //에너미 체력바 갱신
+            enemy.Damage(damage);
+            HpBar.value = enemy.Hp;
+            //초기화
+            damage = 0;
+            GameBoard.Instance.PlayerTurn = false;
+        }
+    }
+
+    //데이터매니저에서 정보 받아온 에너미 퍼즐씬에 세팅
     void SetEnemy()
     {
         int index = DataManager.Instance.EnemyIdx;        
@@ -73,36 +89,31 @@ public class EnemySpawn : MonoBehaviour
     //에너미 맞았당
     public void EnemyHit(Attack attack)
     {
-        float damage = 0;
         //Debug.Log("normal : " + (attack.fire + attack.water + attack.plant));
 
-        //에너미 데미지 주고        
+        //넘겨받은 구조체로 에너미 속성별로 다시 계산
         if (enemy.Type == ENEMYTYPE.fire)
         {
-            damage = attack.fire + attack.water * 2 + attack.plant;
+            damage += attack.fire + attack.water * 2 + attack.plant;
             //Debug.Log("fire : " + damage);
         }
 
         else if (enemy.Type == ENEMYTYPE.water)
         {
-            damage = attack.fire + attack.water + attack.plant * 2;
+            damage += attack.fire + attack.water + attack.plant * 2;
             //Debug.Log("water : " + damage);
         }
 
         else if (enemy.Type == ENEMYTYPE.plant)
         {
-            damage = attack.fire * 2 + attack.water + attack.plant;
+            damage += attack.fire * 2 + attack.water + attack.plant;
             //Debug.Log("plant : " + damage);
         }
 
         else if (enemy.Type == ENEMYTYPE.evil)
         {
-            damage = (attack.fire + attack.water + attack.plant) * 0.7f;
+            damage += (attack.fire + attack.water + attack.plant) * 0.7f;
             //Debug.Log("evil : " + damage);
         }
-
-        //에너미 체력바 갱신
-        enemy.Damage(damage);
-        HpBar.value = enemy.Hp;
     }
 }
