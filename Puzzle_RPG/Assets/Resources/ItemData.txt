@@ -1,11 +1,11 @@
-Weapon	Axe1_R	가장 기본적인 무기 F = 1x W = 1x P = 1X	TRUE	1	1	1
-Weapon	Hammer1_R	화염 특화 무기 F = 1.2x W = 0.9x P = 0.9X	FALSE	1.2	0.9	0.9
-Weapon	Sword1_R	수속성 무기 F = 1x W = 1.1x P = 1X	FALSE	1	1.1	1
-Weapon	Sword2_R	화속성 무기 F = 1.1x W = 1x P = 1X	FALSE	1.1	1	1
-Weapon	Sword3_R	목속성 무기 F = 1x W = 1x P = 1.1X	FALSE	1	1	1.1
-Weapon	Sword4_R	가장 강력한 무기 F = 1.1x W = 1.1x P = 1.1X	FALSE	1.1	1.1	1.1
-Shield	Shield1	가장 기본적인 방패 F = 1x W = 1x P = 1X	TRUE	1	1	1
-Shield	Shield2	화속성 방패 F = 1.5x W = 1x P = 1X	FALSE	1.5	1	1
-Shield	Shield3	수속성 방패 F = 1x W = 1.5x P = 1X	FALSE	1	1.5	1
-Shield	Shield4	목속성 방패 F = 1x W = 1.5x P = 1.5X	FALSE	1	1	1.5
-Shield	Shield5	가장 강력한 방패 F = 1.5x W = 1.5x P = 1.5X	FALSE	1.5	1.5	1.5
+Weapon	Axe1_R	가장 기본적인 무기 F = 1x W = 1x P = 1X	FALSE	1	1	1	2
+Weapon	Hammer1_R	화염 특화 무기 F = 1.2x W = 0.9x P = 0.9X	FALSE	1.2	0.9	0.9	3
+Weapon	Sword1_R	수속성 무기 F = 1x W = 1.1x P = 1X	FALSE	1	1.1	1	4
+Weapon	Sword2_R	화속성 무기 F = 1.1x W = 1x P = 1X	FALSE	1.1	1	1	5
+Weapon	Sword3_R	목속성 무기 F = 1x W = 1x P = 1.1X	FALSE	1	1	1.1	6
+Weapon	Sword4_R	가장 강력한 무기 F = 1.1x W = 1.1x P = 1.1X	FALSE	1.1	1.1	1.1	7
+Shield	Shield1	가장 기본적인 방패 F = 1x W = 1x P = 1X	FALSE	1	1	1	4
+Shield	Shield2	화속성 방패 F = 1.5x W = 1x P = 1X	FALSE	1.5	1	1	5
+Shield	Shield3	수속성 방패 F = 1x W = 1.5x P = 1X	FALSE	1	1.5	1	6
+Shield	Shield4	목속성 방패 F = 1x W = 1.5x P = 1.5X	FALSE	1	1	1.5	7
+Shield	Shield5	가장 강력한 방패 F = 1.5x W = 1.5x P = 1.5X	FALSE	1.5	1.5	1.5	8

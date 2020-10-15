@@ -33,12 +33,16 @@ public class ItemData : MonoBehaviour
     void Save()
     {
         string jdata = JsonConvert.SerializeObject(AllItemList);
-        File.WriteAllText(Application.dataPath + "/Resources/MyItemText.txt", jdata);
+        byte[] bytes = System.Text.Encoding.UTF8.GetBytes(jdata);
+        string format = System.Convert.ToBase64String(bytes);
+        File.WriteAllText(Application.dataPath + "/Resources/MyItemText.json", format);
     }
 
     private void Load()
     {
-        string jdata = File.ReadAllText(Application.dataPath + "/Resources/MyItemText.txt");
-        MyItemList = JsonConvert.DeserializeObject<List<Item>>(jdata);
+        string jdata = File.ReadAllText(Application.dataPath + "/Resources/MyItemText.json");
+        byte[] bytes = System.Convert.FromBase64String(jdata);
+        string format = System.Text.Encoding.UTF8.GetString(bytes);
+        MyItemList = JsonConvert.DeserializeObject<List<Item>>(format);
     }
 }
