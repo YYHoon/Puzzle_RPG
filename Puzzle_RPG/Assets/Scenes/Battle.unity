@@ -3453,7 +3453,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b271cccebd3438e4b92909cdf4b84904, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HpBar: {fileID: 0}
 --- !u!4 &877340879
 Transform:
   m_ObjectHideFlags: 0
@@ -3618,11 +3617,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1499a945975c5d14b84953e6106875f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnObject:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   treeObject:
   - {fileID: 185286, guid: 8ed1fa325ca228645ad26dd6eff14768, type: 3}
   - {fileID: 184622, guid: c7bcf19bbfa57ed4ea9147dff66d5542, type: 3}
@@ -4006,7 +4000,7 @@ CapsuleCollider:
   m_Radius: 0.37
   m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 0.8, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!4 &1221114692 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7908230188131726982, guid: 4ed6b41ae13a055408e59bfedd3e2bbf,

@@ -225,6 +225,7 @@ GameObject:
   - component: {fileID: 4594332585218144}
   - component: {fileID: 95782433703230496}
   - component: {fileID: 4454269653043729477}
+  - component: {fileID: -6032920068782838622}
   m_Layer: 8
   m_Name: SpiderPBRMaskTint
   m_TagString: Enemy
@@ -281,6 +282,20 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0.27, z: 0}
+--- !u!114 &-6032920068782838622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1245321620635218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec1d20b73a4002d43852ef574f71060b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyType: 0
+  enemyHp: 0
 --- !u!1 &1247731671674172
 GameObject:
   m_ObjectHideFlags: 0

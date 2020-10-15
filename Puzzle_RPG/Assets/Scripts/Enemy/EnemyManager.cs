@@ -20,34 +20,33 @@ public class EnemyManager : MonoBehaviour
     List<Enemy> enemyList = new List<Enemy>();
     GameObject[] Enemies;
     int index = 0;
+    int shape = 0;
 
     public List<Enemy> EnemyList { get { return enemyList; } }
+    public int Shape { get { return shape; } }
 
     private void Awake()
     {
         instance = this;
     }
 
-    private void Start()
-    {
-        SetEnemy();
-    }
-
     //에너미 4종류 리스트에 담기
-    public void SetEnemy()
-    {
-        for (int i = 0; i < 4; i++)
-        {
-            Enemy enemy = new Enemy();
-            enemy.Object = selectType(i);
-            enemy.Type = (ENEMYTYPE)i;
-            enemy.EnemyTypeToString();
-            enemyList.Add(enemy);
-        }
-        DataManager.Instance.SaveEnemy();
-    }
+    //public void SetEnemy()
+    //{
+    //    for (int i = 0; i < 4; i++)
+    //    {
+    //        Enemy enemy = new Enemy();
+    //        enemy.Object = selectType(i);
+    //        enemy.Type = (ENEMYTYPE)i;
+    //        enemy.Initialize();
+    //        enemyList.Add(enemy);
+    //    }
+
+    //    DataManager.Instance.SaveEnemy();
+    //}
 
     //에너미 프리팹 지정
+
     GameObject selectType(int type)
     {
         if (type == 0)
@@ -70,18 +69,22 @@ public class EnemyManager : MonoBehaviour
             Enemies = Resources.LoadAll<GameObject>("Prefabs/Enemy/EvilEnemy/");
         }
 
-        int random = Random.Range(0, Enemies.Length);
-        return Enemies[random];
+        shape = Random.Range(0, Enemies.Length);
+        return Enemies[shape];
     }
 
     //에너미 생성
-    public GameObject spawn(Vector3 position)
-    {
-        if (enemyList.Count <= 0) return null;
+    public void spawn(Vector3 position)
+    {       
+        GameObject temp = selectType(index);
 
-        GameObject enemy = enemyList[index].Object;
+        GameObject enemy = Instantiate(temp, position, Quaternion.Euler(0, 0, 0));
+        ENEMYTYPE type = (ENEMYTYPE)index;
+
+        enemy.GetComponent<Enemy>().Initialize(type);
+        enemyList.Add(enemy.GetComponent<Enemy>());
+        
+        DataManager.Instance.SaveEnemy(index, shape);
         index++;
-
-        return Instantiate(enemy, position, Quaternion.Euler(0, 0, 0));        
     }
 }

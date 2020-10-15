@@ -26,7 +26,7 @@ public class PlayerColl : MonoBehaviour
         {
             for(int i = 0; i < DataManager.Instance.EnemyList.Count; ++i)
             {
-                if (other.gameObject.name == DataManager.Instance.EnemyList[i].Object.name + "(Clone)")
+                if (other.gameObject.name == DataManager.Instance.EnemyList[i].gameObject.name)
                 {
                     DataManager.Instance.EnemyIdx = i;
                 }

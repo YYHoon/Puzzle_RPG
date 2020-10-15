@@ -1020,6 +1020,7 @@ GameObject:
   - component: {fileID: 4787767504811496}
   - component: {fileID: 95181452434276654}
   - component: {fileID: 5848867396007998155}
+  - component: {fileID: 4234433174896208425}
   m_Layer: 8
   m_Name: GolemPBRMaskTint
   m_TagString: Enemy
@@ -1053,7 +1054,7 @@ Animator:
   m_GameObject: {fileID: 1522012193435230}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: fdd223089abef8e4d919be1b750e3dbc, type: 3}
-  m_Controller: {fileID: 9100000, guid: 0dff641279ea8b0418acb8b12af64271, type: 2}
+  m_Controller: {fileID: 9100000, guid: b7867d9ac8b97764b89343352f839f2d, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1076,6 +1077,20 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 1.07, z: 0}
+--- !u!114 &4234433174896208425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1522012193435230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec1d20b73a4002d43852ef574f71060b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyType: 0
+  enemyHp: 0
 --- !u!1 &1536261451581358
 GameObject:
   m_ObjectHideFlags: 0

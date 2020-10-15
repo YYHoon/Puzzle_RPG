@@ -27,8 +27,8 @@ public class GameBoard : MonoBehaviour
     Attack attack;
     List<Piece> attackList = new List<Piece>();
 
-    float count = 0;
-    bool turn = false;
+    float count = 0;        //턴 지나는지 확인할 카운트
+    bool turn = false;      //다시 턴을 진행할 수 있을 경우 (true)
     
     public bool PlayerTurn { get { return turn; } set { turn = value; } }
 
@@ -39,7 +39,6 @@ public class GameBoard : MonoBehaviour
 
     [Header("다 움직인 피스들")]
     List<MoveEvent> moveEventList = new List<MoveEvent>();
-    int damage;
 
     [Header("게임보드 칸")]
     [SerializeField] float cellSize = 64f;
@@ -92,7 +91,7 @@ public class GameBoard : MonoBehaviour
             count += Time.deltaTime;
 
             //시간 1초 지나면 턴 활성화
-            if (count >= 1)
+            if (count >= 0.8f)
             {
                 count = 0;
                 turn = true;
@@ -157,6 +156,7 @@ public class GameBoard : MonoBehaviour
                     
                     PIECETYPE newType = ResetPieceType(equal);
 
+                    //매치리스트 중간 인덱스 노드에 있는 피스 타입 변경
                     Node node = GetNode(matchList[matchList.Count / 2].index);
                     node.setPieceType(newType);
                     GetPiece(node.index).image.sprite = resources[(int)newType];
@@ -287,7 +287,7 @@ public class GameBoard : MonoBehaviour
 
         List<Node> matchList = new List<Node>();
 
-        Index[] match = {Index.right, Index.left, Index.up, Index.down };
+        Index[] match = { Index.right, Index.left, Index.up, Index.down };
 
         //한 방향으로의 일렬검사
         foreach (Index i in match)

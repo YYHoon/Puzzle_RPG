@@ -11,5 +11,13 @@ public class EnemyAnimation : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
+    public void Hit()
+    {
+        anim.SetBool("IsHit", true);
+    }
 
+    public void Attack()
+    {
+        anim.SetBool("IsAttack", true);
+    }
 }

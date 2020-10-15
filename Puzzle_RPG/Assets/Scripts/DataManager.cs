@@ -11,12 +11,17 @@ public class DataManager : MonoBehaviour
     ChangeCloth.PlayerIdx saveIdx;
     public GameObject ClothIdx;
 
+    int[] Shape =new int[4];
+    public int[] EnemyShape { get { return Shape; } }
+    
+
     List<Enemy> enemyList = new List<Enemy>();
     public List<Enemy> EnemyList
     {
         get
         {
             return enemyList;
+            //return EnemyManager.Instance.EnemyList;
         }
     }
     public int EnemyIdx
@@ -54,9 +59,10 @@ public class DataManager : MonoBehaviour
         ClothIdx = GameObject.Find("Player_H1");
     }
 
-    public void SaveEnemy()
+    public void SaveEnemy(int index, int shape)
     {
         enemyList = EnemyManager.Instance.EnemyList;
+        Shape[index] = shape;
     }
 
     public void SaveMap(int [,]map)
