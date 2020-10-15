@@ -8,21 +8,24 @@ public class EnemySpawn : MonoBehaviour
     static EnemySpawn instance;
     public static EnemySpawn Instance { get { return instance; } }
 
+    [Header("에너미 생성하는 데 필요함")]
     public Transform enemyPos;
     GameObject[] Enemies;
     Enemy puzzleEnemy = new Enemy();
-    float damage = 0;   //에너미가 받는 데미지
-    int turn;           //에너미 공격 턴수 계산용
-    int random;         //에너미 공격 턴수 랜덤 부가용
 
-    float playerHp = 100f;
-
+    [Header("체력바 관련")]
+    float damage = 0;       //에너미가 받는 데미지
+    float playerHp = 100f;  //플레이어 전체 체력
     [SerializeField] Slider EnemyHpBar;
     [SerializeField] Slider PlayerHpBar;
 
+    [Header("에너미 턴UI 관련")]
+    [SerializeField] Image[] turn;  //턴수 보여줄 이미지
+    int enemyTurn;                  //에너미가 공격할 턴수
+
     List<Enemy> enemyList = new List<Enemy>();
     public List<Enemy> EnemyList { get { return enemyList; } }
-    
+
     private void Awake()
     {
         instance = this;
@@ -32,6 +35,10 @@ public class EnemySpawn : MonoBehaviour
     {
         enemyPos = GetComponent<Transform>();
         SetEnemy();
+        if (enemyTurn == 1)
+            puzzleEnemy.WaitAtk(1);
+        else
+            puzzleEnemy.WaitAtk(0);
     }
 
     private void Update()
@@ -40,26 +47,15 @@ public class EnemySpawn : MonoBehaviour
         if (GameBoard.Instance.PlayerTurn == true)
         {
             //에너미 체력바 갱신
-            puzzleEnemy.Damage(damage);
+            if (damage != 0)
+                puzzleEnemy.Damage(damage);
             EnemyHpBar.value = puzzleEnemy.Hp;
-            //초기화
+
+            //데미지 초기화
             damage = 0;
-            turn++;
-            Debug.Log("turn : " + turn + " / random : " + random);
 
             //에너미 공격 턴 돌아오면
-            if (EnemyAttack())
-            {
-                //에너미 공격시키고
-                puzzleEnemy.Attack();
-                playerHp -= 10f;
-                PlayerHpBar.value = playerHp / 100f;
-                //턴 수 다시 뽑아보기
-                puzzleEnemy.WaitAtk(0);
-                random = Random.Range(1, 4);
-                Debug.Log("new random : " + random);
-                turn = 0;
-            }
+            EnemyAttack();
             GameBoard.Instance.PlayerTurn = false;
         }
     }
@@ -67,17 +63,25 @@ public class EnemySpawn : MonoBehaviour
     //데이터매니저에서 정보 받아온 에너미 퍼즐씬에 세팅
     void SetEnemy()
     {
+        //데이터 매니저에서 에너미(오브젝트)
+        //인덱스와 종류(shape) 받아오기
         int index = DataManager.Instance.EnemyIdx;
         int shape = DataManager.Instance.EnemyShape[index];
 
+        //생성 후 크기 조절
         GameObject temp = selectType(index, shape);
         GameObject enemy = Instantiate(temp, enemyPos.position, enemyPos.rotation, enemyPos);
         enemyPos.localScale = new Vector3(2.0f, 2.0f, 1.0f);
 
+        //타입(shape)대로 에너미 대입
         ENEMYTYPE type = (ENEMYTYPE)index;
         puzzleEnemy = enemy.GetComponent<Enemy>();
         puzzleEnemy.Initialize(type);
-        random = Random.Range(1, 4);
+        enemyTurn = Random.Range(1, 4);
+
+        //에너미 턴수 알려주는 UI 이미지 켜기
+        for (int i = 0; i < enemyTurn; i++)
+            turn[i].enabled = true;
 
         ///enemy.Object = enemyList[index].Object;
         ///enemy.Type = enemyList[index].Type;
@@ -142,16 +146,51 @@ public class EnemySpawn : MonoBehaviour
         }
     }
 
-    public bool EnemyAttack()
+    //에너미 공격한당
+    public void EnemyAttack()
     {
-        if (turn == random - 1)
-            puzzleEnemy.WaitAtk(1);
+        //턴수대로 UI 이미지 끄기
+        turn[enemyTurn - 1].enabled = false;
+        enemyTurn--;
+        Debug.Log("turn : " + enemyTurn);
 
-        else if (turn == random)
+        //공격 전에 공격 준비 아이들
+        if (enemyTurn == 1)
         {
-            Debug.Log("에너미 턴!");
-            return true;
+            puzzleEnemy.WaitAtk(1);
+            Debug.Log("공격 전 / turn : " + enemyTurn);
         }
-        return false;
+
+        else if (enemyTurn == 0)
+        {
+            //에너미 공격 애니메이션
+            StartCoroutine(AttackAfterHit());
+        }
+    }
+
+    //맞은 뒤 공격 애니메이션 순차적으로 돌리기 위한 코루틴
+    IEnumerator AttackAfterHit()
+    {
+        yield return new WaitForSeconds(1);
+
+        //에너미 공격 시키기
+        puzzleEnemy.Attack();
+        playerHp -= 10f;
+        PlayerHpBar.value = playerHp / 100f;
+
+        //턴 수 다시 뽑아서 UI 켜기
+        enemyTurn = Random.Range(1, 4);
+        for (int i = 0; i < enemyTurn; i++)
+            turn[i].enabled = true;
+
+        Debug.Log("에너미 턴 / turn : " + enemyTurn);
+
+        yield return new WaitForSeconds(0.2f);
+
+        //턴수에 따라 아이들 상태 정해주기
+        if (enemyTurn == 1)
+            puzzleEnemy.WaitAtk(1);
+        else
+            puzzleEnemy.WaitAtk(0);
     }
 }

@@ -9,7 +9,7 @@ public class Enemy : MonoBehaviour
     
     float currentHp = 200f;
     float maxHp = 200f;
-    public float enemyHp;
+    float enemyHp;
 
     public ENEMYTYPE Type { get { return enemyType; } set { enemyType = value; } }
     public float Hp { get { return enemyHp; } }
@@ -32,15 +32,15 @@ public class Enemy : MonoBehaviour
     //에너미가 공격 당할 때
     public void Damage(float damage)
     {
+        animator.SetTrigger("IsHit");
+        currentHp -= damage;
+        enemyHp = currentHp / maxHp;
+
         if (currentHp <= 0)
         {
             animator.SetTrigger("IsDie");
             return;
         }
-
-        animator.SetTrigger("IsHit");
-        currentHp -= damage;
-        enemyHp = currentHp / maxHp;
     }
 
     public void Attack()
@@ -50,7 +50,6 @@ public class Enemy : MonoBehaviour
 
     public void WaitAtk(int wait)
     {
-        Debug.Log("에너미 공격 전");
         animator.SetInteger("IsWait", wait);
     }
 }

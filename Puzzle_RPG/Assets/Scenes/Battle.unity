@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.50398177, g: 0.7965214, b: 0.9949359, a: 1}
+  m_IndirectSpecularColor: {r: 0.5039817, g: 0.7965214, b: 0.9949359, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3035,7 +3035,7 @@ MonoBehaviour:
   height: 50
   seed: 5
   useRnadomSeed: 1
-  randomFillPercent: 56
+  randomFillPercent: 55
 --- !u!4 &940710559
 Transform:
   m_ObjectHideFlags: 0
