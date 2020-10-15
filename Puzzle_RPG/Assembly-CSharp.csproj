@@ -63,7 +63,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\ChangeCloth.cs" />
-    <Compile Include="Assets\Scripts\DataManager.cs" />
+    <Compile Include="Assets\Scripts\Data\DataManager.cs" />
+    <Compile Include="Assets\Scripts\Data\ItemData.cs" />
+    <Compile Include="Assets\Scripts\Data\PlayerData.cs" />
     <Compile Include="Assets\Scripts\Enemy\Enemy.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyAnimation.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyManager.cs" />
@@ -76,6 +78,7 @@
     <Compile Include="Assets\Scripts\Player\PlayerCloth.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerColl.cs" />
     <Compile Include="Assets\Scripts\TimeManager.cs" />
+    <Compile Include="Assets\Scripts\UI\Camera\EquipCamera.cs" />
     <Compile Include="Assets\Scripts\UI\Camera\IsometricCamera.cs" />
     <Compile Include="Assets\Scripts\UI\Joystick\JoyStick.cs" />
     <Compile Include="Assets\Scripts\UI\MiniMap\MiniMap.cs" />
@@ -88,12 +91,16 @@
     <None Include="Assets\Resources\Epic Toon FX\Prefabs\Combat\Combat FX.txt" />
     <None Include="Assets\Resources\CUBE - Heroes and Dungeons\Read me.txt" />
     <None Include="Assets\Models\RPG Monster Wave PBR\Shaders\PBRMaskTint.shader" />
+    <None Include="Assets\Scripts\Data\ItemData.txt" />
+    <None Include="Assets\JsonDotNet\link.xml" />
     <None Include="Assets\Resources\CUBE - Heroes and Dungeons\www.meshtint.com.txt" />
     <None Include="Assets\Images\CasualUI\ReadMe.txt" />
     <None Include="Assets\Resources\ModularRPGHeroesPolyArt\Shader\PolyArtMaskTint.shader" />
+    <None Include="Assets\Resources\PlayerText.txt" />
     <None Include="Assets\Resources\Epic Toon FX\Prefabs\Interactive\Interactive FX.txt" />
     <None Include="Assets\Resources\BrokenVector\LowPolyTreePack\README.txt" />
     <None Include="Assets\Resources\Customizable Skybox\Stylized Sky\Shaders\Stylized Sky.shader" />
+    <None Include="Assets\Resources\ItemData.txt" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/KGA_9/Desktop/Puzzle_RPG/Puzzle_RPG/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
@@ -300,6 +307,9 @@
     </Reference>
     <Reference Include="UnityEngine.XRModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.0f6/Editor/Data/Managed/UnityEngine/UnityEngine.XRModule.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>C:/Users/KGA_9/Desktop/Puzzle_RPG/Puzzle_RPG/Assets/JsonDotNet/Assemblies/Standalone/Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.iOS.Extensions.Xcode">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.0f6/Editor/Data/PlaybackEngines/AppleTVSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>

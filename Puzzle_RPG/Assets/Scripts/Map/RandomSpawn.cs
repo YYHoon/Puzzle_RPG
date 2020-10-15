@@ -18,6 +18,11 @@ public class RandomSpawn : MonoBehaviour
         {
             int x = Random.Range(0, (int)(map.GetLength(0)*(0.3f+test)));
             int y = Random.Range(0, (int)(map.GetLength(1) * (0.3f + test)));
+            while (x > map.GetLength(0) || y > map.GetLength(1))
+            {
+                x = Random.Range(0, (int)(map.GetLength(0)*(0.3f+test)));
+                y = Random.Range(0, (int)(map.GetLength(1) * (0.3f + test)));
+            }
             if (map[x, y] == 0&& checkMap(map,x,y))
             {
                 Vector3 spawnPos = new Vector3(x- map.GetLength(0)*0.5f, 0.3f, y- map.GetLength(1) * 0.5f);
@@ -32,6 +37,11 @@ public class RandomSpawn : MonoBehaviour
         {
             int x = Random.Range((int)(map.GetLength(0) * (0.7f + test)), map.GetLength(0) - 1);
             int y = Random.Range(0, (int)(map.GetLength(1) * (0.3f + test)));
+            while (x > map.GetLength(0) || y > map.GetLength(1))
+            {
+                x = Random.Range((int)(map.GetLength(0) * (0.7f + test)), map.GetLength(0) - 1);
+                y = Random.Range(0, (int)(map.GetLength(1) * (0.3f + test)));
+            }
             if (map[x, y] == 0 && checkMap(map, x, y))
             {
                 Vector3 spawnPos = new Vector3(x - map.GetLength(0) * 0.5f, 0.3f, y - map.GetLength(1) * 0.5f);
@@ -46,6 +56,11 @@ public class RandomSpawn : MonoBehaviour
         {
             int x = Random.Range(0, (int)(map.GetLength(0) * (0.3f + test)));
             int y = Random.Range((int)(map.GetLength(1) * (0.7f + test)), map.GetLength(1));
+            while (x > map.GetLength(0) || y > map.GetLength(1))
+            {
+                x = Random.Range(0, (int)(map.GetLength(0) * (0.3f + test)));
+                y = Random.Range((int)(map.GetLength(1) * (0.7f + test)), map.GetLength(1));
+            }
             if (map[x, y] == 0 && checkMap(map, x, y))
             {
                 Vector3 spawnPos = new Vector3(x - map.GetLength(0) * 0.5f, 0.3f, y - map.GetLength(1) * 0.5f);
@@ -60,6 +75,11 @@ public class RandomSpawn : MonoBehaviour
         {
             int x = Random.Range((int)(map.GetLength(0) * (0.7f + test)), map.GetLength(0) - 1);
             int y = Random.Range((int)(map.GetLength(1) * (0.7f + test)), map.GetLength(1));
+            while (x > map.GetLength(0) || y > map.GetLength(1))
+            {
+                x = Random.Range((int)(map.GetLength(0) * (0.7f + test)), map.GetLength(0) - 1);
+                y = Random.Range((int)(map.GetLength(1) * (0.7f + test)), map.GetLength(1));
+            }
             if (map[x, y] == 0 && checkMap(map, x, y))
             {
                 Vector3 spawnPos = new Vector3(x - map.GetLength(0) * 0.5f, 0.3f, y - map.GetLength(1) * 0.5f);
@@ -80,6 +100,11 @@ public class RandomSpawn : MonoBehaviour
         {
             int x = Random.Range((int)(map.GetLength(0) * (0.3f + test)), (int)(map.GetLength(0) * (0.6f + test)));
             int y = Random.Range((int)(map.GetLength(1) * (0.3f + test)), (int)(map.GetLength(1) * (0.6f + test)));
+            while (x > map.GetLength(0) || y > map.GetLength(1))
+            {
+                x = Random.Range((int)(map.GetLength(0) * (0.3f + test)), (int)(map.GetLength(0) * (0.6f + test)));
+                y = Random.Range((int)(map.GetLength(1) * (0.3f + test)), (int)(map.GetLength(1) * (0.6f + test)));
+            }
             if (map[x, y] == 0 && checkMap(map, x, y))
             {
                 Vector3 spawnPos = new Vector3(x - map.GetLength(0) * 0.5f, 0f, y - map.GetLength(1) * 0.5f);

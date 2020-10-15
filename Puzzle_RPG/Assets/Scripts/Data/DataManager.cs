@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class DataManager : MonoBehaviour
 {
@@ -10,11 +11,9 @@ public class DataManager : MonoBehaviour
 
     ChangeCloth.PlayerIdx saveIdx;
     public GameObject ClothIdx;
-
     int[] Shape =new int[4];
     public int[] EnemyShape { get { return Shape; } }
     
-
     List<Enemy> enemyList = new List<Enemy>();
     public List<Enemy> EnemyList
     {
@@ -48,7 +47,7 @@ public class DataManager : MonoBehaviour
         instance = this;
         DontDestroyOnLoad(gameObject);        
     }
-    
+
     public void SaveCloth()
     {
         saveIdx = ClothIdx.GetComponent<ChangeCloth>().ClothIdx;
@@ -56,7 +55,6 @@ public class DataManager : MonoBehaviour
 
     public void LoadCloth()
     {
-        ClothIdx = GameObject.Find("Player_H1");
     }
 
     public void SaveEnemy(int index, int shape)

@@ -17,7 +17,7 @@ public class LoadScene : MonoBehaviour
     {
         SceneManager.LoadScene("Puzzle");
     }
-
+    
     public void FromPuzzleToBattle()
     {
         SceneManager.LoadScene("Battle");
