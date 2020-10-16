@@ -16,8 +16,6 @@ public class Enemy : MonoBehaviour
 
     public void Initialize(ENEMYTYPE type)
     {
-        //enemyObject = GetComponent<GameObject>();
-        //this.enemyObject = enemyObject;
         animator = gameObject.GetComponent<Animator>();
         enemyType = type;
         EnemyTypeToString();

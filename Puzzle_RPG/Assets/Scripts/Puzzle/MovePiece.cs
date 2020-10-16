@@ -8,12 +8,12 @@ public class MovePiece : MonoBehaviour
     static MovePiece instance;
     public static MovePiece Instance { get { return instance; } }
 
-    Index final;       //추가할 인덱스
-    Index idx;         //최종적으로 이동할 인덱스
-    Piece movingPiece; //내가 움직이고 있는 피스
-    [SerializeField] float maxDragRange = 0.5f;
-    float distance;    //마우스와 피스 거리
-    bool moving = false;
+    Index final;                  //추가할 인덱스
+    Index idx;                    //최종적으로 이동할 인덱스
+    Piece movingPiece;            //내가 움직이고 있는 피스
+    float maxDragRange = 0.5f;    //피스 이동 제한거리
+    float distance;               //마우스와 피스 거리
+    bool moving = false;          //턴제를 위해서 마우스를 UP할 때 활성화
     
     public bool Moving { get { return moving; } set { moving = value; } }
 

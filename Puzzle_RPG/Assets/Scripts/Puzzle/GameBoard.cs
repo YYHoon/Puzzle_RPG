@@ -29,7 +29,7 @@ public class GameBoard : MonoBehaviour
 
     float count = 0;        //턴 지나는지 확인할 카운트
     bool turn = false;      //다시 턴을 진행할 수 있을 경우 (true)
-    
+
     public bool PlayerTurn { get { return turn; } set { turn = value; } }
 
     [Header("피스에 필요한 것들")]
@@ -59,7 +59,7 @@ public class GameBoard : MonoBehaviour
         SetBoard();
         MixBoard();
     }
-    
+
     void Update()
     {
         if (IsMoveEventEnd())
@@ -77,6 +77,7 @@ public class GameBoard : MonoBehaviour
                 {
                     attackList.Add(matchList[i].piece);
                     RemovePiece(matchList[i]);
+
                 }
             }
 
@@ -105,7 +106,7 @@ public class GameBoard : MonoBehaviour
             count = 0;
             turn = false;
         }
-    } 
+    }
 
     //시작할 때 보드 세팅
     void SetBoard()
@@ -150,10 +151,10 @@ public class GameBoard : MonoBehaviour
                 List<Node> matchList = CheckMatch(idx);
 
                 while (matchList.Count > 0)
-                {                    
+                {
                     if (!equal.Contains(type))
                         equal.Add(type);
-                    
+
                     PIECETYPE newType = ResetPieceType(equal);
 
                     //매치리스트 중간 인덱스 노드에 있는 피스 타입 변경
@@ -237,7 +238,7 @@ public class GameBoard : MonoBehaviour
 
         AddMatch(matchList, matchOne);
         AddMatch(matchList, matchTwo);
-        
+
         //매치된 퍼즐이 없으면 제자리로 돌려놓기
         if (matchList.Count == 0)
         {
@@ -383,7 +384,7 @@ public class GameBoard : MonoBehaviour
             else if (attackList[i].piecetype == PIECETYPE.heal)
                 attack.heal += 1;
         }
-        
+
         //에너미 힛 함수로 넘기기
         EnemySpawn.Instance.EnemyHit(attack);
 
@@ -413,11 +414,11 @@ public class GameBoard : MonoBehaviour
                     while (GetPiece(upper) == null)
                     {
                         upper.add(Index.up);
-                        
+
                         //노드 벗어나면 탐색 종료
                         if (GetNode(upper) == null) break;
                     }
-                    
+
                     //빈 노드의 위를 탐색했을 때 피스가 있다면
                     if (GetNode(upper) != null)
                     {
@@ -449,7 +450,7 @@ public class GameBoard : MonoBehaviour
                         GetNode(current).piece = newPiece;
                         //movingPiece.Add(GetPiece(current));
                         GetPiece(current).index = GetNode(current).index;
-                    }                    
+                    }
                 }
             }
         }
@@ -494,10 +495,15 @@ public class GameBoard : MonoBehaviour
             }
         }
     }
-    
+
     //매치된 퍼즐 삭제
     void RemovePiece(Node node)
-    {       
+    {
+        //int index = (int)GetPieceType(node.index);
+        //Transform start = GetPiece(node.index).rectTransform;
+        
+        //EffectManager.Instance.CreateEffect(index, start);
+
         Destroy(node.piece.gameObject);
         node.piece = null;
     }

@@ -22,10 +22,7 @@ public class EnemySpawn : MonoBehaviour
     [Header("에너미 턴UI 관련")]
     [SerializeField] Image[] turn;  //턴수 보여줄 이미지
     int enemyTurn;                  //에너미가 공격할 턴수
-
-    List<Enemy> enemyList = new List<Enemy>();
-    public List<Enemy> EnemyList { get { return enemyList; } }
-
+    
     private void Awake()
     {
         instance = this;
@@ -64,7 +61,7 @@ public class EnemySpawn : MonoBehaviour
     void SetEnemy()
     {
         //데이터 매니저에서 에너미(오브젝트)
-        //인덱스와 종류(shape) 받아오기
+        //인덱스(tyep)와 종류(shape) 받아오기
         int index = DataManager.Instance.EnemyIdx;
         int shape = DataManager.Instance.EnemyShape[index];
 
@@ -152,13 +149,11 @@ public class EnemySpawn : MonoBehaviour
         //턴수대로 UI 이미지 끄기
         turn[enemyTurn - 1].enabled = false;
         enemyTurn--;
-        Debug.Log("turn : " + enemyTurn);
 
         //공격 전에 공격 준비 아이들
         if (enemyTurn == 1)
         {
             puzzleEnemy.WaitAtk(1);
-            Debug.Log("공격 전 / turn : " + enemyTurn);
         }
 
         else if (enemyTurn == 0)
@@ -182,9 +177,7 @@ public class EnemySpawn : MonoBehaviour
         enemyTurn = Random.Range(1, 4);
         for (int i = 0; i < enemyTurn; i++)
             turn[i].enabled = true;
-
-        Debug.Log("에너미 턴 / turn : " + enemyTurn);
-
+        
         yield return new WaitForSeconds(0.2f);
 
         //턴수에 따라 아이들 상태 정해주기
