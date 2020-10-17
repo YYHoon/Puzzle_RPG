@@ -18,7 +18,7 @@ TagManager:
   - ENEMY
   - PLAYER
   - PLANT
-  - 
+  - EFFECT
   - 
   - 
   - 
@@ -48,4 +48,7 @@ TagManager:
     locked: 0
   - name: PuzzleUI
     uniqueID: 2866115883
+    locked: 0
+  - name: Effect
+    uniqueID: 1517992019
     locked: 0

@@ -46,7 +46,6 @@ public class EnemyManager : MonoBehaviour
     //}
 
     //에너미 프리팹 지정
-
     GameObject selectType(int type)
     {
         if (type == 0)
@@ -76,14 +75,18 @@ public class EnemyManager : MonoBehaviour
     //에너미 생성
     public void spawn(Vector3 position)
     {       
+        //에너미 순서대로 불, 물, 나무, 이블 뽑아내기
         GameObject temp = selectType(index);
 
+        //에너미 생성(RandomSpawn 스크립트)
         GameObject enemy = Instantiate(temp, position, Quaternion.Euler(0, 0, 0));
         ENEMYTYPE type = (ENEMYTYPE)index;
 
+        //에너미 클래스 대입
         enemy.GetComponent<Enemy>().Initialize(type);
         enemyList.Add(enemy.GetComponent<Enemy>());
         
+        //데이터 매니저에 저장
         DataManager.Instance.SaveEnemy(index, shape);
         index++;
     }

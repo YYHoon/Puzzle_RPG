@@ -18,7 +18,7 @@ public class RandomSpawn : MonoBehaviour
         {
             int x = Random.Range(0, (int)(map.GetLength(0)*(0.3f+test)));
             int y = Random.Range(0, (int)(map.GetLength(1) * (0.3f + test)));
-            while (x > map.GetLength(0) || y > map.GetLength(1))
+            while (x >50 || y > 50)
             {
                 x = Random.Range(0, (int)(map.GetLength(0)*(0.3f+test)));
                 y = Random.Range(0, (int)(map.GetLength(1) * (0.3f + test)));
@@ -37,7 +37,7 @@ public class RandomSpawn : MonoBehaviour
         {
             int x = Random.Range((int)(map.GetLength(0) * (0.7f + test)), map.GetLength(0) - 1);
             int y = Random.Range(0, (int)(map.GetLength(1) * (0.3f + test)));
-            while (x > map.GetLength(0) || y > map.GetLength(1))
+            while (x > 50 || y > 50)
             {
                 x = Random.Range((int)(map.GetLength(0) * (0.7f + test)), map.GetLength(0) - 1);
                 y = Random.Range(0, (int)(map.GetLength(1) * (0.3f + test)));
@@ -56,7 +56,7 @@ public class RandomSpawn : MonoBehaviour
         {
             int x = Random.Range(0, (int)(map.GetLength(0) * (0.3f + test)));
             int y = Random.Range((int)(map.GetLength(1) * (0.7f + test)), map.GetLength(1));
-            while (x > map.GetLength(0) || y > map.GetLength(1))
+            while (x > 50 || y > 50)
             {
                 x = Random.Range(0, (int)(map.GetLength(0) * (0.3f + test)));
                 y = Random.Range((int)(map.GetLength(1) * (0.7f + test)), map.GetLength(1));
@@ -75,7 +75,7 @@ public class RandomSpawn : MonoBehaviour
         {
             int x = Random.Range((int)(map.GetLength(0) * (0.7f + test)), map.GetLength(0) - 1);
             int y = Random.Range((int)(map.GetLength(1) * (0.7f + test)), map.GetLength(1));
-            while (x > map.GetLength(0) || y > map.GetLength(1))
+            while (x > 50 || y > 50)
             {
                 x = Random.Range((int)(map.GetLength(0) * (0.7f + test)), map.GetLength(0) - 1);
                 y = Random.Range((int)(map.GetLength(1) * (0.7f + test)), map.GetLength(1));
@@ -100,7 +100,7 @@ public class RandomSpawn : MonoBehaviour
         {
             int x = Random.Range((int)(map.GetLength(0) * (0.3f + test)), (int)(map.GetLength(0) * (0.6f + test)));
             int y = Random.Range((int)(map.GetLength(1) * (0.3f + test)), (int)(map.GetLength(1) * (0.6f + test)));
-            while (x > map.GetLength(0) || y > map.GetLength(1))
+            while (x > 50 || y > 50)
             {
                 x = Random.Range((int)(map.GetLength(0) * (0.3f + test)), (int)(map.GetLength(0) * (0.6f + test)));
                 y = Random.Range((int)(map.GetLength(1) * (0.3f + test)), (int)(map.GetLength(1) * (0.6f + test)));
