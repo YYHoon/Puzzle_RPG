@@ -373,13 +373,13 @@ public class GameBoard : MonoBehaviour
         for (int i = 0; i < attackList.Count; i++)
         {
             if (attackList[i].piecetype == PIECETYPE.fire)
-                attack.fire += 1;
+                attack.fire += DataManager.Instance.savePlayerData.fireDamage;
 
             else if (attackList[i].piecetype == PIECETYPE.water)
-                attack.water += 1;
+                attack.water += DataManager.Instance.savePlayerData.waterDamage;
 
             else if (attackList[i].piecetype == PIECETYPE.plant)
-                attack.plant += 1;
+                attack.plant += DataManager.Instance.savePlayerData.plantDamage;
 
             else if (attackList[i].piecetype == PIECETYPE.heal)
                 attack.heal += 1;

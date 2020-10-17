@@ -46,12 +46,15 @@ public class EnemySpawn : MonoBehaviour
         {
             //에너미 체력바 갱신
             if (damage != 0)
+            {
                 puzzleEnemy.Damage(damage);
+                player.IsAttack();
+            }
             EnemyHpBar.value = puzzleEnemy.Hp;
 
             //데미지 초기화
             damage = 0;
-
+           
             //에너미 공격 턴 돌아오면
             EnemyAttack();
             GameBoard.Instance.PlayerTurn = false;
@@ -171,9 +174,17 @@ public class EnemySpawn : MonoBehaviour
 
         //에너미 공격 시키기
         puzzleEnemy.Attack();
-        playerHp -= 10f;
-        PlayerHpBar.value = playerHp / 100f;
 
+        PlayerDefenseAttack();
+        PlayerHpBar.value = playerHp / 100f;
+        if(playerHp <=0)
+        {
+            player.IsDie();
+        }
+        else
+        {
+            player.IsHit();
+        }
         //턴 수 다시 뽑아서 UI 켜기
         enemyTurn = Random.Range(1, 4);
         for (int i = 0; i < enemyTurn; i++)
@@ -186,5 +197,28 @@ public class EnemySpawn : MonoBehaviour
             puzzleEnemy.WaitAtk(1);
         else
             puzzleEnemy.WaitAtk(0);
+    }
+
+    void PlayerDefenseAttack()
+    {
+        if (puzzleEnemy.Type == ENEMYTYPE.fire)
+        {
+            playerHp -= (2 - DataManager.Instance.savePlayerData.fireDefense) * 10.0f;
+        }
+
+        else if (puzzleEnemy.Type == ENEMYTYPE.water)
+        {
+            playerHp -= (2 - DataManager.Instance.savePlayerData.waterDefense) * 10.0f;
+        }
+
+        else if (puzzleEnemy.Type == ENEMYTYPE.plant)
+        {
+            playerHp -= (2 - DataManager.Instance.savePlayerData.plantDefense) * 10.0f;
+        }
+
+        else if (puzzleEnemy.Type == ENEMYTYPE.evil)
+        {
+            playerHp -= 15f;
+        }
     }
 }
