@@ -10,15 +10,43 @@ public class PlayerData
     {
         playerHp = _playerHp; fireDamage = _fireDamage; waterDamage = _waterDamage; plantDamage = _plantDamage; fireDefense = _fireDefense; waterDefense = _waterDefense; plantDefense = _plantDefense;
     }
-    float playerHp, fireDamage, waterDamage, plantDamage, fireDefense, waterDefense, plantDefense;
+    public float playerHp, fireDamage, waterDamage, plantDamage, fireDefense, waterDefense, plantDefense;
 }
 public class Player : MonoBehaviour
 {
     PlayerData playerData;
-    // Start is called before the first frame update
-
-    public PlayerData PlayerStat()
+    Animator anim;
+    public PlayerData PlayerData
     {
-        return playerData;
+        get { return playerData; }
+        set { playerData = value; }
+    }
+    
+    // Start is called before the first frame update
+    private void Start()
+    {
+        playerData = DataManager.Instance.savePlayerData;
+        anim = GetComponent<Animator>();
+    }
+
+    public void ChangeEquip()
+    {
+        anim.SetTrigger("ChangeEquip");
+    }
+    public void IsHit()
+    {
+        anim.SetTrigger("IsHit");
+    }
+    public void IsAttack()
+    {
+        anim.SetTrigger("IsAttack");
+    }
+    public void IsVictory()
+    {
+        anim.SetTrigger("IsVictory");
+    }
+    public void IsDie()
+    {
+        anim.SetTrigger("IsDie");
     }
 }

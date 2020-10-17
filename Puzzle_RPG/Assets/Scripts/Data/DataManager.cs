@@ -8,7 +8,8 @@ public class DataManager : MonoBehaviour
 {
     static DataManager instance;
     public static DataManager Instance { get { return instance; } }
-
+    public PlayerData savePlayerData = new PlayerData(100,1,1,1,1,1,1);
+    public Item[] SaveInven;
     ChangeCloth.PlayerIdx saveIdx;
     public GameObject ClothIdx;
     int[] Shape =new int[4];
