@@ -14,7 +14,20 @@ public class DataManager : MonoBehaviour
     public GameObject ClothIdx;
     int[] Shape =new int[4];
     public int[] EnemyShape { get { return Shape; } }
-    
+    Vector3 playerPosition;
+    List<Vector3> enemyPosition = new List<Vector3>();
+    public bool[] chkEnemy = new bool[4];
+
+    public Vector3 PlayerPosition
+    {
+        get { return playerPosition; }
+        set { playerPosition = value; }
+    }
+    public List<Vector3> EnemyPosition
+    {
+        get { return enemyPosition; }
+        set { enemyPosition = value; }
+    }
     List<Enemy> enemyList = new List<Enemy>();
     public List<Enemy> EnemyList
     {
@@ -63,7 +76,7 @@ public class DataManager : MonoBehaviour
         enemyList = EnemyManager.Instance.EnemyList;
         Shape[index] = shape;
     }
-
+   
     public void SaveMap(int [,]map)
     {
         mapSave = map;

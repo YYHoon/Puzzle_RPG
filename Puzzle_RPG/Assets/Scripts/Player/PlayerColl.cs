@@ -26,6 +26,7 @@ public class PlayerColl : MonoBehaviour
         {
             for(int i = 0; i < DataManager.Instance.EnemyList.Count; ++i)
             {
+                if (DataManager.Instance.EnemyList[i] == null) continue;
                 if (other.gameObject.name == DataManager.Instance.EnemyList[i].gameObject.name)
                 {
                     DataManager.Instance.EnemyIdx = i;
@@ -39,5 +40,10 @@ public class PlayerColl : MonoBehaviour
     {
         if (other.gameObject.tag == "Enemy")
             enemySearch = false;
+    }
+
+    private void OnDestroy()
+    {
+        DataManager.Instance.PlayerPosition = gameObject.transform.position;
     }
 }

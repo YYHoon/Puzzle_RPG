@@ -32,6 +32,9 @@ public class MapGenerator : MonoBehaviour
     void Generator()
     {
         int[,] borderedMap;
+        MeshGenerator meshGen = GetComponent<MeshGenerator>();
+        RandomSpawn rs = GetComponent<RandomSpawn>();
+
         if (DataManager.Instance.mapSave == null)
         {
             map = new int[width, height];
@@ -58,19 +61,17 @@ public class MapGenerator : MonoBehaviour
                     }
                 }
             }
+            meshGen.GenerateMesh(borderedMap, 1);
+            rs.SpawnGameObject(borderedMap);
+            rs.PlayerSpawn(borderedMap);
         }
         else
         {
             borderedMap = DataManager.Instance.mapSave;
+            meshGen.GenerateMesh(borderedMap, 1);
+            rs.PlayerEnemySpawn();
         }
-        MeshGenerator meshGen = GetComponent<MeshGenerator>();
-        meshGen.GenerateMesh(borderedMap, 1);
-        RandomSpawn rs = GetComponent<RandomSpawn>();
-        rs.DeleteChilds();
-        rs.SpawnGameObject(borderedMap);
         rs.TreeSpawn(borderedMap);
-        rs.PlayerSpawn(borderedMap);
-
         DataManager.Instance.SaveMap(borderedMap);
     }
 

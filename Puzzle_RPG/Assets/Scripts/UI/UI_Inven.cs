@@ -58,6 +58,7 @@ public class UI_Inven : MonoBehaviour
                     usingImage[i].SetActive(true);
             }
         }
+        
     }
 
     void EquipmentSetting()

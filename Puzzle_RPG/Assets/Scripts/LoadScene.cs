@@ -15,6 +15,7 @@ public class LoadScene : MonoBehaviour
 
     public void OnPuzzleScene()
     {
+        DataManager.Instance.GetComponent<ItemData>().Save();
         SceneManager.LoadScene("Puzzle");
     }
     

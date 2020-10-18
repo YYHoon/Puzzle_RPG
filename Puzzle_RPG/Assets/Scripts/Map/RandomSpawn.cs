@@ -9,7 +9,6 @@ public class RandomSpawn : MonoBehaviour
     public GameObject[] treeObject;
     public GameObject treeParent;
     public GameObject player;
-
     public void SpawnGameObject(int[,] map)
     {
         float test = 0.0f;
@@ -27,6 +26,7 @@ public class RandomSpawn : MonoBehaviour
             {
                 Vector3 spawnPos = new Vector3(x- map.GetLength(0)*0.5f, 0.3f, y- map.GetLength(1) * 0.5f);
                 EnemyManager.Instance.spawn(spawnPos);
+                DataManager.Instance.EnemyPosition.Add(spawnPos);
                 break;
             }
             test += 0.00001f;
@@ -46,6 +46,7 @@ public class RandomSpawn : MonoBehaviour
             {
                 Vector3 spawnPos = new Vector3(x - map.GetLength(0) * 0.5f, 0.3f, y - map.GetLength(1) * 0.5f);
                 EnemyManager.Instance.spawn(spawnPos);
+                DataManager.Instance.EnemyPosition.Add(spawnPos);
                 break;
             }
             test += 0.00001f;
@@ -65,6 +66,7 @@ public class RandomSpawn : MonoBehaviour
             {
                 Vector3 spawnPos = new Vector3(x - map.GetLength(0) * 0.5f, 0.3f, y - map.GetLength(1) * 0.5f);
                 EnemyManager.Instance.spawn(spawnPos);
+                DataManager.Instance.EnemyPosition.Add(spawnPos);
                 break;
             }
             test += 0.00001f;
@@ -84,6 +86,7 @@ public class RandomSpawn : MonoBehaviour
             {
                 Vector3 spawnPos = new Vector3(x - map.GetLength(0) * 0.5f, 0.3f, y - map.GetLength(1) * 0.5f);
                 EnemyManager.Instance.spawn(spawnPos);
+                DataManager.Instance.EnemyPosition.Add(spawnPos);
                 //spawnObject = EnemyManager.Instance.RandomEnemy();
                 //Instantiate(spawnObject, spawnPos, Quaternion.Euler(0, 0, 0));
                 break;
@@ -109,6 +112,7 @@ public class RandomSpawn : MonoBehaviour
             {
                 Vector3 spawnPos = new Vector3(x - map.GetLength(0) * 0.5f, 0f, y - map.GetLength(1) * 0.5f);
                 player.transform.position = spawnPos;
+                player.transform.rotation = new Quaternion(0,-110,0,0);
                 break;
             }
             test += 0.00001f;
@@ -140,6 +144,31 @@ public class RandomSpawn : MonoBehaviour
                     GameObject newObject = Instantiate(treeObject[Random.Range(0,treeObject.Length)], new Vector3(i - map.GetLength(0) * 0.5f, 0.8f, j - map.GetLength(1) * 0.5f),Quaternion.Euler(0,0,0), treeParent.transform);
                     newObject.isStatic = true;
                 }
+            }
+        }
+    }
+
+    public void PlayerEnemySpawn()
+    {
+        player.transform.position = DataManager.Instance.PlayerPosition;
+        player.transform.rotation = new Quaternion(0, -110, 0, 0);
+        DataManager.Instance.EnemyList.Clear();
+        int index = DataManager.Instance.EnemyIdx;
+        DataManager.Instance.chkEnemy[index] = true;
+        for (int i = 0; i < DataManager.Instance.EnemyPosition.Count; ++i)
+        {
+            int shape = DataManager.Instance.EnemyShape[i];
+            if (DataManager.Instance.chkEnemy[i]==false)
+            {
+                GameObject temp = EnemySpawn.Instance.selectType(i, shape);
+                GameObject enemy = Instantiate(temp, DataManager.Instance.EnemyPosition[i], new Quaternion(0, -110, 0, 0));
+                ENEMYTYPE type = (ENEMYTYPE)i;
+                enemy.GetComponent<Enemy>().Initialize(type);
+                DataManager.Instance.EnemyList.Add(enemy.GetComponent<Enemy>());
+            }
+            else
+            {
+                DataManager.Instance.EnemyList.Add(null);
             }
         }
     }

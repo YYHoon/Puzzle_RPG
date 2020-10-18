@@ -90,7 +90,7 @@ public class EnemySpawn : MonoBehaviour
     }
 
     //에너미 프리팹 지정
-    GameObject selectType(int type, int shape)
+    public GameObject selectType(int type, int shape)
     {
         if (type == 0)
         {
