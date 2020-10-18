@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.5039817, g: 0.7965214, b: 0.9949359, a: 1}
+  m_IndirectSpecularColor: {r: 0.50398177, g: 0.7965214, b: 0.9949359, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -800,8 +800,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1536691790}
-        m_MethodName: OnPuzzleScene
+      - m_Target: {fileID: 1536691791}
+        m_MethodName: BattleToPuzzle
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4068,6 +4068,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1536691789}
   - component: {fileID: 1536691790}
+  - component: {fileID: 1536691791}
   m_Layer: 0
   m_Name: SceneChange
   m_TagString: Untagged
@@ -4096,12 +4097,26 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1536691788}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f6cd3f68452af3c4ab69ce2e0bdbc662, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyPosition: {fileID: 0}
+  fadeImage: {fileID: 0}
+  loadingSlider: {fileID: 0}
+--- !u!114 &1536691791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1536691788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5bff3cd236f46545858089543903b60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1603565636
 GameObject:
   m_ObjectHideFlags: 0

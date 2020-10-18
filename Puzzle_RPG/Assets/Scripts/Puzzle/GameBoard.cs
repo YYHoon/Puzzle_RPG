@@ -496,10 +496,9 @@ public class GameBoard : MonoBehaviour
                             int random = Random.Range(0, pieceList.Count);
 
                             Piece oldPiece = pieceList[random];
+                            PiecePosition(oldPiece, current, position);
                             oldPiece.gameObject.SetActive(true);
-                            pieceList.RemoveAt(random);
-                            
-                            oldPiece.rectTransform.position = position;
+                            pieceList.RemoveAt(random);                            
 
                             MoveEvent newEvent = new MoveEvent();
                             newEvent.targetPiece = oldPiece;
@@ -507,7 +506,7 @@ public class GameBoard : MonoBehaviour
                             moveEventList.Add(newEvent);
 
                             GetNode(current).piece = oldPiece;
-                            GetPiece(current).index = GetNode(current).index;
+                            //GetPiece(current).index = GetNode(current).index;
                         }
 
                         //피스 리스트가 없었을 때
