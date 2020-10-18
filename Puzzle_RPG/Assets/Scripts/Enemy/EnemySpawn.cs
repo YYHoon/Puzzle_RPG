@@ -23,7 +23,8 @@ public class EnemySpawn : MonoBehaviour
     [Header("에너미 턴UI 관련")]
     [SerializeField] Image[] turn;  //턴수 보여줄 이미지
     int enemyTurn;                  //에너미가 공격할 턴수
-    
+
+    [SerializeField] GameObject gameOver;
     private void Awake()
     {
         instance = this;
@@ -177,13 +178,15 @@ public class EnemySpawn : MonoBehaviour
 
         PlayerDefenseAttack();
         PlayerHpBar.value = playerHp / 100f;
-        if(playerHp <=0)
+        
+        player.IsHit();
+        yield return new WaitForSeconds(1f);
+        if (playerHp <= 0)
         {
             player.IsDie();
-        }
-        else
-        {
-            player.IsHit();
+            puzzleEnemy.Victory();
+            yield return new WaitForSeconds(3f);
+            gameOver.SetActive(true);
         }
         //턴 수 다시 뽑아서 UI 켜기
         enemyTurn = Random.Range(1, 4);

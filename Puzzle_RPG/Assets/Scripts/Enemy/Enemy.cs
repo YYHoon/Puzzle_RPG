@@ -36,8 +36,7 @@ public class Enemy : MonoBehaviour
 
         if (currentHp <= 0)
         {
-            animator.SetTrigger("IsDie");
-            return;
+            StartCoroutine(EnemyDie());
         }
     }
 
@@ -49,5 +48,19 @@ public class Enemy : MonoBehaviour
     public void WaitAtk(int wait)
     {
         animator.SetInteger("IsWait", wait);
+    }
+
+    public void Victory()
+    {
+        animator.SetTrigger("IsVictory");
+    }
+
+    IEnumerator EnemyDie()
+    {
+        yield return new WaitForSeconds(1.0f);
+        animator.SetTrigger("IsDie");
+        GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().IsVictory();
+        yield return new WaitForSeconds(3.0f);
+        GameObject.Find("SceneChange").GetComponent<LoadScene>().FromPuzzleToBattle();
     }
 }
