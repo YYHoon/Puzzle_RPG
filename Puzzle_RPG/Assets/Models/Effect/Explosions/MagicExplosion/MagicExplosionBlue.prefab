@@ -23685,6 +23685,7 @@ GameObject:
   - component: {fileID: 19853034}
   - component: {fileID: 19988488}
   - component: {fileID: 8261688}
+  - component: {fileID: 4147150591207362363}
   m_Layer: 11
   m_Name: MagicExplosionBlue
   m_TagString: Untagged
@@ -28533,3 +28534,15 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &4147150591207362363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 193442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d971f14974773144186e2c42b79adf6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

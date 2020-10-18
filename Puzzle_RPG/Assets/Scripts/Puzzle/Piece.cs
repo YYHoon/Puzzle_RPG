@@ -27,21 +27,32 @@ public class Piece : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerU
     public Index index { get { return idx; } set { idx = value; } }
     public Vector3 originPosition { get { return originPos; } set { originPos = value; } }
 
-    public void Initialize(PIECETYPE type, Sprite sprite, Index index)
+    //public void Initialize(PIECETYPE type, Sprite sprite, Index index)
+    //{
+    //    img = GetComponent<Image>();
+    //    rtTransform = GetComponent<RectTransform>();
+
+    //    pieceType = type;
+    //    img.sprite = sprite;
+    //    //idx = index;
+    //    //originPos = rtTransform.position;
+    //    //Name();
+    //}
+
+    public void Create(PIECETYPE type, Sprite sprite)
     {
         img = GetComponent<Image>();
         rtTransform = GetComponent<RectTransform>();
 
         pieceType = type;
         img.sprite = sprite;
+    }
+
+    public void Position(Index index)
+    {
         idx = index;
         originPos = rtTransform.position;
         Name();
-    }
-
-    public void SetIndex(Index index)
-    {
-        this.idx = index;
     }
 
     void Name()

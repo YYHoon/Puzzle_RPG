@@ -49,7 +49,7 @@ public class ItemData : MonoBehaviour
         Save();
     }
 
-    void Save()
+    public void Save()
     {
         string jdata = JsonConvert.SerializeObject(MyItemList);
         byte[] bytes = System.Text.Encoding.UTF8.GetBytes(jdata);

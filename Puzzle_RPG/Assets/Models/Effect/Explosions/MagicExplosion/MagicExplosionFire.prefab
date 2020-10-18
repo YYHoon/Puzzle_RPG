@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 19851920}
   - component: {fileID: 19939816}
   - component: {fileID: 8237088}
+  - component: {fileID: -7316774237791686198}
   m_Layer: 11
   m_Name: MagicExplosionFire
   m_TagString: Untagged
@@ -4860,6 +4861,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &-7316774237791686198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 112034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d971f14974773144186e2c42b79adf6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &119398
 GameObject:
   m_ObjectHideFlags: 0

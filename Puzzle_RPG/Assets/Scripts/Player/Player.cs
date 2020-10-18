@@ -15,7 +15,12 @@ public class PlayerData
 public class Player : MonoBehaviour
 {
     PlayerData playerData;
+    Item[] currentItemData;
     Animator anim;
+    [SerializeField]
+    List<Transform> weaponList = new List<Transform>();
+    [SerializeField]
+    List<Transform> shieldList = new List<Transform>();
     public PlayerData PlayerData
     {
         get { return playerData; }
@@ -27,6 +32,32 @@ public class Player : MonoBehaviour
     {
         playerData = DataManager.Instance.savePlayerData;
         anim = GetComponent<Animator>();
+        currentItemData = GameObject.Find("DataManager").GetComponent<ItemData>().PlayerItemList();
+        PlayerEquipment();
+    }
+
+    void PlayerEquipment()
+    {
+        // 무기 
+        for (int i = 0; i < currentItemData.Length; ++i)
+        {
+            if (currentItemData[i] == null) continue;
+            if (currentItemData[i].isUsing == true && currentItemData[i].type == "Weapon")
+            {
+                weaponList[currentItemData[i].idx].gameObject.SetActive(true);
+                break;
+            }
+        }
+        // 방패
+        for (int i = 0; i < currentItemData.Length; ++i)
+        {
+            if (currentItemData[i] == null) continue;
+            if (currentItemData[i].isUsing == true && currentItemData[i].type == "Shield")
+            {
+                shieldList[currentItemData[i].idx].gameObject.SetActive(true);
+                break;
+            }
+        }
     }
 
     public void ChangeEquip()

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 19855684}
   - component: {fileID: 19913970}
   - component: {fileID: 8232538}
+  - component: {fileID: 4689874038738645224}
   m_Layer: 11
   m_Name: MagicExplosionGreen
   m_TagString: Untagged
@@ -4860,6 +4861,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &4689874038738645224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 102006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d971f14974773144186e2c42b79adf6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &121606
 GameObject:
   m_ObjectHideFlags: 0

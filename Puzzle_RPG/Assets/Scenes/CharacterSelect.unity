@@ -213,17 +213,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 340505344}
-        m_MethodName: ChangeEquip
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &63043322
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -347,6 +336,7 @@ GameObject:
   - component: {fileID: 77604653}
   - component: {fileID: 77604652}
   - component: {fileID: 77604654}
+  - component: {fileID: 77604655}
   m_Layer: 0
   m_Name: DataManager
   m_TagString: Untagged
@@ -366,14 +356,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c084df2b4f75f1499b71c5f81b957e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  savePlayerData:
-    playerHp: 100
-    fireDamage: 1
-    waterDamage: 1
-    plantDamage: 1
-    fireDefense: 1
-    waterDefense: 1
-    plantDefense: 1
   ClothIdx: {fileID: 1294121324}
 --- !u!4 &77604653
 Transform:
@@ -401,7 +383,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d0a06f4925e6954aa1536e4e8fbd81e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ItemDataBase: {fileID: 4900000, guid: 8c9fc851e348c864eb4621da5e0cf156, type: 3}
+  ItemDataBase: {fileID: 4900000, guid: d49b32c8ae77392449ec22d7dfa96c16, type: 3}
+--- !u!114 &77604655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 77604651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52f09850a70b5e4b851cb8b81b159b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &92060921
 GameObject:
   m_ObjectHideFlags: 0
@@ -637,17 +631,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 340505344}
-        m_MethodName: ChangeEquip
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &295319062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -728,18 +711,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &340505344 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2996033327888482474, guid: 4ed6b41ae13a055408e59bfedd3e2bbf,
-    type: 3}
-  m_PrefabInstance: {fileID: 7903718186276864585}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb33548d11aa2bd4cbce23858c6a3adf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &343279527
 GameObject:
   m_ObjectHideFlags: 0
@@ -1134,17 +1105,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 340505344}
-        m_MethodName: ChangeEquip
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
 --- !u!114 &595234071
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1265,17 +1225,6 @@ MonoBehaviour:
       - m_Target: {fileID: 1294121328}
         m_MethodName: OnClothButton
         m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 340505344}
-        m_MethodName: ChangeEquip
-        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1733,17 +1682,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 340505344}
-        m_MethodName: ChangeEquip
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
 --- !u!114 &1085067524
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1872,17 +1810,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 340505344}
-        m_MethodName: ChangeEquip
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
 --- !u!114 &1229211370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2003,17 +1930,6 @@ MonoBehaviour:
       - m_Target: {fileID: 1294121328}
         m_MethodName: OnClothButton
         m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 340505344}
-        m_MethodName: ChangeEquip
-        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2236,17 +2152,6 @@ MonoBehaviour:
       - m_Target: {fileID: 1294121328}
         m_MethodName: OnShoesButton
         m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 340505344}
-        m_MethodName: ChangeEquip
-        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2696,17 +2601,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 340505344}
-        m_MethodName: ChangeEquip
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1720919812
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2904,17 +2798,6 @@ MonoBehaviour:
       - m_Target: {fileID: 1294121328}
         m_MethodName: OnShoesButton
         m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 340505344}
-        m_MethodName: ChangeEquip
-        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

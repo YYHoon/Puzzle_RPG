@@ -152,5 +152,4 @@ public class ChangeCloth : MonoBehaviour
         }
         shoesChild[playerIdx.shoesIndex].gameObject.SetActive(true);
     }
-    
 }

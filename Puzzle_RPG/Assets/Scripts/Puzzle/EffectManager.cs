@@ -5,7 +5,7 @@ using UnityEngine;
 public class EffectManager : MonoBehaviour
 {
     static EffectManager instance;
-    public static EffectManager Instance { get {return instance; } }
+    public static EffectManager Instance { get { return instance; } }
     
     [Header("이펙트 생성 관련")]
     [SerializeField] GameObject[] effects = new GameObject[4];
@@ -22,13 +22,14 @@ public class EffectManager : MonoBehaviour
         instance = this;
     }
 
-    public void CreateEffect(int index, Transform start)
+    public void CreateEffect(int index, RectTransform start)
     {
         GameObject shape = effects[index];
         GameObject effect = Instantiate(shape, start);
         
         Effect puzzleEffect = effect.GetComponent<Effect>();
-        puzzleEffect.Initialize();
+        Debug.Log(puzzleEffect.name + " : " + puzzleEffect.transform.position);
+        puzzleEffect.Initialize(start);
     }
 
     //생성 후 모이는 위치로 가는 함수
