@@ -213,8 +213,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_MethodName: ChangeEquip
+      - m_Target: {fileID: 11500000, guid: eb33548d11aa2bd4cbce23858c6a3adf, type: 3}
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -375,6 +375,7 @@ MonoBehaviour:
     waterDefense: 1
     plantDefense: 1
   ClothIdx: {fileID: 1294121324}
+  chkEnemy: 00000000
 --- !u!4 &77604653
 Transform:
   m_ObjectHideFlags: 0
@@ -637,8 +638,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_MethodName: ChangeEquip
+      - m_Target: {fileID: 11500000, guid: eb33548d11aa2bd4cbce23858c6a3adf, type: 3}
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1122,8 +1123,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_MethodName: ChangeEquip
+      - m_Target: {fileID: 11500000, guid: eb33548d11aa2bd4cbce23858c6a3adf, type: 3}
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1261,8 +1262,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_MethodName: ChangeEquip
+      - m_Target: {fileID: 11500000, guid: eb33548d11aa2bd4cbce23858c6a3adf, type: 3}
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1721,8 +1722,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_MethodName: ChangeEquip
+      - m_Target: {fileID: 11500000, guid: eb33548d11aa2bd4cbce23858c6a3adf, type: 3}
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1860,8 +1861,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_MethodName: ChangeEquip
+      - m_Target: {fileID: 11500000, guid: eb33548d11aa2bd4cbce23858c6a3adf, type: 3}
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1999,8 +2000,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_MethodName: ChangeEquip
+      - m_Target: {fileID: 11500000, guid: eb33548d11aa2bd4cbce23858c6a3adf, type: 3}
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2232,8 +2233,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_MethodName: ChangeEquip
+      - m_Target: {fileID: 11500000, guid: eb33548d11aa2bd4cbce23858c6a3adf, type: 3}
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2684,8 +2685,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_MethodName: ChangeEquip
+      - m_Target: {fileID: 11500000, guid: eb33548d11aa2bd4cbce23858c6a3adf, type: 3}
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2900,8 +2901,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_MethodName: ChangeEquip
+      - m_Target: {fileID: 11500000, guid: eb33548d11aa2bd4cbce23858c6a3adf, type: 3}
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
