@@ -44,7 +44,7 @@ public class EnemyManager : MonoBehaviour
 
     //    DataManager.Instance.SaveEnemy();
     //}
-
+        
     //에너미 프리팹 지정
     GameObject selectType(int type)
     {

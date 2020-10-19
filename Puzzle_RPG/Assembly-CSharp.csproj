@@ -86,11 +86,13 @@
     <Compile Include="Assets\Scripts\Puzzle\Index.cs" />
     <Compile Include="Assets\Scripts\Puzzle\MovePiece.cs" />
     <Compile Include="Assets\Scripts\Puzzle\Piece.cs" />
+    <Compile Include="Assets\Scripts\Sound.cs" />
     <Compile Include="Assets\Scripts\TimeManager.cs" />
     <Compile Include="Assets\Scripts\UI\Camera\EquipCamera.cs" />
     <Compile Include="Assets\Scripts\UI\Camera\IsometricCamera.cs" />
     <Compile Include="Assets\Scripts\UI\Joystick\JoyStick.cs" />
     <Compile Include="Assets\Scripts\UI\MiniMap\MiniMap.cs" />
+    <Compile Include="Assets\Scripts\UI\UI_BGM.cs" />
     <Compile Include="Assets\Scripts\UI\UI_Inven.cs" />
     <None Include="Assets\Resources\CUBE - Heroes and Dungeons\Read me.txt" />
     <None Include="Assets\Models\RPG Monster Wave PBR\Shaders\PBRMaskTint.shader" />
