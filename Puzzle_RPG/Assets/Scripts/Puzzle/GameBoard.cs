@@ -421,16 +421,16 @@ public class GameBoard : MonoBehaviour
         for (int i = 0; i < attackList.Count; i++)
         {
             if (attackList[i].piecetype == PIECETYPE.fire)
-                attack.fire += 1;
+                attack.fire += 1.5f;
 
             else if (attackList[i].piecetype == PIECETYPE.water)
-                attack.water += 1;
+                attack.water += 1.5f;
 
             else if (attackList[i].piecetype == PIECETYPE.plant)
-                attack.plant += 1;
+                attack.plant += 1.5f;
 
             else if (attackList[i].piecetype == PIECETYPE.heal)
-                attack.heal += 1;
+                attack.heal += 1.5f;
         }
 
         //에너미 힛 함수로 넘기기
