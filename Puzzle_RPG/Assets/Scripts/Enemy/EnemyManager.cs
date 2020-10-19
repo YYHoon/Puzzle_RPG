@@ -79,7 +79,7 @@ public class EnemyManager : MonoBehaviour
         GameObject temp = selectType(index);
 
         //에너미 생성(RandomSpawn 스크립트)
-        GameObject enemy = Instantiate(temp, position, Quaternion.Euler(0, 0, 0));
+        GameObject enemy = Instantiate(temp, position, Quaternion.Euler(0, -110, 0));
         ENEMYTYPE type = (ENEMYTYPE)index;
 
         //에너미 클래스 대입

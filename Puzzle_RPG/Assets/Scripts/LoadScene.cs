@@ -15,11 +15,23 @@ public class LoadScene : MonoBehaviour
 
     public void OnPuzzleScene()
     {
+        DataManager.Instance.GetComponent<ItemData>().Save();
         SceneManager.LoadScene("Puzzle");
     }
     
     public void FromPuzzleToBattle()
     {
         SceneManager.LoadScene("Battle");
+    }
+
+    public void ReloadPuzzleScene()
+    {
+        SceneManager.LoadScene("Puzzle");
+    }
+
+    public void ToHome()
+    {
+        Destroy(DataManager.Instance.gameObject);
+        SceneManager.LoadScene("CharacterSelect");
     }
 }

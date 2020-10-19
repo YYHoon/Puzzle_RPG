@@ -10,6 +10,7 @@ public class EnemySpawn : MonoBehaviour
 
     [Header("에너미 생성하는 데 필요함")]
     public Transform enemyPos;
+    [SerializeField] Player player;
     GameObject[] Enemies;
     Enemy puzzleEnemy = new Enemy();
 
@@ -22,7 +23,8 @@ public class EnemySpawn : MonoBehaviour
     [Header("에너미 턴UI 관련")]
     [SerializeField] Image[] turn;  //턴수 보여줄 이미지
     int enemyTurn;                  //에너미가 공격할 턴수
-    
+
+    [SerializeField] GameObject gameOver;
     private void Awake()
     {
         instance = this;
@@ -45,12 +47,15 @@ public class EnemySpawn : MonoBehaviour
         {
             //에너미 체력바 갱신
             if (damage != 0)
+            {
                 puzzleEnemy.Damage(damage);
+                player.IsAttack();
+            }
             EnemyHpBar.value = puzzleEnemy.Hp;
 
             //데미지 초기화
             damage = 0;
-
+           
             //에너미 공격 턴 돌아오면
             EnemyAttack();
             GameBoard.Instance.PlayerTurn = false;
@@ -86,7 +91,7 @@ public class EnemySpawn : MonoBehaviour
     }
 
     //에너미 프리팹 지정
-    GameObject selectType(int type, int shape)
+    public GameObject selectType(int type, int shape)
     {
         if (type == 0)
         {
@@ -170,9 +175,19 @@ public class EnemySpawn : MonoBehaviour
 
         //에너미 공격 시키기
         puzzleEnemy.Attack();
-        playerHp -= 10f;
-        PlayerHpBar.value = playerHp / 100f;
 
+        PlayerDefenseAttack();
+        PlayerHpBar.value = playerHp / 100f;
+        
+        player.IsHit();
+        yield return new WaitForSeconds(1f);
+        if (playerHp <= 0)
+        {
+            player.IsDie();
+            puzzleEnemy.Victory();
+            yield return new WaitForSeconds(3f);
+            gameOver.SetActive(true);
+        }
         //턴 수 다시 뽑아서 UI 켜기
         enemyTurn = Random.Range(1, 4);
         for (int i = 0; i < enemyTurn; i++)
@@ -185,5 +200,28 @@ public class EnemySpawn : MonoBehaviour
             puzzleEnemy.WaitAtk(1);
         else
             puzzleEnemy.WaitAtk(0);
+    }
+
+    void PlayerDefenseAttack()
+    {
+        if (puzzleEnemy.Type == ENEMYTYPE.fire)
+        {
+            playerHp -= (2 - DataManager.Instance.savePlayerData.fireDefense) * 10.0f;
+        }
+
+        else if (puzzleEnemy.Type == ENEMYTYPE.water)
+        {
+            playerHp -= (2 - DataManager.Instance.savePlayerData.waterDefense) * 10.0f;
+        }
+
+        else if (puzzleEnemy.Type == ENEMYTYPE.plant)
+        {
+            playerHp -= (2 - DataManager.Instance.savePlayerData.plantDefense) * 10.0f;
+        }
+
+        else if (puzzleEnemy.Type == ENEMYTYPE.evil)
+        {
+            playerHp -= 15f;
+        }
     }
 }
