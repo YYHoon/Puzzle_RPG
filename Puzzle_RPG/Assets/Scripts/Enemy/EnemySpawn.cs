@@ -52,6 +52,7 @@ public class EnemySpawn : MonoBehaviour
                 player.IsAttack();
             }
             EnemyHpBar.value = puzzleEnemy.Hp;
+            PlayerHpBar.value = playerHp / 100f;
 
             //데미지 초기화
             damage = 0;
@@ -121,6 +122,8 @@ public class EnemySpawn : MonoBehaviour
     public void EnemyHit(Attack attack)
     {
         //Debug.Log("normal : " + (attack.fire + attack.water + attack.plant));
+        playerHp += attack.heal;
+        if (playerHp >= 100f) playerHp = 100f;
 
         //넘겨받은 구조체로 에너미 속성별로 다시 계산
         if (puzzleEnemy.Type == ENEMYTYPE.fire)
@@ -177,8 +180,8 @@ public class EnemySpawn : MonoBehaviour
         puzzleEnemy.Attack();
 
         PlayerDefenseAttack();
-        PlayerHpBar.value = playerHp / 100f;
-        
+        //PlayerHpBar.value = playerHp / 100f;
+
         player.IsHit();
         yield return new WaitForSeconds(1f);
         if (playerHp <= 0)

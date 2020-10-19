@@ -306,7 +306,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &201999404
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2306,7 +2306,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!20 &852401508
 Camera:
   m_ObjectHideFlags: 0
@@ -3859,7 +3859,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6cd3f68452af3c4ab69ce2e0bdbc662, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemyPosition: {fileID: 0}
+  fadeImage: {fileID: 0}
+  loadingSlider: {fileID: 0}
 --- !u!4 &2073039172
 Transform:
   m_ObjectHideFlags: 0
