@@ -6,21 +6,28 @@ using UnityEngine.SceneManagement;
 
 public class LoadScene : MonoBehaviour
 {
-    [Header("로딩 관련")]
+    [Header("페이드인 관련")]
     [SerializeField] Image fadeImage;
-    [SerializeField] Slider loadingSlider;
-    public static string nextScene;
     float FadeTime = 2f;
+
+    //[Header("로딩 관련")]
+    //[SerializeField] Slider loadingSlider;
+    //public static string nextScene;
+
+    //private void Start()
+    //{
+    //    StartCoroutine(LoadingScene());
+    //}
+
+    //public static void LoadingScene(string sceneName)
+    //{
+    //    nextScene = sceneName;
+    //    SceneManager.LoadScene("LoadingScene");
+    //}
 
     private void Start()
     {
-        StartCoroutine(LoadingScene());
-    }
-
-    public static void LoadingScene(string sceneName)
-    {
-        nextScene = sceneName;
-        SceneManager.LoadScene("LoadingScene");
+        StartCoroutine(FadeIn());
     }
 
     public void OnBattleScene()
@@ -32,12 +39,15 @@ public class LoadScene : MonoBehaviour
     public void OnPuzzleScene()
     {
         DataManager.Instance.GetComponent<ItemData>().Save();
-        SceneManager.LoadScene("Puzzle");
+        StartCoroutine(FadeOut("Puzzle"));
+        //DataManager.Instance.GetComponent<ItemData>().Save();
+        //SceneManager.LoadScene("Puzzle");
     }
     
     public void FromPuzzleToBattle()
     {
-        SceneManager.LoadScene("Battle");
+        StartCoroutine(FadeOut("Battle"));
+        //SceneManager.LoadScene("Battle");
     }
 
     public void ReloadPuzzleScene()
@@ -51,74 +61,51 @@ public class LoadScene : MonoBehaviour
         SceneManager.LoadScene("CharacterSelect");
     }
 
-    IEnumerator LoadingScene()
+    IEnumerator FadeOut(string sceneName)
     {
-        AsyncOperation operation = SceneManager.LoadSceneAsync(nextScene);
-        operation.allowSceneActivation = false;
-        float time = 0f;
-
-        while (!operation.isDone)
-        {
-            time += Time.deltaTime;
-
-            if (operation.progress < 0.9f)
-            {
-                loadingSlider.value = Mathf.Lerp(loadingSlider.value, operation.progress, time);
-
-                if (loadingSlider.value >= operation.progress)
-                {
-                    time = 0f;
-                }
-            }
-
-            else
-            {
-                loadingSlider.value = Mathf.Lerp(loadingSlider.value, 1f, time);
-
-                if (loadingSlider.value == 1f)
-                {
-                    operation.allowSceneActivation = true;
-                }
-                yield return new WaitForSeconds(0.05f);
-            }
-            yield return null;
-        }
-    }
-
-    IEnumerator FadeIn()
-    {
-        Debug.Log("fade in");
+        fadeImage.enabled = true;
         Color fadeColor = fadeImage.color;
+        fadeColor.a = 0f;
+        fadeImage.color = fadeColor;
         float time = 0f;
 
         while (fadeColor.a < 1f)
         {
             //시간이 지남에 따라 색 진하게 하기
-            time += Time.deltaTime / FadeTime;
+            time += Time.deltaTime;
             fadeColor.a = Mathf.Lerp(0f, 1f, time);
+            fadeImage.color = fadeColor;
             yield return null;
             //yield return new WaitForSeconds(0.2f);
         }
 
-        if (fadeColor.a >= 1f) fadeColor.a = 1f;
+        if (fadeColor.a >= 1f)
+            fadeColor.a = 1f;
+
+        SceneManager.LoadScene(sceneName);
     }
 
-    IEnumerator FadeOut()
+    public IEnumerator FadeIn()
     {
-        Debug.Log("fade out");
+        fadeImage.enabled = true;
         Color fadeColor = fadeImage.color;
+        fadeColor.a = 1f;
+        fadeImage.color = fadeColor;
         float time = 0f;
 
         while (fadeColor.a > 0f)
         {
+        Debug.Log(fadeColor.a);
             //시간이 지남에 따라 색 연하게 하기
             //fadeColor.a -= Time.deltaTime / FadeTime;
             time += Time.deltaTime / FadeTime;
-            fadeColor.a = Mathf.Lerp(0f, 1f, time);
+            fadeColor.a = Mathf.Lerp(1f, 0f, time);
+            fadeImage.color = fadeColor;
             yield return null;
             //yield return new WaitForSeconds(0.2f);
         }
 
-        if (fadeColor.a <= 0f) fadeColor.a = 0f;
+        if (fadeColor.a <= 0f)
+            fadeColor.a = 0f;
     }
 }

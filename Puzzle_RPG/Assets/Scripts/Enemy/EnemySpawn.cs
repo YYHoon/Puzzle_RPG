@@ -124,6 +124,7 @@ public class EnemySpawn : MonoBehaviour
         //Debug.Log("normal : " + (attack.fire + attack.water + attack.plant));
         playerHp += attack.heal;
         if (playerHp >= 100f) playerHp = 100f;
+        Debug.Log(playerHp);
 
         //넘겨받은 구조체로 에너미 속성별로 다시 계산
         if (puzzleEnemy.Type == ENEMYTYPE.fire)
