@@ -59,7 +59,7 @@ public class LoadScene : MonoBehaviour
 
         while (!operation.isDone)
         {
-            time += Time.deltaTime;
+            time += Time.deltaTime/10f;
 
             if (operation.progress < 0.9f)
             {

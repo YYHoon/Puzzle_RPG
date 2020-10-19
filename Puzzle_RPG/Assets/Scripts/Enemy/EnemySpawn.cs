@@ -11,17 +11,21 @@ public class EnemySpawn : MonoBehaviour
     [Header("에너미 생성하는 데 필요함")]
     public Transform enemyPos;
     [SerializeField] Player player;
+    [SerializeField] ParticleSystem playerHealing;
+    [SerializeField] ParticleSystem playerHit;
     GameObject[] Enemies;
     Enemy puzzleEnemy = new Enemy();
 
     [Header("체력바 관련")]
     float damage = 0;       //에너미가 받는 데미지
+    float healing = 0;
     float playerHp = 100f;  //플레이어 전체 체력
     [SerializeField] Slider EnemyHpBar;
     [SerializeField] Slider PlayerHpBar;
 
     [Header("에너미 턴UI 관련")]
     [SerializeField] Image[] turn;  //턴수 보여줄 이미지
+    [SerializeField] ParticleSystem enemyHit;
     int enemyTurn;                  //에너미가 공격할 턴수
 
     [SerializeField] GameObject gameOver;
@@ -45,14 +49,22 @@ public class EnemySpawn : MonoBehaviour
         //플레이어 턴 하나 끝나면
         if (GameBoard.Instance.PlayerTurn == true)
         {
+            if(healing>0)
+            {
+                playerHealing.Play();
+                if (playerHp + healing >= 100f) playerHp = 100f;
+                    else playerHp += healing;    
+                PlayerHpBar.value = playerHp / 100f;
+                healing = 0;
+            }
             //에너미 체력바 갱신
             if (damage != 0)
             {
                 puzzleEnemy.Damage(damage);
                 player.IsAttack();
+                enemyHit.Play();
             }
             EnemyHpBar.value = puzzleEnemy.Hp;
-            PlayerHpBar.value = playerHp / 100f;
 
             //데미지 초기화
             damage = 0;
@@ -122,9 +134,10 @@ public class EnemySpawn : MonoBehaviour
     public void EnemyHit(Attack attack)
     {
         //Debug.Log("normal : " + (attack.fire + attack.water + attack.plant));
-        playerHp += attack.heal;
-        if (playerHp >= 100f) playerHp = 100f;
-
+        if (attack.heal > 0)
+        {
+            healing += attack.heal;
+        }
         //넘겨받은 구조체로 에너미 속성별로 다시 계산
         if (puzzleEnemy.Type == ENEMYTYPE.fire)
         {
@@ -180,8 +193,8 @@ public class EnemySpawn : MonoBehaviour
         puzzleEnemy.Attack();
 
         PlayerDefenseAttack();
-        //PlayerHpBar.value = playerHp / 100f;
-
+        PlayerHpBar.value = playerHp / 100f;
+        playerHit.Play();
         player.IsHit();
         yield return new WaitForSeconds(1f);
         if (playerHp <= 0)
