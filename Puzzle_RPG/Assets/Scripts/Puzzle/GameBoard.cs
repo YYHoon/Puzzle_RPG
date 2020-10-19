@@ -1,4 +1,4 @@
-﻿using System.Collections;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -33,12 +33,15 @@ public class GameBoard : MonoBehaviour
     public bool PlayerTurn { get { return turn; } set { turn = value; } }
 
     [Header("피스에 필요한 것들")]
+    List<Piece> pieceList = new List<Piece>();
+    int pieceCount = 100;
     GameObject piecePrefab;
     [SerializeField] Sprite[] resources;
     Node[,] nodeList;
 
     [Header("다 움직인 피스들")]
     List<MoveEvent> moveEventList = new List<MoveEvent>();
+    [SerializeField] GameObject[] effects = new GameObject[4];
 
     [Header("게임보드 칸")]
     [SerializeField] float cellSize = 64f;
@@ -56,12 +59,14 @@ public class GameBoard : MonoBehaviour
 
     void Start()
     {
+        PiecePool();
         SetBoard();
         MixBoard();
     }
 
     void Update()
     {
+        //피스의 움직임이 끝났으면
         if (IsMoveEventEnd())
         {
             List<Node> matchList = new List<Node>();
@@ -108,10 +113,22 @@ public class GameBoard : MonoBehaviour
         }
     }
 
+    //피스 미리 만들기
+    void PiecePool()
+    {
+        piecePrefab = Resources.Load("Prefabs/Puzzle/Piece") as GameObject;
+
+        for (int i = 0; i < pieceCount; i++)
+        {
+            Piece piece = CreatePiece();
+            piece.gameObject.SetActive(false);
+            pieceList.Add(piece);
+        }
+    }
+
     //시작할 때 보드 세팅
     void SetBoard()
     {
-        piecePrefab = Resources.Load("Prefabs/Puzzle/Piece") as GameObject;
         RectTransform gameBoard = GetComponent<RectTransform>();
 
         //widthCount = (int)(gameBoard.sizeDelta.x / cellSize);
@@ -128,15 +145,25 @@ public class GameBoard : MonoBehaviour
         {
             for (int x = 0; x < widthCount; ++x)
             {
+                int random = Random.Range(0, pieceList.Count);
                 //Vector2(startX + CellSize * x, startY - CellSize * y)
                 Vector2 position = new Vector2(32 + cellSize * x, -32 - cellSize * y);
-                Piece newPiece = RandomPiece(new Index(x, y), position);
+
+                //피스 새로 생성
+                //Piece newPiece = RandomPiece(new Index(x, y), position);
+
+                //피스리스트에서 꺼내서 자리 정해주기
+                Piece newPiece = pieceList[random];
+                PiecePosition(newPiece, new Index(x, y), position);
+                newPiece.gameObject.SetActive(true);
+                pieceList.RemoveAt(random);
+
                 nodeList[y, x] = new Node(x, y, newPiece.rectTransform.position, newPiece);
             }
         }
     }
 
-    //중복 피스 재설정
+    //처음 세팅 시 중복 피스 재설정
     void MixBoard()
     {
         List<PIECETYPE> equal = new List<PIECETYPE>();
@@ -172,7 +199,7 @@ public class GameBoard : MonoBehaviour
         }
     }
 
-    //중복 피스 중 겹치지 않는 타입 리턴
+    //피스 자신과 겹치지 않는 타입 리턴
     PIECETYPE ResetPieceType(List<PIECETYPE> equal)
     {
         List<PIECETYPE> type = new List<PIECETYPE>();
@@ -190,8 +217,8 @@ public class GameBoard : MonoBehaviour
         return type[Random.Range(0, type.Count)];
     }
 
-    //피스 섞기
-    Piece RandomPiece(Index idx, Vector2 vec)
+    //피스 생성
+    Piece CreatePiece()
     {
         GameObject newObj = Instantiate(piecePrefab, transform);
         Piece piece = newObj.GetComponent<Piece>();
@@ -199,11 +226,32 @@ public class GameBoard : MonoBehaviour
         int random = Random.Range(0, resources.Length);
         PIECETYPE type = (PIECETYPE)random;
 
-        piece.GetComponent<RectTransform>().anchoredPosition = vec;
-        piece.Initialize(type, resources[random], idx);
+        piece.Create(type, resources[random]);
 
         return piece;
     }
+
+    //피스 자리
+    void PiecePosition(Piece piece, Index idx, Vector2 vec)
+    {
+        piece.GetComponent<RectTransform>().anchoredPosition = vec;
+        piece.Position(idx);
+    }
+
+    //피스 랜덤하게 생성(피스 리스트 전)
+    //Piece RandomPiece(Index idx, Vector2 vec)
+    //{
+    //    GameObject newObj = Instantiate(piecePrefab, transform);
+    //    Piece piece = newObj.GetComponent<Piece>();
+
+    //    int random = Random.Range(0, resources.Length);
+    //    PIECETYPE type = (PIECETYPE)random;
+
+    //    piece.GetComponent<RectTransform>().anchoredPosition = vec;
+    //    piece.Initialize(type, resources[random], idx);
+
+    //    return piece;
+    //}
 
     //피스 위치 바꾸기
     public void SwapPiece(Index one, Index two)
@@ -373,13 +421,13 @@ public class GameBoard : MonoBehaviour
         for (int i = 0; i < attackList.Count; i++)
         {
             if (attackList[i].piecetype == PIECETYPE.fire)
-                attack.fire += DataManager.Instance.savePlayerData.fireDamage;
+                attack.fire += 1;
 
             else if (attackList[i].piecetype == PIECETYPE.water)
-                attack.water += DataManager.Instance.savePlayerData.waterDamage;
+                attack.water += 1;
 
             else if (attackList[i].piecetype == PIECETYPE.plant)
-                attack.plant += DataManager.Instance.savePlayerData.plantDamage;
+                attack.plant += 1;
 
             else if (attackList[i].piecetype == PIECETYPE.heal)
                 attack.heal += 1;
@@ -403,11 +451,13 @@ public class GameBoard : MonoBehaviour
     {
         for (int x = 0; x < widthCount; x++)
         {
+            //거꾸로 올라가면서 탐색
             for (int y = heightCount - 1; y >= 0; y--)
             {
                 Index current = new Index(x, y);
                 Index upper = Index.Add(current, Index.up);
 
+                //노드의 피스가 비어있으면
                 if (nodeList[y, x].piece == null)
                 {
                     //빈 노드 위의 인덱스를 검사
@@ -433,23 +483,46 @@ public class GameBoard : MonoBehaviour
                         GetNode(upper).piece = null;
                     }
 
-                    //노드 바깥이면
+                    //노드 바깥까지 갔는데 피스가 없으면
                     else
                     {
                         Vector2 position = new Vector2();
                         position.x = 32 + (cellSize * x);
-                        position.y = -32 + (cellSize * y);
+                        position.y = (-32 + (cellSize * y)) + 512;
 
-                        Piece newPiece = RandomPiece(current, position);
+                        //피스 리스트에서 꺼내 쓰기
+                        if (pieceList.Count != 0)
+                        {
+                            int random = Random.Range(0, pieceList.Count);
 
-                        MoveEvent newEvent = new MoveEvent();
-                        newEvent.targetPiece = newPiece;
-                        newEvent.coroutine = StartCoroutine(Move(newPiece, GetNode(current)));
-                        moveEventList.Add(newEvent);
+                            Piece oldPiece = pieceList[random];
+                            PiecePosition(oldPiece, current, position);
+                            oldPiece.gameObject.SetActive(true);
+                            pieceList.RemoveAt(random);
 
-                        GetNode(current).piece = newPiece;
-                        //movingPiece.Add(GetPiece(current));
-                        GetPiece(current).index = GetNode(current).index;
+                            MoveEvent newEvent = new MoveEvent();
+                            newEvent.targetPiece = oldPiece;
+                            newEvent.coroutine = StartCoroutine(Move(oldPiece, GetNode(current)));
+                            moveEventList.Add(newEvent);
+
+                            GetNode(current).piece = oldPiece;
+                            //GetPiece(current).index = GetNode(current).index;
+                        }
+
+                        //피스 리스트가 없었을 때
+                        //else
+                        //{
+                        //    //피스 새로 생성
+                        //    Piece newPiece = RandomPiece(current, position);
+                        //
+                        //    MoveEvent newEvent = new MoveEvent();
+                        //    newEvent.targetPiece = newPiece;
+                        //    newEvent.coroutine = StartCoroutine(Move(newPiece, GetNode(current)));
+                        //    moveEventList.Add(newEvent);
+                        //
+                        //    GetNode(current).piece = newPiece;
+                        //    GetPiece(current).index = GetNode(current).index;
+                        //}
                     }
                 }
             }
@@ -469,7 +542,7 @@ public class GameBoard : MonoBehaviour
     }
 
     //퍼즐 움직이는 코루틴
-    public IEnumerator Move(Piece piece, Node destination, float moveSpeed = 7.0f)
+    public IEnumerator Move(Piece piece, Node destination, float moveSpeed = 9.0f)
     {
         while (true)
         {
@@ -500,14 +573,17 @@ public class GameBoard : MonoBehaviour
     void RemovePiece(Node node)
     {
         //int index = (int)GetPieceType(node.index);
-        //Transform start = GetPiece(node.index).rectTransform;
-        
+        //RectTransform start = GetPiece(node.index).rectTransform;
+        //
         //EffectManager.Instance.CreateEffect(index, start);
 
-        Destroy(node.piece.gameObject);
+        //=========================================//
+        //Destroy(node.piece.gameObject);
+        node.piece.gameObject.SetActive(false);
+        pieceList.Add(node.piece);
         node.piece = null;
     }
-   
+
     //인덱스의 노드값 받기
     Node GetNode(Index idx)
     {
@@ -553,7 +629,7 @@ public class Node
     public void setIndex(Piece p)
     {
         piece = p;
-        piece.SetIndex(index);
+        piece.index = this.index;
         //piece.rectTransform.position = pos;
         //piece.originPosition = pos;
     }
